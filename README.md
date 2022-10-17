@@ -20,7 +20,7 @@
 
 # Hours Spent
 |    Name               | Hours Spent (Del. 1) | Hours Spent (Del. 2) | Hours Spent (Del. 3) | Hours Spent (Del. 4) |
-| -------------         | -------------        | -----------          | -------------        | --------------- 
+| -------------         | -------------------- | -------------------  | -------------------- | ---------------------| 
 | Chrisovalantis Vatos  | 1                    |                      |                      |                      |
 | Sadek Mahmood         |                      |                      |                      |                      |
 | Jasmine Taggart       |                      |                      |                      |                      |
