@@ -1,5 +1,4 @@
-package ca.mcgill.ecse321.mms.mms;
-
+package ca.mcgill.ecse321.mms;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

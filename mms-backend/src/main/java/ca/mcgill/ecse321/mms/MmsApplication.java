@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.mms.mms;
+package ca.mcgill.ecse321.mms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
