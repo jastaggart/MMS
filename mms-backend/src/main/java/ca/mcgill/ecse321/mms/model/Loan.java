@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.sql.Date;
 
 // line 66 "model.ump"
-// line 161 "model.ump"
+// line 165 "model.ump"
 public class Loan
 {
 
@@ -14,10 +14,10 @@ public class Loan
   //------------------------
 
   //Loan Attributes
-  private int loanID;
   private int loanFee;
   private Date startDate;
   private Date endDate;
+  private int loanID;
   private boolean isApproved;
 
   //Loan Associations

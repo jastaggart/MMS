@@ -1,13 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
-package ca.mcgill.ecse321.mms.model;
+
 
 import java.util.*;
 import java.sql.Date;
 
 // line 77 "model.ump"
-// line 174 "model.ump"
-
+// line 178 "model.ump"
 public class Artwork
 {
 
@@ -16,10 +15,12 @@ public class Artwork
   //------------------------
 
   //Artwork Attributes
-  private int artworkID;
   private boolean availableForLoan;
   private DisplayStatus status;
-  
+  private int artworkID;
+  private String name;
+  private String artist;
+
   //Artwork Associations
   private List<Loan> loans;
   private Room room;
@@ -29,11 +30,13 @@ public class Artwork
   // CONSTRUCTOR
   //------------------------
 
-  public Artwork(boolean aAvailableForLoan, DisplayStatus aStatus, int aArtworkID, MMS aMuseumManagementSystem)
+  public Artwork(boolean aAvailableForLoan, DisplayStatus aStatus, int aArtworkID, String aName, String aArtist, MMS aMuseumManagementSystem)
   {
     availableForLoan = aAvailableForLoan;
     status = aStatus;
     artworkID = aArtworkID;
+    name = aName;
+    artist = aArtist;
     loans = new ArrayList<Loan>();
     boolean didAddMuseumManagementSystem = setMuseumManagementSystem(aMuseumManagementSystem);
     if (!didAddMuseumManagementSystem)
@@ -70,6 +73,22 @@ public class Artwork
     return wasSet;
   }
 
+  public boolean setName(String aName)
+  {
+    boolean wasSet = false;
+    name = aName;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setArtist(String aArtist)
+  {
+    boolean wasSet = false;
+    artist = aArtist;
+    wasSet = true;
+    return wasSet;
+  }
+
   public boolean getAvailableForLoan()
   {
     return availableForLoan;
@@ -83,6 +102,16 @@ public class Artwork
   public int getArtworkID()
   {
     return artworkID;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public String getArtist()
+  {
+    return artist;
   }
   /* Code from template association_GetMany */
   public Loan getLoan(int index)
@@ -265,7 +294,9 @@ public class Artwork
   {
     return super.toString() + "["+
             "availableForLoan" + ":" + getAvailableForLoan()+ "," +
-            "artworkID" + ":" + getArtworkID()+ "]" + System.getProperties().getProperty("line.separator") +
+            "artworkID" + ":" + getArtworkID()+ "," +
+            "name" + ":" + getName()+ "," +
+            "artist" + ":" + getArtist()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "status" + "=" + (getStatus() != null ? !getStatus().equals(this)  ? getStatus().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "room = "+(getRoom()!=null?Integer.toHexString(System.identityHashCode(getRoom())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "museumManagementSystem = "+(getMuseumManagementSystem()!=null?Integer.toHexString(System.identityHashCode(getMuseumManagementSystem())):"null");

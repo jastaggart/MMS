@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
 import java.sql.Date;
 
 // line 46 "model.ump"
-// line 142 "model.ump"
+// line 144 "model.ump"
 public class Owner extends StaffMember
 {
 
@@ -15,7 +15,7 @@ public class Owner extends StaffMember
   //------------------------
 
   //Owner Associations
-  private List<Shift> shift;
+  private List<Shift> shifts;
 
   //------------------------
   // CONSTRUCTOR
@@ -24,7 +24,7 @@ public class Owner extends StaffMember
   public Owner(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
   {
     super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
-    shift = new ArrayList<Shift>();
+    shifts = new ArrayList<Shift>();
   }
 
   //------------------------
@@ -33,35 +33,35 @@ public class Owner extends StaffMember
   /* Code from template association_GetMany */
   public Shift getShift(int index)
   {
-    Shift aShift = shift.get(index);
+    Shift aShift = shifts.get(index);
     return aShift;
   }
 
-  public List<Shift> getShift()
+  public List<Shift> getShifts()
   {
-    List<Shift> newShift = Collections.unmodifiableList(shift);
-    return newShift;
+    List<Shift> newShifts = Collections.unmodifiableList(shifts);
+    return newShifts;
   }
 
-  public int numberOfShift()
+  public int numberOfShifts()
   {
-    int number = shift.size();
+    int number = shifts.size();
     return number;
   }
 
-  public boolean hasShift()
+  public boolean hasShifts()
   {
-    boolean has = shift.size() > 0;
+    boolean has = shifts.size() > 0;
     return has;
   }
 
   public int indexOfShift(Shift aShift)
   {
-    int index = shift.indexOf(aShift);
+    int index = shifts.indexOf(aShift);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfShift()
+  public static int minimumNumberOfShifts()
   {
     return 0;
   }
@@ -69,8 +69,8 @@ public class Owner extends StaffMember
   public boolean addShift(Shift aShift)
   {
     boolean wasAdded = false;
-    if (shift.contains(aShift)) { return false; }
-    shift.add(aShift);
+    if (shifts.contains(aShift)) { return false; }
+    shifts.add(aShift);
     wasAdded = true;
     return wasAdded;
   }
@@ -78,9 +78,9 @@ public class Owner extends StaffMember
   public boolean removeShift(Shift aShift)
   {
     boolean wasRemoved = false;
-    if (shift.contains(aShift))
+    if (shifts.contains(aShift))
     {
-      shift.remove(aShift);
+      shifts.remove(aShift);
       wasRemoved = true;
     }
     return wasRemoved;
@@ -92,9 +92,9 @@ public class Owner extends StaffMember
     if(addShift(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfShift()) { index = numberOfShift() - 1; }
-      shift.remove(aShift);
-      shift.add(index, aShift);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     }
     return wasAdded;
@@ -103,12 +103,12 @@ public class Owner extends StaffMember
   public boolean addOrMoveShiftAt(Shift aShift, int index)
   {
     boolean wasAdded = false;
-    if(shift.contains(aShift))
+    if(shifts.contains(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfShift()) { index = numberOfShift() - 1; }
-      shift.remove(aShift);
-      shift.add(index, aShift);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     } 
     else 
@@ -120,7 +120,7 @@ public class Owner extends StaffMember
 
   public void delete()
   {
-    shift.clear();
+    shifts.clear();
     super.delete();
   }
 

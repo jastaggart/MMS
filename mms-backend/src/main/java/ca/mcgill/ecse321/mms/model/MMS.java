@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
 
 // line 11 "model.ump"
-// line 214 "model.ump"
+// line 219 "model.ump"
 public class MMS
 {
 
@@ -319,9 +319,9 @@ public class MMS
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Artwork addArtwork(boolean aAvailableForLoan, DisplayStatus aStatus, int aArtworkID)
+  public Artwork addArtwork(boolean aAvailableForLoan, DisplayStatus aStatus, int aArtworkID, String aName, String aArtist)
   {
-    return new Artwork(aAvailableForLoan, aStatus, aArtworkID, this);
+    return new Artwork(aAvailableForLoan, aStatus, aArtworkID, aName, aArtist, this);
   }
 
   public boolean addArtwork(Artwork aArtwork)

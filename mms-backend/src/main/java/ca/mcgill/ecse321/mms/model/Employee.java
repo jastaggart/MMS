@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
 import java.sql.Date;
 
 // line 52 "model.ump"
-// line 149 "model.ump"
+// line 152 "model.ump"
 public class Employee extends StaffMember
 {
 
@@ -15,7 +15,7 @@ public class Employee extends StaffMember
   //------------------------
 
   //Employee Associations
-  private List<Shift> shift;
+  private List<Shift> shifts;
 
   //------------------------
   // CONSTRUCTOR
@@ -24,7 +24,7 @@ public class Employee extends StaffMember
   public Employee(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
   {
     super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
-    shift = new ArrayList<Shift>();
+    shifts = new ArrayList<Shift>();
   }
 
   //------------------------
@@ -33,35 +33,35 @@ public class Employee extends StaffMember
   /* Code from template association_GetMany */
   public Shift getShift(int index)
   {
-    Shift aShift = shift.get(index);
+    Shift aShift = shifts.get(index);
     return aShift;
   }
 
-  public List<Shift> getShift()
+  public List<Shift> getShifts()
   {
-    List<Shift> newShift = Collections.unmodifiableList(shift);
-    return newShift;
+    List<Shift> newShifts = Collections.unmodifiableList(shifts);
+    return newShifts;
   }
 
-  public int numberOfShift()
+  public int numberOfShifts()
   {
-    int number = shift.size();
+    int number = shifts.size();
     return number;
   }
 
-  public boolean hasShift()
+  public boolean hasShifts()
   {
-    boolean has = shift.size() > 0;
+    boolean has = shifts.size() > 0;
     return has;
   }
 
   public int indexOfShift(Shift aShift)
   {
-    int index = shift.indexOf(aShift);
+    int index = shifts.indexOf(aShift);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfShift()
+  public static int minimumNumberOfShifts()
   {
     return 0;
   }
@@ -74,7 +74,7 @@ public class Employee extends StaffMember
   public boolean addShift(Shift aShift)
   {
     boolean wasAdded = false;
-    if (shift.contains(aShift)) { return false; }
+    if (shifts.contains(aShift)) { return false; }
     Employee existingShiftAssignee = aShift.getShiftAssignee();
     boolean isNewShiftAssignee = existingShiftAssignee != null && !this.equals(existingShiftAssignee);
     if (isNewShiftAssignee)
@@ -83,7 +83,7 @@ public class Employee extends StaffMember
     }
     else
     {
-      shift.add(aShift);
+      shifts.add(aShift);
     }
     wasAdded = true;
     return wasAdded;
@@ -95,7 +95,7 @@ public class Employee extends StaffMember
     //Unable to remove aShift, as it must always have a shiftAssignee
     if (!this.equals(aShift.getShiftAssignee()))
     {
-      shift.remove(aShift);
+      shifts.remove(aShift);
       wasRemoved = true;
     }
     return wasRemoved;
@@ -107,9 +107,9 @@ public class Employee extends StaffMember
     if(addShift(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfShift()) { index = numberOfShift() - 1; }
-      shift.remove(aShift);
-      shift.add(index, aShift);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     }
     return wasAdded;
@@ -118,12 +118,12 @@ public class Employee extends StaffMember
   public boolean addOrMoveShiftAt(Shift aShift, int index)
   {
     boolean wasAdded = false;
-    if(shift.contains(aShift))
+    if(shifts.contains(aShift))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfShift()) { index = numberOfShift() - 1; }
-      shift.remove(aShift);
-      shift.add(index, aShift);
+      if(index > numberOfShifts()) { index = numberOfShifts() - 1; }
+      shifts.remove(aShift);
+      shifts.add(index, aShift);
       wasAdded = true;
     } 
     else 
@@ -135,9 +135,9 @@ public class Employee extends StaffMember
 
   public void delete()
   {
-    for(int i=shift.size(); i > 0; i--)
+    for(int i=shifts.size(); i > 0; i--)
     {
-      Shift aShift = shift.get(i - 1);
+      Shift aShift = shifts.get(i - 1);
       aShift.delete();
     }
     super.delete();
