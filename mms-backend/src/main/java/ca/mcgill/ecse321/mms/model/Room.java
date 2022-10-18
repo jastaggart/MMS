@@ -5,7 +5,7 @@
 import java.util.*;
 
 // line 87 "model.ump"
-// line 182 "model.ump"
+// line 189 "model.ump"
 public class Room
 {
 
@@ -15,7 +15,7 @@ public class Room
 
   //Room Associations
   private MMS museumManagementSystem;
-  private List<Artwork> artwork;
+  private List<Artwork> artworks;
 
   //------------------------
   // CONSTRUCTOR
@@ -28,7 +28,7 @@ public class Room
     {
       throw new RuntimeException("Unable to create room due to museumManagementSystem. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    artwork = new ArrayList<Artwork>();
+    artworks = new ArrayList<Artwork>();
   }
 
   //------------------------
@@ -42,31 +42,31 @@ public class Room
   /* Code from template association_GetMany */
   public Artwork getArtwork(int index)
   {
-    Artwork aArtwork = artwork.get(index);
+    Artwork aArtwork = artworks.get(index);
     return aArtwork;
   }
 
-  public List<Artwork> getArtwork()
+  public List<Artwork> getArtworks()
   {
-    List<Artwork> newArtwork = Collections.unmodifiableList(artwork);
-    return newArtwork;
+    List<Artwork> newArtworks = Collections.unmodifiableList(artworks);
+    return newArtworks;
   }
 
-  public int numberOfArtwork()
+  public int numberOfArtworks()
   {
-    int number = artwork.size();
+    int number = artworks.size();
     return number;
   }
 
-  public boolean hasArtwork()
+  public boolean hasArtworks()
   {
-    boolean has = artwork.size() > 0;
+    boolean has = artworks.size() > 0;
     return has;
   }
 
   public int indexOfArtwork(Artwork aArtwork)
   {
-    int index = artwork.indexOf(aArtwork);
+    int index = artworks.indexOf(aArtwork);
     return index;
   }
   /* Code from template association_SetOneToMany */
@@ -89,7 +89,7 @@ public class Room
     return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfArtwork()
+  public static int minimumNumberOfArtworks()
   {
     return 0;
   }
@@ -97,7 +97,7 @@ public class Room
   public boolean addArtwork(Artwork aArtwork)
   {
     boolean wasAdded = false;
-    if (artwork.contains(aArtwork)) { return false; }
+    if (artworks.contains(aArtwork)) { return false; }
     Room existingRoom = aArtwork.getRoom();
     if (existingRoom == null)
     {
@@ -110,7 +110,7 @@ public class Room
     }
     else
     {
-      artwork.add(aArtwork);
+      artworks.add(aArtwork);
     }
     wasAdded = true;
     return wasAdded;
@@ -119,9 +119,9 @@ public class Room
   public boolean removeArtwork(Artwork aArtwork)
   {
     boolean wasRemoved = false;
-    if (artwork.contains(aArtwork))
+    if (artworks.contains(aArtwork))
     {
-      artwork.remove(aArtwork);
+      artworks.remove(aArtwork);
       aArtwork.setRoom(null);
       wasRemoved = true;
     }
@@ -134,9 +134,9 @@ public class Room
     if(addArtwork(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtwork()) { index = numberOfArtwork() - 1; }
-      artwork.remove(aArtwork);
-      artwork.add(index, aArtwork);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     }
     return wasAdded;
@@ -145,12 +145,12 @@ public class Room
   public boolean addOrMoveArtworkAt(Artwork aArtwork, int index)
   {
     boolean wasAdded = false;
-    if(artwork.contains(aArtwork))
+    if(artworks.contains(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtwork()) { index = numberOfArtwork() - 1; }
-      artwork.remove(aArtwork);
-      artwork.add(index, aArtwork);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     } 
     else 
@@ -168,9 +168,9 @@ public class Room
     {
       placeholderMuseumManagementSystem.removeRoom(this);
     }
-    while( !artwork.isEmpty() )
+    while( !artworks.isEmpty() )
     {
-      artwork.get(0).setRoom(null);
+      artworks.get(0).setRoom(null);
     }
   }
 

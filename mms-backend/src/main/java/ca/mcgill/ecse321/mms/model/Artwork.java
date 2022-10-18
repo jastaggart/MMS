@@ -6,7 +6,7 @@ import java.util.*;
 import java.sql.Date;
 
 // line 77 "model.ump"
-// line 170 "model.ump"
+// line 174 "model.ump"
 public class Artwork
 {
 
@@ -20,7 +20,7 @@ public class Artwork
   private int artworkID;
 
   //Artwork Associations
-  private List<Loan> loa;
+  private List<Loan> loans;
   private Room room;
   private MMS museumManagementSystem;
 
@@ -33,7 +33,7 @@ public class Artwork
     availableForLoan = aAvailableForLoan;
     status = aStatus;
     artworkID = aArtworkID;
-    loa = new ArrayList<Loan>();
+    loans = new ArrayList<Loan>();
     boolean didAddMuseumManagementSystem = setMuseumManagementSystem(aMuseumManagementSystem);
     if (!didAddMuseumManagementSystem)
     {
@@ -84,33 +84,33 @@ public class Artwork
     return artworkID;
   }
   /* Code from template association_GetMany */
-  public Loan getLoa(int index)
+  public Loan getLoan(int index)
   {
-    Loan aLoa = loa.get(index);
-    return aLoa;
+    Loan aLoan = loans.get(index);
+    return aLoan;
   }
 
-  public List<Loan> getLoa()
+  public List<Loan> getLoans()
   {
-    List<Loan> newLoa = Collections.unmodifiableList(loa);
-    return newLoa;
+    List<Loan> newLoans = Collections.unmodifiableList(loans);
+    return newLoans;
   }
 
-  public int numberOfLoa()
+  public int numberOfLoans()
   {
-    int number = loa.size();
+    int number = loans.size();
     return number;
   }
 
-  public boolean hasLoa()
+  public boolean hasLoans()
   {
-    boolean has = loa.size() > 0;
+    boolean has = loans.size() > 0;
     return has;
   }
 
-  public int indexOfLoa(Loan aLoa)
+  public int indexOfLoan(Loan aLoan)
   {
-    int index = loa.indexOf(aLoa);
+    int index = loans.indexOf(aLoan);
     return index;
   }
   /* Code from template association_GetOne */
@@ -130,74 +130,74 @@ public class Artwork
     return museumManagementSystem;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfLoa()
+  public static int minimumNumberOfLoans()
   {
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Loan addLoa(int aLoanFee, Date aStartDate, Date aEndDate, int aLoanID, boolean aIsApproved, Visitor aLoanRequestor, StaffMember aLoanApprover)
+  public Loan addLoan(int aLoanFee, Date aStartDate, Date aEndDate, int aLoanID, boolean aIsApproved, Visitor aLoanRequestor, StaffMember aLoanApprover)
   {
     return new Loan(aLoanFee, aStartDate, aEndDate, aLoanID, aIsApproved, aLoanRequestor, aLoanApprover, this);
   }
 
-  public boolean addLoa(Loan aLoa)
+  public boolean addLoan(Loan aLoan)
   {
     boolean wasAdded = false;
-    if (loa.contains(aLoa)) { return false; }
-    Artwork existingArtwork = aLoa.getArtwork();
+    if (loans.contains(aLoan)) { return false; }
+    Artwork existingArtwork = aLoan.getArtwork();
     boolean isNewArtwork = existingArtwork != null && !this.equals(existingArtwork);
     if (isNewArtwork)
     {
-      aLoa.setArtwork(this);
+      aLoan.setArtwork(this);
     }
     else
     {
-      loa.add(aLoa);
+      loans.add(aLoan);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeLoa(Loan aLoa)
+  public boolean removeLoan(Loan aLoan)
   {
     boolean wasRemoved = false;
-    //Unable to remove aLoa, as it must always have a artwork
-    if (!this.equals(aLoa.getArtwork()))
+    //Unable to remove aLoan, as it must always have a artwork
+    if (!this.equals(aLoan.getArtwork()))
     {
-      loa.remove(aLoa);
+      loans.remove(aLoan);
       wasRemoved = true;
     }
     return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addLoaAt(Loan aLoa, int index)
+  public boolean addLoanAt(Loan aLoan, int index)
   {  
     boolean wasAdded = false;
-    if(addLoa(aLoa))
+    if(addLoan(aLoan))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfLoa()) { index = numberOfLoa() - 1; }
-      loa.remove(aLoa);
-      loa.add(index, aLoa);
+      if(index > numberOfLoans()) { index = numberOfLoans() - 1; }
+      loans.remove(aLoan);
+      loans.add(index, aLoan);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveLoaAt(Loan aLoa, int index)
+  public boolean addOrMoveLoanAt(Loan aLoan, int index)
   {
     boolean wasAdded = false;
-    if(loa.contains(aLoa))
+    if(loans.contains(aLoan))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfLoa()) { index = numberOfLoa() - 1; }
-      loa.remove(aLoa);
-      loa.add(index, aLoa);
+      if(index > numberOfLoans()) { index = numberOfLoans() - 1; }
+      loans.remove(aLoan);
+      loans.add(index, aLoan);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addLoaAt(aLoa, index);
+      wasAdded = addLoanAt(aLoan, index);
     }
     return wasAdded;
   }
@@ -240,10 +240,10 @@ public class Artwork
 
   public void delete()
   {
-    for(int i=loa.size(); i > 0; i--)
+    for(int i=loans.size(); i > 0; i--)
     {
-      Loan aLoa = loa.get(i - 1);
-      aLoa.delete();
+      Loan aLoan = loans.get(i - 1);
+      aLoan.delete();
     }
     if (room != null)
     {

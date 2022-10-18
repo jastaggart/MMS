@@ -5,7 +5,7 @@
 import java.sql.Date;
 
 // line 66 "model.ump"
-// line 159 "model.ump"
+// line 161 "model.ump"
 public class Loan
 {
 
@@ -49,7 +49,7 @@ public class Loan
     boolean didAddArtwork = setArtwork(aArtwork);
     if (!didAddArtwork)
     {
-      throw new RuntimeException("Unable to create loa due to artwork. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create loan due to artwork. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
 
@@ -187,9 +187,9 @@ public class Loan
     artwork = aArtwork;
     if (existingArtwork != null && !existingArtwork.equals(aArtwork))
     {
-      existingArtwork.removeLoa(this);
+      existingArtwork.removeLoan(this);
     }
-    artwork.addLoa(this);
+    artwork.addLoan(this);
     wasSet = true;
     return wasSet;
   }
@@ -212,7 +212,7 @@ public class Loan
     this.artwork = null;
     if(placeholderArtwork != null)
     {
-      placeholderArtwork.removeLoa(this);
+      placeholderArtwork.removeLoan(this);
     }
   }
 

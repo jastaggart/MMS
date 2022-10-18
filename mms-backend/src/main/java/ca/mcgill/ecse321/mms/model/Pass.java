@@ -18,20 +18,20 @@ public class Pass
   private Date passDate;
 
   //Pass Associations
-  private Visitor passPu;
+  private Visitor passPurchaser;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Pass(int aPassID, Date aPassDate, Visitor aPassPu)
+  public Pass(int aPassID, Date aPassDate, Visitor aPassPurchaser)
   {
     passID = aPassID;
     passDate = aPassDate;
-    boolean didAddPassPu = setPassPu(aPassPu);
-    if (!didAddPassPu)
+    boolean didAddPassPurchaser = setPassPurchaser(aPassPurchaser);
+    if (!didAddPassPurchaser)
     {
-      throw new RuntimeException("Unable to create pass due to passPu. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create pass due to passPurchaser. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
 
@@ -65,37 +65,37 @@ public class Pass
     return passDate;
   }
   /* Code from template association_GetOne */
-  public Visitor getPassPu()
+  public Visitor getPassPurchaser()
   {
-    return passPu;
+    return passPurchaser;
   }
   /* Code from template association_SetOneToMany */
-  public boolean setPassPu(Visitor aPassPu)
+  public boolean setPassPurchaser(Visitor aPassPurchaser)
   {
     boolean wasSet = false;
-    if (aPassPu == null)
+    if (aPassPurchaser == null)
     {
       return wasSet;
     }
 
-    Visitor existingPassPu = passPu;
-    passPu = aPassPu;
-    if (existingPassPu != null && !existingPassPu.equals(aPassPu))
+    Visitor existingPassPurchaser = passPurchaser;
+    passPurchaser = aPassPurchaser;
+    if (existingPassPurchaser != null && !existingPassPurchaser.equals(aPassPurchaser))
     {
-      existingPassPu.removePass(this);
+      existingPassPurchaser.removePass(this);
     }
-    passPu.addPass(this);
+    passPurchaser.addPass(this);
     wasSet = true;
     return wasSet;
   }
 
   public void delete()
   {
-    Visitor placeholderPassPu = passPu;
-    this.passPu = null;
-    if(placeholderPassPu != null)
+    Visitor placeholderPassPurchaser = passPurchaser;
+    this.passPurchaser = null;
+    if(placeholderPassPurchaser != null)
     {
-      placeholderPassPu.removePass(this);
+      placeholderPassPurchaser.removePass(this);
     }
   }
 
@@ -105,6 +105,6 @@ public class Pass
     return super.toString() + "["+
             "passID" + ":" + getPassID()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "passDate" + "=" + (getPassDate() != null ? !getPassDate().equals(this)  ? getPassDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "passPu = "+(getPassPu()!=null?Integer.toHexString(System.identityHashCode(getPassPu())):"null");
+            "  " + "passPurchaser = "+(getPassPurchaser()!=null?Integer.toHexString(System.identityHashCode(getPassPurchaser())):"null");
   }
 }

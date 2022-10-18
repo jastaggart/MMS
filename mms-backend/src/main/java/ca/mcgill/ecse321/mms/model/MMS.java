@@ -5,7 +5,7 @@
 import java.util.*;
 
 // line 11 "model.ump"
-// line 207 "model.ump"
+// line 214 "model.ump"
 public class MMS
 {
 
@@ -19,9 +19,9 @@ public class MMS
   private int passFee;
 
   //MMS Associations
-  private List<User> user;
-  private List<Room> room;
-  private List<Artwork> artwork;
+  private List<User> users;
+  private List<Room> rooms;
+  private List<Artwork> artworks;
 
   //------------------------
   // CONSTRUCTOR
@@ -32,9 +32,9 @@ public class MMS
     openingHours = aOpeningHours;
     closingHours = aClosingHours;
     passFee = aPassFee;
-    user = new ArrayList<User>();
-    room = new ArrayList<Room>();
-    artwork = new ArrayList<Artwork>();
+    users = new ArrayList<User>();
+    rooms = new ArrayList<Room>();
+    artworks = new ArrayList<Artwork>();
   }
 
   //------------------------
@@ -82,95 +82,95 @@ public class MMS
   /* Code from template association_GetMany */
   public User getUser(int index)
   {
-    User aUser = user.get(index);
+    User aUser = users.get(index);
     return aUser;
   }
 
-  public List<User> getUser()
+  public List<User> getUsers()
   {
-    List<User> newUser = Collections.unmodifiableList(user);
-    return newUser;
+    List<User> newUsers = Collections.unmodifiableList(users);
+    return newUsers;
   }
 
-  public int numberOfUser()
+  public int numberOfUsers()
   {
-    int number = user.size();
+    int number = users.size();
     return number;
   }
 
-  public boolean hasUser()
+  public boolean hasUsers()
   {
-    boolean has = user.size() > 0;
+    boolean has = users.size() > 0;
     return has;
   }
 
   public int indexOfUser(User aUser)
   {
-    int index = user.indexOf(aUser);
+    int index = users.indexOf(aUser);
     return index;
   }
   /* Code from template association_GetMany */
   public Room getRoom(int index)
   {
-    Room aRoom = room.get(index);
+    Room aRoom = rooms.get(index);
     return aRoom;
   }
 
-  public List<Room> getRoom()
+  public List<Room> getRooms()
   {
-    List<Room> newRoom = Collections.unmodifiableList(room);
-    return newRoom;
+    List<Room> newRooms = Collections.unmodifiableList(rooms);
+    return newRooms;
   }
 
-  public int numberOfRoom()
+  public int numberOfRooms()
   {
-    int number = room.size();
+    int number = rooms.size();
     return number;
   }
 
-  public boolean hasRoom()
+  public boolean hasRooms()
   {
-    boolean has = room.size() > 0;
+    boolean has = rooms.size() > 0;
     return has;
   }
 
   public int indexOfRoom(Room aRoom)
   {
-    int index = room.indexOf(aRoom);
+    int index = rooms.indexOf(aRoom);
     return index;
   }
   /* Code from template association_GetMany */
   public Artwork getArtwork(int index)
   {
-    Artwork aArtwork = artwork.get(index);
+    Artwork aArtwork = artworks.get(index);
     return aArtwork;
   }
 
-  public List<Artwork> getArtwork()
+  public List<Artwork> getArtworks()
   {
-    List<Artwork> newArtwork = Collections.unmodifiableList(artwork);
-    return newArtwork;
+    List<Artwork> newArtworks = Collections.unmodifiableList(artworks);
+    return newArtworks;
   }
 
-  public int numberOfArtwork()
+  public int numberOfArtworks()
   {
-    int number = artwork.size();
+    int number = artworks.size();
     return number;
   }
 
-  public boolean hasArtwork()
+  public boolean hasArtworks()
   {
-    boolean has = artwork.size() > 0;
+    boolean has = artworks.size() > 0;
     return has;
   }
 
   public int indexOfArtwork(Artwork aArtwork)
   {
-    int index = artwork.indexOf(aArtwork);
+    int index = artworks.indexOf(aArtwork);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfUser()
+  public static int minimumNumberOfUsers()
   {
     return 0;
   }
@@ -183,7 +183,7 @@ public class MMS
   public boolean addUser(User aUser)
   {
     boolean wasAdded = false;
-    if (user.contains(aUser)) { return false; }
+    if (users.contains(aUser)) { return false; }
     MMS existingMuseumManagementSystem = aUser.getMuseumManagementSystem();
     boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
     if (isNewMuseumManagementSystem)
@@ -192,7 +192,7 @@ public class MMS
     }
     else
     {
-      user.add(aUser);
+      users.add(aUser);
     }
     wasAdded = true;
     return wasAdded;
@@ -204,7 +204,7 @@ public class MMS
     //Unable to remove aUser, as it must always have a museumManagementSystem
     if (!this.equals(aUser.getMuseumManagementSystem()))
     {
-      user.remove(aUser);
+      users.remove(aUser);
       wasRemoved = true;
     }
     return wasRemoved;
@@ -216,9 +216,9 @@ public class MMS
     if(addUser(aUser))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfUser()) { index = numberOfUser() - 1; }
-      user.remove(aUser);
-      user.add(index, aUser);
+      if(index > numberOfUsers()) { index = numberOfUsers() - 1; }
+      users.remove(aUser);
+      users.add(index, aUser);
       wasAdded = true;
     }
     return wasAdded;
@@ -227,12 +227,12 @@ public class MMS
   public boolean addOrMoveUserAt(User aUser, int index)
   {
     boolean wasAdded = false;
-    if(user.contains(aUser))
+    if(users.contains(aUser))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfUser()) { index = numberOfUser() - 1; }
-      user.remove(aUser);
-      user.add(index, aUser);
+      if(index > numberOfUsers()) { index = numberOfUsers() - 1; }
+      users.remove(aUser);
+      users.add(index, aUser);
       wasAdded = true;
     } 
     else 
@@ -242,7 +242,7 @@ public class MMS
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfRoom()
+  public static int minimumNumberOfRooms()
   {
     return 0;
   }
@@ -255,7 +255,7 @@ public class MMS
   public boolean addRoom(Room aRoom)
   {
     boolean wasAdded = false;
-    if (room.contains(aRoom)) { return false; }
+    if (rooms.contains(aRoom)) { return false; }
     MMS existingMuseumManagementSystem = aRoom.getMuseumManagementSystem();
     boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
     if (isNewMuseumManagementSystem)
@@ -264,7 +264,7 @@ public class MMS
     }
     else
     {
-      room.add(aRoom);
+      rooms.add(aRoom);
     }
     wasAdded = true;
     return wasAdded;
@@ -276,7 +276,7 @@ public class MMS
     //Unable to remove aRoom, as it must always have a museumManagementSystem
     if (!this.equals(aRoom.getMuseumManagementSystem()))
     {
-      room.remove(aRoom);
+      rooms.remove(aRoom);
       wasRemoved = true;
     }
     return wasRemoved;
@@ -288,9 +288,9 @@ public class MMS
     if(addRoom(aRoom))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfRoom()) { index = numberOfRoom() - 1; }
-      room.remove(aRoom);
-      room.add(index, aRoom);
+      if(index > numberOfRooms()) { index = numberOfRooms() - 1; }
+      rooms.remove(aRoom);
+      rooms.add(index, aRoom);
       wasAdded = true;
     }
     return wasAdded;
@@ -299,12 +299,12 @@ public class MMS
   public boolean addOrMoveRoomAt(Room aRoom, int index)
   {
     boolean wasAdded = false;
-    if(room.contains(aRoom))
+    if(rooms.contains(aRoom))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfRoom()) { index = numberOfRoom() - 1; }
-      room.remove(aRoom);
-      room.add(index, aRoom);
+      if(index > numberOfRooms()) { index = numberOfRooms() - 1; }
+      rooms.remove(aRoom);
+      rooms.add(index, aRoom);
       wasAdded = true;
     } 
     else 
@@ -314,7 +314,7 @@ public class MMS
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfArtwork()
+  public static int minimumNumberOfArtworks()
   {
     return 0;
   }
@@ -327,7 +327,7 @@ public class MMS
   public boolean addArtwork(Artwork aArtwork)
   {
     boolean wasAdded = false;
-    if (artwork.contains(aArtwork)) { return false; }
+    if (artworks.contains(aArtwork)) { return false; }
     MMS existingMuseumManagementSystem = aArtwork.getMuseumManagementSystem();
     boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
     if (isNewMuseumManagementSystem)
@@ -336,7 +336,7 @@ public class MMS
     }
     else
     {
-      artwork.add(aArtwork);
+      artworks.add(aArtwork);
     }
     wasAdded = true;
     return wasAdded;
@@ -348,7 +348,7 @@ public class MMS
     //Unable to remove aArtwork, as it must always have a museumManagementSystem
     if (!this.equals(aArtwork.getMuseumManagementSystem()))
     {
-      artwork.remove(aArtwork);
+      artworks.remove(aArtwork);
       wasRemoved = true;
     }
     return wasRemoved;
@@ -360,9 +360,9 @@ public class MMS
     if(addArtwork(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtwork()) { index = numberOfArtwork() - 1; }
-      artwork.remove(aArtwork);
-      artwork.add(index, aArtwork);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     }
     return wasAdded;
@@ -371,12 +371,12 @@ public class MMS
   public boolean addOrMoveArtworkAt(Artwork aArtwork, int index)
   {
     boolean wasAdded = false;
-    if(artwork.contains(aArtwork))
+    if(artworks.contains(aArtwork))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfArtwork()) { index = numberOfArtwork() - 1; }
-      artwork.remove(aArtwork);
-      artwork.add(index, aArtwork);
+      if(index > numberOfArtworks()) { index = numberOfArtworks() - 1; }
+      artworks.remove(aArtwork);
+      artworks.add(index, aArtwork);
       wasAdded = true;
     } 
     else 
@@ -388,25 +388,25 @@ public class MMS
 
   public void delete()
   {
-    while (user.size() > 0)
+    while (users.size() > 0)
     {
-      User aUser = user.get(user.size() - 1);
+      User aUser = users.get(users.size() - 1);
       aUser.delete();
-      user.remove(aUser);
+      users.remove(aUser);
     }
     
-    while (room.size() > 0)
+    while (rooms.size() > 0)
     {
-      Room aRoom = room.get(room.size() - 1);
+      Room aRoom = rooms.get(rooms.size() - 1);
       aRoom.delete();
-      room.remove(aRoom);
+      rooms.remove(aRoom);
     }
     
-    while (artwork.size() > 0)
+    while (artworks.size() > 0)
     {
-      Artwork aArtwork = artwork.get(artwork.size() - 1);
+      Artwork aArtwork = artworks.get(artworks.size() - 1);
       aArtwork.delete();
-      artwork.remove(aArtwork);
+      artworks.remove(aArtwork);
     }
     
   }

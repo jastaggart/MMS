@@ -18,7 +18,7 @@ public class StaffMember extends User
   private int staffMemberID;
 
   //StaffMember Associations
-  private List<Loan> loan;
+  private List<Loan> loans;
 
   //------------------------
   // CONSTRUCTOR
@@ -28,7 +28,7 @@ public class StaffMember extends User
   {
     super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
     staffMemberID = aStaffMemberID;
-    loan = new ArrayList<Loan>();
+    loans = new ArrayList<Loan>();
   }
 
   //------------------------
@@ -50,35 +50,35 @@ public class StaffMember extends User
   /* Code from template association_GetMany */
   public Loan getLoan(int index)
   {
-    Loan aLoan = loan.get(index);
+    Loan aLoan = loans.get(index);
     return aLoan;
   }
 
-  public List<Loan> getLoan()
+  public List<Loan> getLoans()
   {
-    List<Loan> newLoan = Collections.unmodifiableList(loan);
-    return newLoan;
+    List<Loan> newLoans = Collections.unmodifiableList(loans);
+    return newLoans;
   }
 
-  public int numberOfLoan()
+  public int numberOfLoans()
   {
-    int number = loan.size();
+    int number = loans.size();
     return number;
   }
 
-  public boolean hasLoan()
+  public boolean hasLoans()
   {
-    boolean has = loan.size() > 0;
+    boolean has = loans.size() > 0;
     return has;
   }
 
   public int indexOfLoan(Loan aLoan)
   {
-    int index = loan.indexOf(aLoan);
+    int index = loans.indexOf(aLoan);
     return index;
   }
   /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfLoan()
+  public static int minimumNumberOfLoans()
   {
     return 0;
   }
@@ -91,7 +91,7 @@ public class StaffMember extends User
   public boolean addLoan(Loan aLoan)
   {
     boolean wasAdded = false;
-    if (loan.contains(aLoan)) { return false; }
+    if (loans.contains(aLoan)) { return false; }
     StaffMember existingLoanApprover = aLoan.getLoanApprover();
     boolean isNewLoanApprover = existingLoanApprover != null && !this.equals(existingLoanApprover);
     if (isNewLoanApprover)
@@ -100,7 +100,7 @@ public class StaffMember extends User
     }
     else
     {
-      loan.add(aLoan);
+      loans.add(aLoan);
     }
     wasAdded = true;
     return wasAdded;
@@ -112,7 +112,7 @@ public class StaffMember extends User
     //Unable to remove aLoan, as it must always have a loanApprover
     if (!this.equals(aLoan.getLoanApprover()))
     {
-      loan.remove(aLoan);
+      loans.remove(aLoan);
       wasRemoved = true;
     }
     return wasRemoved;
@@ -124,9 +124,9 @@ public class StaffMember extends User
     if(addLoan(aLoan))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfLoan()) { index = numberOfLoan() - 1; }
-      loan.remove(aLoan);
-      loan.add(index, aLoan);
+      if(index > numberOfLoans()) { index = numberOfLoans() - 1; }
+      loans.remove(aLoan);
+      loans.add(index, aLoan);
       wasAdded = true;
     }
     return wasAdded;
@@ -135,12 +135,12 @@ public class StaffMember extends User
   public boolean addOrMoveLoanAt(Loan aLoan, int index)
   {
     boolean wasAdded = false;
-    if(loan.contains(aLoan))
+    if(loans.contains(aLoan))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfLoan()) { index = numberOfLoan() - 1; }
-      loan.remove(aLoan);
-      loan.add(index, aLoan);
+      if(index > numberOfLoans()) { index = numberOfLoans() - 1; }
+      loans.remove(aLoan);
+      loans.add(index, aLoan);
       wasAdded = true;
     } 
     else 
@@ -152,9 +152,9 @@ public class StaffMember extends User
 
   public void delete()
   {
-    for(int i=loan.size(); i > 0; i--)
+    for(int i=loans.size(); i > 0; i--)
     {
-      Loan aLoan = loan.get(i - 1);
+      Loan aLoan = loans.get(i - 1);
       aLoan.delete();
     }
     super.delete();
