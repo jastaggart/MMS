@@ -18,6 +18,7 @@ public class StaffMember extends User
   private int staffMemberID;
 
   //StaffMember Associations
+
   private List<Loan> loans;
 
   //------------------------

@@ -14,10 +14,10 @@ public class Loan
   //------------------------
 
   //Loan Attributes
+  private int loanID;
   private int loanFee;
   private Date startDate;
   private Date endDate;
-  private int loanID;
   private boolean isApproved;
 
   //Loan Associations

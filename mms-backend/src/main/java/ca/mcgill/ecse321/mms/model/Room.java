@@ -4,6 +4,7 @@
 package ca.mcgill.ecse321.mms.model;
 import java.util.*;
 
+
 // line 87 "model.ump"
 // line 189 "model.ump"
 public class Room
@@ -14,6 +15,7 @@ public class Room
   //------------------------
 
   //Room Associations
+
   private MMS museumManagementSystem;
   private List<Artwork> artworks;
 

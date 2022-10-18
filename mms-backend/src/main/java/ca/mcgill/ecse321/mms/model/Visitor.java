@@ -7,6 +7,7 @@ import java.sql.Date;
 
 // line 27 "model.ump"
 // line 123 "model.ump"
+
 public class Visitor extends User
 {
 
@@ -14,7 +15,6 @@ public class Visitor extends User
   // MEMBER VARIABLES
   //------------------------
 
-  //Visitor Attributes
   private int visitorID;
 
   //Visitor Associations
