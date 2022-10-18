@@ -19,32 +19,32 @@ public class DisplayStatus
   //------------------------
 
   //DisplayStatus Attributes
-  private Status displayStatus;
+  private Status status;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public DisplayStatus(Status aDisplayStatus)
+  public DisplayStatus(Status aStatus)
   {
-    displayStatus = aDisplayStatus;
+    status = aStatus;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public boolean setDisplayStatus(Status aDisplayStatus)
+  public boolean setStatus(Status aStatus)
   {
     boolean wasSet = false;
-    displayStatus = aDisplayStatus;
+    status = aStatus;
     wasSet = true;
     return wasSet;
   }
 
-  public Status getDisplayStatus()
+  public Status getStatus()
   {
-    return displayStatus;
+    return status;
   }
 
   public void delete()
@@ -54,6 +54,6 @@ public class DisplayStatus
   public String toString()
   {
     return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "displayStatus" + "=" + (getDisplayStatus() != null ? !getDisplayStatus().equals(this)  ? getDisplayStatus().toString().replaceAll("  ","    ") : "this" : "null");
+            "  " + "status" + "=" + (getStatus() != null ? !getStatus().equals(this)  ? getStatus().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

@@ -3,8 +3,8 @@
 
 
 
-// line 13 "model.ump"
-// line 111 "model.ump"
+// line 20 "model.ump"
+// line 118 "model.ump"
 public class User
 {
 

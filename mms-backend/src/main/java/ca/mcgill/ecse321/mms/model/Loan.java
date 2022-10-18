@@ -4,8 +4,8 @@
 
 import java.sql.Date;
 
-// line 59 "model.ump"
-// line 152 "model.ump"
+// line 66 "model.ump"
+// line 159 "model.ump"
 public class Loan
 {
 

@@ -5,8 +5,8 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 26 "model.ump"
-// line 121 "model.ump"
+// line 33 "model.ump"
+// line 128 "model.ump"
 public class StaffMember extends User
 {
 

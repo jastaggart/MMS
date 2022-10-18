@@ -4,16 +4,10 @@
 
 import java.util.*;
 
-// line 80 "model.ump"
-// line 175 "model.ump"
+// line 87 "model.ump"
+// line 182 "model.ump"
 public class Room
 {
-
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
-
-  public enum DisplayStatus { OnDisplay, InStorage, OnLoan }
 
   //------------------------
   // MEMBER VARIABLES

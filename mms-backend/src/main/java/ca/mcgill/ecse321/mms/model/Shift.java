@@ -4,8 +4,8 @@
 
 import java.sql.Date;
 
-// line 51 "model.ump"
-// line 147 "model.ump"
+// line 58 "model.ump"
+// line 154 "model.ump"
 public class Shift
 {
 

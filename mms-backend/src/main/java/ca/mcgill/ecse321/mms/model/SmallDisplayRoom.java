@@ -4,8 +4,8 @@
 
 import java.util.*;
 
-// line 96 "model.ump"
-// line 190 "model.ump"
+// line 103 "model.ump"
+// line 197 "model.ump"
 public class SmallDisplayRoom extends DisplayRoom
 {
 

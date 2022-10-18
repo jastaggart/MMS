@@ -5,16 +5,10 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 70 "model.ump"
-// line 163 "model.ump"
+// line 77 "model.ump"
+// line 170 "model.ump"
 public class Artwork
 {
-
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
-
-  public enum DisplayStatus { OnDisplay, InStorage, OnLoan }
 
   //------------------------
   // MEMBER VARIABLES

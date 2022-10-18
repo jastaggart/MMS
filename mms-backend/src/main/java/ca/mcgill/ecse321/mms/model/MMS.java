@@ -4,16 +4,10 @@
 
 import java.util.*;
 
-// line 4 "model.ump"
-// line 200 "model.ump"
+// line 11 "model.ump"
+// line 207 "model.ump"
 public class MMS
 {
-
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
-
-  public enum DisplayStatus { OnDisplay, InStorage, OnLoan }
 
   //------------------------
   // MEMBER VARIABLES

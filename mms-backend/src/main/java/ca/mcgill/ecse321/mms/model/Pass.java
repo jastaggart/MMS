@@ -4,8 +4,8 @@
 
 import java.sql.Date;
 
-// line 32 "model.ump"
-// line 126 "model.ump"
+// line 39 "model.ump"
+// line 133 "model.ump"
 public class Pass
 {
 
