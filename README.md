@@ -15,7 +15,7 @@
 | Sadek Mahmood | Content Cell    |              | ||
 | Jasmine Taggart  | Content Cell |              | ||
 | Sarah Zhang   | Software Engineering  | U3     |       | [sarah-e-z](https://github.com/sarah-e-z) |
-| Jean Kazanji  | Content Cell    |              | ||  
+| Jean Kazanji  | Software Engineering    |U2              | ||  
 | Minji Chang| Content Cell       |              | ||
 
 # Hours Spent
