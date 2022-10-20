@@ -13,7 +13,7 @@
 | ------------- | -------------   | -----------  | ------------- | ---------------
 | Chrisovalantis Vatos  | Software Engineering |   U2 |  | [cvatos](https://github.com/ChrisVatos) |
 | Sadek Mahmood | Content Cell    |              | ||
-| Jasmine Taggart  | Content Cell |              | ||
+| Jasmine Taggart  | Software Engineering | U2             | |[jastaggart](https://github.com/jastaggart) |
 | Sarah Zhang   | Software Engineering  | U3     |       | [sarah-e-z](https://github.com/sarah-e-z) |
 | Jean Kazanji  | Software Engineering    |U2              | ||  
 | Minji Chang| Software Engineering |   U2 |  | [mmmccccc](https://github.com/mmmccccc) |
