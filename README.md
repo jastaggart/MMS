@@ -16,7 +16,7 @@
 | Jasmine Taggart  | Content Cell |              | ||
 | Sarah Zhang   | Software Engineering  | U3     |       | [sarah-e-z](https://github.com/sarah-e-z) |
 | Jean Kazanji  | Software Engineering    |U2              | ||  
-| Minji Chang| Content Cell       |              | ||
+| Minji Chang| Software Engineering |   U2 |  | [mmmccccc](https://github.com/minjic) |
 
 # Hours Spent
 |    Name               | Hours Spent (Del. 1) | Hours Spent (Del. 2) | Hours Spent (Del. 3) | Hours Spent (Del. 4) |
