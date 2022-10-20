@@ -5,7 +5,7 @@
 ### Project Reports
 
 # Scope of Project
-
+The goal of this project is to design an application for the museum of a small town. The application will have functionalities to support the following stakeholders: the owner, employees, and visitors of the museum. We will gather requirements, design a software system to satisfy those requirements, implement the software system, validate the system against the requirements, and develop a release pipeline to automate the software delivery process.
 
 # Our Team - Group 7
 
