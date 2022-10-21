@@ -1,11 +1,19 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-
+package ca.mcgill.ecse321.mms.model;
 import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 // line 61 "model.ump"
 // line 161 "model.ump"
+@Entity
 public class Shift
 {
 
@@ -14,12 +22,22 @@ public class Shift
   //------------------------
 
   //Shift Attributes
-  private Date date;
-  private String startHour;
-  private String endHour;
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
+  @Id
   private int shiftID;
 
+  @Column(name="shiftDate")
+  private Date date;
+
+  @Column(name="shiftStartTime")
+  private String startHour;
+
+  @Column(name="shiftEndTime")
+  private String endHour;
+
+
   //Shift Associations
+  @ManyToOne
   private Employee shiftAssignee;
 
   //------------------------

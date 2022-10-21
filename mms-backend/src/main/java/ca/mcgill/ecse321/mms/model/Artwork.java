@@ -1,12 +1,22 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
-
-
+package ca.mcgill.ecse321.mms.model;
 import java.util.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import java.sql.Date;
 
 // line 80 "model.ump"
 // line 179 "model.ump"
+
+@Entity
 public class Artwork
 {
 
@@ -15,15 +25,32 @@ public class Artwork
   //------------------------
 
   //Artwork Attributes
-  private boolean availableForLoan;
-  private DisplayStatus status;
+
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
+  @Id
   private int artworkID;
+  
+  @Column(name="isAvailableForLoan")
+  private boolean availableForLoan;
+
+  @Column(name="displayStatus")
+  private DisplayStatus status;
+
+  @Column(name="Name")
   private String name;
+
+  @Column(name="Artist")
   private String artist;
 
   //Artwork Associations
+
+  @OneToMany(mappedBy="artwork")
   private List<Loan> loans;
+
+  @ManyToOne
   private Room room;
+
+  @ManyToOne
   private MMS museumManagementSystem;
 
   //------------------------

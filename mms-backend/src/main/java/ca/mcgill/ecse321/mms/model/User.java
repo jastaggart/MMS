@@ -2,9 +2,15 @@
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 
-
+package ca.mcgill.ecse321.mms.model;
 // line 20 "model.ump"
 // line 223 "model.ump"
+
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class User
 {
 
@@ -13,11 +19,17 @@ public abstract class User
   //------------------------
 
   //User Attributes
+  @Column(name="Username")
   private String username;
+
+  @Column(name="Password")
   private String password;
+
+  @Column(name="Email")
   private String email;
 
   //User Associations
+  @ManyToOne
   private MMS museumManagementSystem;
 
   //------------------------
