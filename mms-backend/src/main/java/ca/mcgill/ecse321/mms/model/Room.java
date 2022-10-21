@@ -1,22 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-// line 92 "model.ump"
-// line 195 "model.ump"
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+// line 91 "model.ump"
+// line 194 "model.ump"
 public abstract class Room
 {
 
@@ -25,15 +14,10 @@ public abstract class Room
   //------------------------
 
   //Room Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
   private int roomID;
 
   //Room Associations
-  @ManyToOne
   private MMS museumManagementSystem;
-
-  @OneToMany(mappedBy="room")
   private List<Artwork> artworks;
 
   //------------------------

@@ -1,20 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-// line 69 "model.ump"
-// line 166 "model.ump"
-
-@Entity
+// line 68 "model.ump"
+// line 165 "model.ump"
 public class Loan
 {
 
@@ -23,31 +14,15 @@ public class Loan
   //------------------------
 
   //Loan Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
-  private int loanID;
-
-  @Column(name="loanFee")
   private int loanFee;
-
-  @Column(name="loanStartDate")
   private Date startDate;
-
-  @Column(name="loanEndDate")
   private Date endDate;
-
-  @Column(name="isApproved")
+  private int loanID;
   private boolean isApproved;
 
   //Loan Associations
-
-  @ManyToOne
   private Visitor loanRequestor;
-
-  @ManyToOne
   private StaffMember loanApprover;
-
-  @ManyToOne
   private Artwork artwork;
 
   //------------------------

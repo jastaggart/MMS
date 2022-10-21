@@ -1,20 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import java.sql.Date;
 
 // line 28 "model.ump"
-// line 126 "model.ump"
-@Entity
+// line 125 "model.ump"
 public class Visitor extends User
 {
 
@@ -23,15 +15,10 @@ public class Visitor extends User
   //------------------------
 
   //Visitor Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
   private int visitorID;
 
   //Visitor Associations
-  @OneToMany(mappedBy="passPurchaser")
   private List<Pass> passes;
-  
-  @OneToMany(mappedBy="loanRequestor")
   private List<Loan> loans;
 
   //------------------------

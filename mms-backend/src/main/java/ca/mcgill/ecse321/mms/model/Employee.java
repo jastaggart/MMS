@@ -1,20 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import java.sql.Date;
 
 // line 54 "model.ump"
-// line 153 "model.ump"
-@Entity
+// line 152 "model.ump"
 public class Employee extends StaffMember
 {
 
@@ -22,42 +14,22 @@ public class Employee extends StaffMember
   // MEMBER VARIABLES
   //------------------------
 
-  //Employee Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
-  private int employeeID;
-
   //Employee Associations
-  @OneToMany(mappedBy="shiftAssignee")
   private List<Shift> shifts;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Employee(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aEmployeeID)
+  public Employee(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
-    employeeID = aEmployeeID;
+    super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
     shifts = new ArrayList<Shift>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setEmployeeID(int aEmployeeID)
-  {
-    boolean wasSet = false;
-    employeeID = aEmployeeID;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public int getEmployeeID()
-  {
-    return employeeID;
-  }
   /* Code from template association_GetMany */
   public Shift getShift(int index)
   {
@@ -94,9 +66,9 @@ public class Employee extends StaffMember
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Shift addShift(Date aDate, String aStartHour, String aEndHour, int aShiftID)
+  public Shift addShift(Date aDate, String aStartHour, String aEndHour, int aShiftID, Owner aShiftAssigner)
   {
-    return new Shift(aDate, aStartHour, aEndHour, aShiftID, this);
+    return new Shift(aDate, aStartHour, aEndHour, aShiftID, aShiftAssigner, this);
   }
 
   public boolean addShift(Shift aShift)
@@ -171,10 +143,4 @@ public class Employee extends StaffMember
     super.delete();
   }
 
-
-  public String toString()
-  {
-    return super.toString() + "["+
-            "employeeID" + ":" + getEmployeeID()+ "]";
-  }
 }

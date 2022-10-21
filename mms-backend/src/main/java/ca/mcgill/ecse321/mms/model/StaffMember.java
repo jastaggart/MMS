@@ -1,23 +1,21 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
-
-
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-
 import java.sql.Date;
 
 // line 34 "model.ump"
-// line 131 "model.ump"
+// line 130 "model.ump"
 public abstract class StaffMember extends User
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //StaffMember Attributes
+  private int staffMemberID;
 
   //StaffMember Associations
   private List<Loan> loans;
@@ -26,15 +24,29 @@ public abstract class StaffMember extends User
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem)
+  public StaffMember(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
   {
     super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
+    staffMemberID = aStaffMemberID;
     loans = new ArrayList<Loan>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setStaffMemberID(int aStaffMemberID)
+  {
+    boolean wasSet = false;
+    staffMemberID = aStaffMemberID;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public int getStaffMemberID()
+  {
+    return staffMemberID;
+  }
   /* Code from template association_GetMany */
   public Loan getLoan(int index)
   {
@@ -148,4 +160,10 @@ public abstract class StaffMember extends User
     super.delete();
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "staffMemberID" + ":" + getStaffMemberID()+ "]";
+  }
 }

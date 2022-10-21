@@ -1,20 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.util.*;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import java.sql.Date;
 
-// line 47 "model.ump"
-// line 145 "model.ump"
-@Entity
+// line 48 "model.ump"
+// line 144 "model.ump"
 public class Owner extends StaffMember
 {
 
@@ -22,43 +14,22 @@ public class Owner extends StaffMember
   // MEMBER VARIABLES
   //------------------------
 
-  //Owner Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
-  private int ownerID;
-  
-
   //Owner Associations
-  @OneToMany
   private List<Shift> shifts;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Owner(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aOwnerID)
+  public Owner(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
-    ownerID = aOwnerID;
+    super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
     shifts = new ArrayList<Shift>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setOwnerID(int aOwnerID)
-  {
-    boolean wasSet = false;
-    ownerID = aOwnerID;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public int getOwnerID()
-  {
-    return ownerID;
-  }
   /* Code from template association_GetMany */
   public Shift getShift(int index)
   {
@@ -94,12 +65,26 @@ public class Owner extends StaffMember
   {
     return 0;
   }
-  /* Code from template association_AddUnidirectionalMany */
+  /* Code from template association_AddManyToOne */
+  public Shift addShift(Date aDate, String aStartHour, String aEndHour, int aShiftID, Employee aShiftAssignee)
+  {
+    return new Shift(aDate, aStartHour, aEndHour, aShiftID, this, aShiftAssignee);
+  }
+
   public boolean addShift(Shift aShift)
   {
     boolean wasAdded = false;
     if (shifts.contains(aShift)) { return false; }
-    shifts.add(aShift);
+    Owner existingShiftAssigner = aShift.getShiftAssigner();
+    boolean isNewShiftAssigner = existingShiftAssigner != null && !this.equals(existingShiftAssigner);
+    if (isNewShiftAssigner)
+    {
+      aShift.setShiftAssigner(this);
+    }
+    else
+    {
+      shifts.add(aShift);
+    }
     wasAdded = true;
     return wasAdded;
   }
@@ -107,7 +92,8 @@ public class Owner extends StaffMember
   public boolean removeShift(Shift aShift)
   {
     boolean wasRemoved = false;
-    if (shifts.contains(aShift))
+    //Unable to remove aShift, as it must always have a shiftAssigner
+    if (!this.equals(aShift.getShiftAssigner()))
     {
       shifts.remove(aShift);
       wasRemoved = true;
@@ -149,14 +135,12 @@ public class Owner extends StaffMember
 
   public void delete()
   {
-    shifts.clear();
+    for(int i=shifts.size(); i > 0; i--)
+    {
+      Shift aShift = shifts.get(i - 1);
+      aShift.delete();
+    }
     super.delete();
   }
 
-
-  public String toString()
-  {
-    return super.toString() + "["+
-            "ownerID" + ":" + getOwnerID()+ "]";
-  }
 }

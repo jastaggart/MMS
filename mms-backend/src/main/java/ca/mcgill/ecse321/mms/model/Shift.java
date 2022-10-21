@@ -1,19 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-// line 61 "model.ump"
-// line 161 "model.ump"
-@Entity
+// line 60 "model.ump"
+// line 160 "model.ump"
 public class Shift
 {
 
@@ -22,34 +14,30 @@ public class Shift
   //------------------------
 
   //Shift Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
+  private Date date;
+  private String startHour;
+  private String endHour;
   private int shiftID;
 
-  @Column(name="shiftDate")
-  private Date date;
-
-  @Column(name="shiftStartTime")
-  private String startHour;
-
-  @Column(name="shiftEndTime")
-  private String endHour;
-
-
   //Shift Associations
-  @ManyToOne
+  private Owner shiftAssigner;
   private Employee shiftAssignee;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Shift(Date aDate, String aStartHour, String aEndHour, int aShiftID, Employee aShiftAssignee)
+  public Shift(Date aDate, String aStartHour, String aEndHour, int aShiftID, Owner aShiftAssigner, Employee aShiftAssignee)
   {
     date = aDate;
     startHour = aStartHour;
     endHour = aEndHour;
     shiftID = aShiftID;
+    boolean didAddShiftAssigner = setShiftAssigner(aShiftAssigner);
+    if (!didAddShiftAssigner)
+    {
+      throw new RuntimeException("Unable to create shift due to shiftAssigner. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
     boolean didAddShiftAssignee = setShiftAssignee(aShiftAssignee);
     if (!didAddShiftAssignee)
     {
@@ -113,9 +101,33 @@ public class Shift
     return shiftID;
   }
   /* Code from template association_GetOne */
+  public Owner getShiftAssigner()
+  {
+    return shiftAssigner;
+  }
+  /* Code from template association_GetOne */
   public Employee getShiftAssignee()
   {
     return shiftAssignee;
+  }
+  /* Code from template association_SetOneToMany */
+  public boolean setShiftAssigner(Owner aShiftAssigner)
+  {
+    boolean wasSet = false;
+    if (aShiftAssigner == null)
+    {
+      return wasSet;
+    }
+
+    Owner existingShiftAssigner = shiftAssigner;
+    shiftAssigner = aShiftAssigner;
+    if (existingShiftAssigner != null && !existingShiftAssigner.equals(aShiftAssigner))
+    {
+      existingShiftAssigner.removeShift(this);
+    }
+    shiftAssigner.addShift(this);
+    wasSet = true;
+    return wasSet;
   }
   /* Code from template association_SetOneToMany */
   public boolean setShiftAssignee(Employee aShiftAssignee)
@@ -139,6 +151,12 @@ public class Shift
 
   public void delete()
   {
+    Owner placeholderShiftAssigner = shiftAssigner;
+    this.shiftAssigner = null;
+    if(placeholderShiftAssigner != null)
+    {
+      placeholderShiftAssigner.removeShift(this);
+    }
     Employee placeholderShiftAssignee = shiftAssignee;
     this.shiftAssignee = null;
     if(placeholderShiftAssignee != null)
@@ -155,6 +173,7 @@ public class Shift
             "endHour" + ":" + getEndHour()+ "," +
             "shiftID" + ":" + getShiftID()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "shiftAssigner = "+(getShiftAssigner()!=null?Integer.toHexString(System.identityHashCode(getShiftAssigner())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "shiftAssignee = "+(getShiftAssignee()!=null?Integer.toHexString(System.identityHashCode(getShiftAssignee())):"null");
   }
 }

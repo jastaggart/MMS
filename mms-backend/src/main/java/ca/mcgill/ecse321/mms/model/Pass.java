@@ -1,19 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-package ca.mcgill.ecse321.mms.model;
+
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-// line 40 "model.ump"
-// line 136 "model.ump"
-@Entity
+// line 41 "model.ump"
+// line 135 "model.ump"
 public class Pass
 {
 
@@ -22,15 +14,10 @@ public class Pass
   //------------------------
 
   //Pass Attributes
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Id
   private int passID;
-
-  @Column(name="passValidDate")
   private Date passDate;
 
   //Pass Associations
-  @ManyToOne
   private Visitor passPurchaser;
 
   //------------------------
