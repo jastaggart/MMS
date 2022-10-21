@@ -1,12 +1,20 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
+package ca.mcgill.ecse321.mms.model;
 
 import java.util.*;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import java.sql.Date;
 
 // line 56 "model.ump"
 // line 154 "model.ump"
+@Entity
+@DiscriminatorValue("Employee")
 public class Employee extends StaffMember
 {
 
@@ -15,6 +23,7 @@ public class Employee extends StaffMember
   //------------------------
 
   //Employee Associations
+  @OneToMany(mappedBy="shiftAssignee")
   private List<Shift> shifts;
 
   //------------------------

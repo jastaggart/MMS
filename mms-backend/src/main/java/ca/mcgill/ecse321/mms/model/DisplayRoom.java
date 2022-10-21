@@ -1,11 +1,17 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
-
+package ca.mcgill.ecse321.mms.model;
 import java.util.*;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 // line 108 "model.ump"
 // line 235 "model.ump"
+@Entity
+@DiscriminatorValue("DisplayRoom")
 public class DisplayRoom extends Room
 {
 
@@ -14,8 +20,13 @@ public class DisplayRoom extends Room
   //------------------------
 
   //DisplayRoom Attributes
+  @Column(name="roomSize")
   private RoomSize size;
+
+  @Column(name="roomMaximumCapacity")
   private int maximumCapacity;
+
+  @Column(name="displayRoomNumber")
   private int displayRoomNumber;
 
   //------------------------
