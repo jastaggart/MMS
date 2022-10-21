@@ -5,8 +5,8 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 48 "model.ump"
-// line 144 "model.ump"
+// line 50 "model.ump"
+// line 146 "model.ump"
 public class Owner extends StaffMember
 {
 
@@ -21,9 +21,9 @@ public class Owner extends StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public Owner(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
+  public Owner(String aUsername, String aPassword, String aEmail, int aStaffMemberID, MMS aMuseumManagementSystem)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
+    super(aUsername, aPassword, aEmail, aStaffMemberID, aMuseumManagementSystem);
     shifts = new ArrayList<Shift>();
   }
 

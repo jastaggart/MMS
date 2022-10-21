@@ -5,7 +5,7 @@
 import java.util.*;
 
 // line 11 "model.ump"
-// line 204 "model.ump"
+// line 206 "model.ump"
 public class MMS
 {
 
@@ -17,23 +17,27 @@ public class MMS
   private String openingHours;
   private String closingHours;
   private int passFee;
+  private int museumID;
 
   //MMS Associations
-  private List<User> users;
   private List<Room> rooms;
+  private List<StaffMember> staffMembers;
+  private List<Visitor> visitors;
   private List<Artwork> artworks;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public MMS(String aOpeningHours, String aClosingHours, int aPassFee)
+  public MMS(String aOpeningHours, String aClosingHours, int aPassFee, int aMuseumID)
   {
     openingHours = aOpeningHours;
     closingHours = aClosingHours;
     passFee = aPassFee;
-    users = new ArrayList<User>();
+    museumID = aMuseumID;
     rooms = new ArrayList<Room>();
+    staffMembers = new ArrayList<StaffMember>();
+    visitors = new ArrayList<Visitor>();
     artworks = new ArrayList<Artwork>();
   }
 
@@ -65,6 +69,14 @@ public class MMS
     return wasSet;
   }
 
+  public boolean setMuseumID(int aMuseumID)
+  {
+    boolean wasSet = false;
+    museumID = aMuseumID;
+    wasSet = true;
+    return wasSet;
+  }
+
   public String getOpeningHours()
   {
     return openingHours;
@@ -79,35 +91,10 @@ public class MMS
   {
     return passFee;
   }
-  /* Code from template association_GetMany */
-  public User getUser(int index)
-  {
-    User aUser = users.get(index);
-    return aUser;
-  }
 
-  public List<User> getUsers()
+  public int getMuseumID()
   {
-    List<User> newUsers = Collections.unmodifiableList(users);
-    return newUsers;
-  }
-
-  public int numberOfUsers()
-  {
-    int number = users.size();
-    return number;
-  }
-
-  public boolean hasUsers()
-  {
-    boolean has = users.size() > 0;
-    return has;
-  }
-
-  public int indexOfUser(User aUser)
-  {
-    int index = users.indexOf(aUser);
-    return index;
+    return museumID;
   }
   /* Code from template association_GetMany */
   public Room getRoom(int index)
@@ -140,6 +127,66 @@ public class MMS
     return index;
   }
   /* Code from template association_GetMany */
+  public StaffMember getStaffMember(int index)
+  {
+    StaffMember aStaffMember = staffMembers.get(index);
+    return aStaffMember;
+  }
+
+  public List<StaffMember> getStaffMembers()
+  {
+    List<StaffMember> newStaffMembers = Collections.unmodifiableList(staffMembers);
+    return newStaffMembers;
+  }
+
+  public int numberOfStaffMembers()
+  {
+    int number = staffMembers.size();
+    return number;
+  }
+
+  public boolean hasStaffMembers()
+  {
+    boolean has = staffMembers.size() > 0;
+    return has;
+  }
+
+  public int indexOfStaffMember(StaffMember aStaffMember)
+  {
+    int index = staffMembers.indexOf(aStaffMember);
+    return index;
+  }
+  /* Code from template association_GetMany */
+  public Visitor getVisitor(int index)
+  {
+    Visitor aVisitor = visitors.get(index);
+    return aVisitor;
+  }
+
+  public List<Visitor> getVisitors()
+  {
+    List<Visitor> newVisitors = Collections.unmodifiableList(visitors);
+    return newVisitors;
+  }
+
+  public int numberOfVisitors()
+  {
+    int number = visitors.size();
+    return number;
+  }
+
+  public boolean hasVisitors()
+  {
+    boolean has = visitors.size() > 0;
+    return has;
+  }
+
+  public int indexOfVisitor(Visitor aVisitor)
+  {
+    int index = visitors.indexOf(aVisitor);
+    return index;
+  }
+  /* Code from template association_GetMany */
   public Artwork getArtwork(int index)
   {
     Artwork aArtwork = artworks.get(index);
@@ -168,75 +215,6 @@ public class MMS
   {
     int index = artworks.indexOf(aArtwork);
     return index;
-  }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfUsers()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToOne */
-
-
-  public boolean addUser(User aUser)
-  {
-    boolean wasAdded = false;
-    if (users.contains(aUser)) { return false; }
-    MMS existingMuseumManagementSystem = aUser.getMuseumManagementSystem();
-    boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
-    if (isNewMuseumManagementSystem)
-    {
-      aUser.setMuseumManagementSystem(this);
-    }
-    else
-    {
-      users.add(aUser);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeUser(User aUser)
-  {
-    boolean wasRemoved = false;
-    //Unable to remove aUser, as it must always have a museumManagementSystem
-    if (!this.equals(aUser.getMuseumManagementSystem()))
-    {
-      users.remove(aUser);
-      wasRemoved = true;
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addUserAt(User aUser, int index)
-  {  
-    boolean wasAdded = false;
-    if(addUser(aUser))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfUsers()) { index = numberOfUsers() - 1; }
-      users.remove(aUser);
-      users.add(index, aUser);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveUserAt(User aUser, int index)
-  {
-    boolean wasAdded = false;
-    if(users.contains(aUser))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfUsers()) { index = numberOfUsers() - 1; }
-      users.remove(aUser);
-      users.add(index, aUser);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addUserAt(aUser, index);
-    }
-    return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfRooms()
@@ -318,6 +296,147 @@ public class MMS
     return wasAdded;
   }
   /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfStaffMembers()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToOne */
+
+
+  public boolean addStaffMember(StaffMember aStaffMember)
+  {
+    boolean wasAdded = false;
+    if (staffMembers.contains(aStaffMember)) { return false; }
+    MMS existingMuseumManagementSystem = aStaffMember.getMuseumManagementSystem();
+    boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
+    if (isNewMuseumManagementSystem)
+    {
+      aStaffMember.setMuseumManagementSystem(this);
+    }
+    else
+    {
+      staffMembers.add(aStaffMember);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeStaffMember(StaffMember aStaffMember)
+  {
+    boolean wasRemoved = false;
+    //Unable to remove aStaffMember, as it must always have a museumManagementSystem
+    if (!this.equals(aStaffMember.getMuseumManagementSystem()))
+    {
+      staffMembers.remove(aStaffMember);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addStaffMemberAt(StaffMember aStaffMember, int index)
+  {  
+    boolean wasAdded = false;
+    if(addStaffMember(aStaffMember))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfStaffMembers()) { index = numberOfStaffMembers() - 1; }
+      staffMembers.remove(aStaffMember);
+      staffMembers.add(index, aStaffMember);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveStaffMemberAt(StaffMember aStaffMember, int index)
+  {
+    boolean wasAdded = false;
+    if(staffMembers.contains(aStaffMember))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfStaffMembers()) { index = numberOfStaffMembers() - 1; }
+      staffMembers.remove(aStaffMember);
+      staffMembers.add(index, aStaffMember);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addStaffMemberAt(aStaffMember, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfVisitors()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToOne */
+  public Visitor addVisitor(String aUsername, String aPassword, String aEmail, int aVisitorID)
+  {
+    return new Visitor(aUsername, aPassword, aEmail, aVisitorID, this);
+  }
+
+  public boolean addVisitor(Visitor aVisitor)
+  {
+    boolean wasAdded = false;
+    if (visitors.contains(aVisitor)) { return false; }
+    MMS existingMuseumManagementSystem = aVisitor.getMuseumManagementSystem();
+    boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
+    if (isNewMuseumManagementSystem)
+    {
+      aVisitor.setMuseumManagementSystem(this);
+    }
+    else
+    {
+      visitors.add(aVisitor);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeVisitor(Visitor aVisitor)
+  {
+    boolean wasRemoved = false;
+    //Unable to remove aVisitor, as it must always have a museumManagementSystem
+    if (!this.equals(aVisitor.getMuseumManagementSystem()))
+    {
+      visitors.remove(aVisitor);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addVisitorAt(Visitor aVisitor, int index)
+  {  
+    boolean wasAdded = false;
+    if(addVisitor(aVisitor))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfVisitors()) { index = numberOfVisitors() - 1; }
+      visitors.remove(aVisitor);
+      visitors.add(index, aVisitor);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveVisitorAt(Visitor aVisitor, int index)
+  {
+    boolean wasAdded = false;
+    if(visitors.contains(aVisitor))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfVisitors()) { index = numberOfVisitors() - 1; }
+      visitors.remove(aVisitor);
+      visitors.add(index, aVisitor);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addVisitorAt(aVisitor, index);
+    }
+    return wasAdded;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfArtworks()
   {
     return 0;
@@ -392,13 +511,6 @@ public class MMS
 
   public void delete()
   {
-    while (users.size() > 0)
-    {
-      User aUser = users.get(users.size() - 1);
-      aUser.delete();
-      users.remove(aUser);
-    }
-    
     while (rooms.size() > 0)
     {
       Room aRoom = rooms.get(rooms.size() - 1);
@@ -406,6 +518,16 @@ public class MMS
       rooms.remove(aRoom);
     }
     
+    for(int i=staffMembers.size(); i > 0; i--)
+    {
+      StaffMember aStaffMember = staffMembers.get(i - 1);
+      aStaffMember.delete();
+    }
+    for(int i=visitors.size(); i > 0; i--)
+    {
+      Visitor aVisitor = visitors.get(i - 1);
+      aVisitor.delete();
+    }
     while (artworks.size() > 0)
     {
       Artwork aArtwork = artworks.get(artworks.size() - 1);
@@ -421,6 +543,7 @@ public class MMS
     return super.toString() + "["+
             "openingHours" + ":" + getOpeningHours()+ "," +
             "closingHours" + ":" + getClosingHours()+ "," +
-            "passFee" + ":" + getPassFee()+ "]";
+            "passFee" + ":" + getPassFee()+ "," +
+            "museumID" + ":" + getMuseumID()+ "]";
   }
 }

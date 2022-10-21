@@ -3,8 +3,8 @@
 
 
 
-// line 114 "model.ump"
-// line 232 "model.ump"
+// line 116 "model.ump"
+// line 240 "model.ump"
 public class RoomSize
 {
 

@@ -5,8 +5,8 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 28 "model.ump"
-// line 125 "model.ump"
+// line 30 "model.ump"
+// line 127 "model.ump"
 public class Visitor extends User
 {
 
@@ -18,6 +18,7 @@ public class Visitor extends User
   private int visitorID;
 
   //Visitor Associations
+  private MMS museumManagementSystem;
   private List<Pass> passes;
   private List<Loan> loans;
 
@@ -25,10 +26,15 @@ public class Visitor extends User
   // CONSTRUCTOR
   //------------------------
 
-  public Visitor(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aVisitorID)
+  public Visitor(String aUsername, String aPassword, String aEmail, int aVisitorID, MMS aMuseumManagementSystem)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
+    super(aUsername, aPassword, aEmail);
     visitorID = aVisitorID;
+    boolean didAddMuseumManagementSystem = setMuseumManagementSystem(aMuseumManagementSystem);
+    if (!didAddMuseumManagementSystem)
+    {
+      throw new RuntimeException("Unable to create visitor due to museumManagementSystem. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
     passes = new ArrayList<Pass>();
     loans = new ArrayList<Loan>();
   }
@@ -48,6 +54,11 @@ public class Visitor extends User
   public int getVisitorID()
   {
     return visitorID;
+  }
+  /* Code from template association_GetOne */
+  public MMS getMuseumManagementSystem()
+  {
+    return museumManagementSystem;
   }
   /* Code from template association_GetMany */
   public Pass getPass(int index)
@@ -108,6 +119,25 @@ public class Visitor extends User
   {
     int index = loans.indexOf(aLoan);
     return index;
+  }
+  /* Code from template association_SetOneToMany */
+  public boolean setMuseumManagementSystem(MMS aMuseumManagementSystem)
+  {
+    boolean wasSet = false;
+    if (aMuseumManagementSystem == null)
+    {
+      return wasSet;
+    }
+
+    MMS existingMuseumManagementSystem = museumManagementSystem;
+    museumManagementSystem = aMuseumManagementSystem;
+    if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
+    {
+      existingMuseumManagementSystem.removeVisitor(this);
+    }
+    museumManagementSystem.addVisitor(this);
+    wasSet = true;
+    return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfPasses()
@@ -256,6 +286,12 @@ public class Visitor extends User
 
   public void delete()
   {
+    MMS placeholderMuseumManagementSystem = museumManagementSystem;
+    this.museumManagementSystem = null;
+    if(placeholderMuseumManagementSystem != null)
+    {
+      placeholderMuseumManagementSystem.removeVisitor(this);
+    }
     for(int i=passes.size(); i > 0; i--)
     {
       Pass aPass = passes.get(i - 1);
@@ -273,6 +309,7 @@ public class Visitor extends User
   public String toString()
   {
     return super.toString() + "["+
-            "visitorID" + ":" + getVisitorID()+ "]";
+            "visitorID" + ":" + getVisitorID()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "museumManagementSystem = "+(getMuseumManagementSystem()!=null?Integer.toHexString(System.identityHashCode(getMuseumManagementSystem())):"null");
   }
 }

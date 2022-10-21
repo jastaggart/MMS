@@ -5,8 +5,8 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 34 "model.ump"
-// line 130 "model.ump"
+// line 36 "model.ump"
+// line 132 "model.ump"
 public abstract class StaffMember extends User
 {
 
@@ -18,16 +18,22 @@ public abstract class StaffMember extends User
   private int staffMemberID;
 
   //StaffMember Associations
+  private MMS museumManagementSystem;
   private List<Loan> loans;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
+  public StaffMember(String aUsername, String aPassword, String aEmail, int aStaffMemberID, MMS aMuseumManagementSystem)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
+    super(aUsername, aPassword, aEmail);
     staffMemberID = aStaffMemberID;
+    boolean didAddMuseumManagementSystem = setMuseumManagementSystem(aMuseumManagementSystem);
+    if (!didAddMuseumManagementSystem)
+    {
+      throw new RuntimeException("Unable to create staffMember due to museumManagementSystem. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
     loans = new ArrayList<Loan>();
   }
 
@@ -46,6 +52,11 @@ public abstract class StaffMember extends User
   public int getStaffMemberID()
   {
     return staffMemberID;
+  }
+  /* Code from template association_GetOne */
+  public MMS getMuseumManagementSystem()
+  {
+    return museumManagementSystem;
   }
   /* Code from template association_GetMany */
   public Loan getLoan(int index)
@@ -76,6 +87,25 @@ public abstract class StaffMember extends User
   {
     int index = loans.indexOf(aLoan);
     return index;
+  }
+  /* Code from template association_SetOneToMany */
+  public boolean setMuseumManagementSystem(MMS aMuseumManagementSystem)
+  {
+    boolean wasSet = false;
+    if (aMuseumManagementSystem == null)
+    {
+      return wasSet;
+    }
+
+    MMS existingMuseumManagementSystem = museumManagementSystem;
+    museumManagementSystem = aMuseumManagementSystem;
+    if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
+    {
+      existingMuseumManagementSystem.removeStaffMember(this);
+    }
+    museumManagementSystem.addStaffMember(this);
+    wasSet = true;
+    return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfLoans()
@@ -152,6 +182,12 @@ public abstract class StaffMember extends User
 
   public void delete()
   {
+    MMS placeholderMuseumManagementSystem = museumManagementSystem;
+    this.museumManagementSystem = null;
+    if(placeholderMuseumManagementSystem != null)
+    {
+      placeholderMuseumManagementSystem.removeStaffMember(this);
+    }
     for(int i=loans.size(); i > 0; i--)
     {
       Loan aLoan = loans.get(i - 1);
@@ -164,6 +200,7 @@ public abstract class StaffMember extends User
   public String toString()
   {
     return super.toString() + "["+
-            "staffMemberID" + ":" + getStaffMemberID()+ "]";
+            "staffMemberID" + ":" + getStaffMemberID()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "museumManagementSystem = "+(getMuseumManagementSystem()!=null?Integer.toHexString(System.identityHashCode(getMuseumManagementSystem())):"null");
   }
 }

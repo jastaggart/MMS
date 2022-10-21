@@ -4,8 +4,8 @@
 
 import java.util.*;
 
-// line 106 "model.ump"
-// line 227 "model.ump"
+// line 108 "model.ump"
+// line 235 "model.ump"
 public class DisplayRoom extends Room
 {
 

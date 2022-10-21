@@ -4,8 +4,8 @@
 
 import java.util.*;
 
-// line 91 "model.ump"
-// line 194 "model.ump"
+// line 93 "model.ump"
+// line 196 "model.ump"
 public abstract class Room
 {
 

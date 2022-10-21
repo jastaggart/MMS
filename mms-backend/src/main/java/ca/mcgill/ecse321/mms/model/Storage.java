@@ -4,8 +4,8 @@
 
 import java.util.*;
 
-// line 99 "model.ump"
-// line 199 "model.ump"
+// line 101 "model.ump"
+// line 201 "model.ump"
 public class Storage extends Room
 {
 
