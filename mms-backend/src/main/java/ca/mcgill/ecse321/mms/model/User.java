@@ -4,8 +4,8 @@
 
 
 // line 20 "model.ump"
-// line 120 "model.ump"
-public class User
+// line 223 "model.ump"
+public abstract class User
 {
 
   //------------------------

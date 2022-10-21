@@ -5,14 +5,17 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 52 "model.ump"
-// line 152 "model.ump"
+// line 54 "model.ump"
+// line 153 "model.ump"
 public class Employee extends StaffMember
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //Employee Attributes
+  private int employeeID;
 
   //Employee Associations
   private List<Shift> shifts;
@@ -21,15 +24,29 @@ public class Employee extends StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public Employee(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
+  public Employee(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aEmployeeID)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
+    super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
+    employeeID = aEmployeeID;
     shifts = new ArrayList<Shift>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setEmployeeID(int aEmployeeID)
+  {
+    boolean wasSet = false;
+    employeeID = aEmployeeID;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public int getEmployeeID()
+  {
+    return employeeID;
+  }
   /* Code from template association_GetMany */
   public Shift getShift(int index)
   {
@@ -143,4 +160,10 @@ public class Employee extends StaffMember
     super.delete();
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "employeeID" + ":" + getEmployeeID()+ "]";
+  }
 }

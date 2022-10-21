@@ -5,7 +5,7 @@
 import java.util.*;
 
 // line 100 "model.ump"
-// line 204 "model.ump"
+// line 200 "model.ump"
 public class Storage extends Room
 {
 
@@ -17,9 +17,9 @@ public class Storage extends Room
   // CONSTRUCTOR
   //------------------------
 
-  public Storage(MMS aMuseumManagementSystem)
+  public Storage(int aRoomID, MMS aMuseumManagementSystem)
   {
-    super(aMuseumManagementSystem);
+    super(aRoomID, aMuseumManagementSystem);
   }
 
   //------------------------

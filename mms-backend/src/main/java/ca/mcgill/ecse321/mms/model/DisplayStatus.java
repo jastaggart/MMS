@@ -4,7 +4,7 @@
 
 
 // line 2 "model.ump"
-// line 231 "model.ump"
+// line 218 "model.ump"
 public class DisplayStatus
 {
 

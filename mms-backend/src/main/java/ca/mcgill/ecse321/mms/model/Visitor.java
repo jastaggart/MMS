@@ -5,8 +5,8 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 27 "model.ump"
-// line 125 "model.ump"
+// line 28 "model.ump"
+// line 126 "model.ump"
 public class Visitor extends User
 {
 

@@ -5,14 +5,17 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 46 "model.ump"
-// line 144 "model.ump"
+// line 47 "model.ump"
+// line 145 "model.ump"
 public class Owner extends StaffMember
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //Owner Attributes
+  private int ownerID;
 
   //Owner Associations
   private List<Shift> shifts;
@@ -21,15 +24,29 @@ public class Owner extends StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public Owner(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
+  public Owner(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aOwnerID)
   {
-    super(aUsername, aPassword, aEmail, aMuseumManagementSystem, aStaffMemberID);
+    super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
+    ownerID = aOwnerID;
     shifts = new ArrayList<Shift>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setOwnerID(int aOwnerID)
+  {
+    boolean wasSet = false;
+    ownerID = aOwnerID;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public int getOwnerID()
+  {
+    return ownerID;
+  }
   /* Code from template association_GetMany */
   public Shift getShift(int index)
   {
@@ -124,4 +141,10 @@ public class Owner extends StaffMember
     super.delete();
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "ownerID" + ":" + getOwnerID()+ "]";
+  }
 }

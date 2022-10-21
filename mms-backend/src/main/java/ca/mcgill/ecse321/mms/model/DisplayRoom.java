@@ -4,8 +4,8 @@
 
 import java.util.*;
 
-// line 93 "model.ump"
-// line 199 "model.ump"
+// line 107 "model.ump"
+// line 228 "model.ump"
 public class DisplayRoom extends Room
 {
 
@@ -14,28 +14,30 @@ public class DisplayRoom extends Room
   //------------------------
 
   //DisplayRoom Attributes
-  private int roomNumber;
+  private RoomSize size;
   private int maximumCapacity;
+  private int displayRoomNumber;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public DisplayRoom(MMS aMuseumManagementSystem, int aRoomNumber, int aMaximumCapacity)
+  public DisplayRoom(int aRoomID, MMS aMuseumManagementSystem, RoomSize aSize, int aMaximumCapacity, int aDisplayRoomNumber)
   {
-    super(aMuseumManagementSystem);
-    roomNumber = aRoomNumber;
+    super(aRoomID, aMuseumManagementSystem);
+    size = aSize;
     maximumCapacity = aMaximumCapacity;
+    displayRoomNumber = aDisplayRoomNumber;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public boolean setRoomNumber(int aRoomNumber)
+  public boolean setSize(RoomSize aSize)
   {
     boolean wasSet = false;
-    roomNumber = aRoomNumber;
+    size = aSize;
     wasSet = true;
     return wasSet;
   }
@@ -48,14 +50,27 @@ public class DisplayRoom extends Room
     return wasSet;
   }
 
-  public int getRoomNumber()
+  public boolean setDisplayRoomNumber(int aDisplayRoomNumber)
   {
-    return roomNumber;
+    boolean wasSet = false;
+    displayRoomNumber = aDisplayRoomNumber;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public RoomSize getSize()
+  {
+    return size;
   }
 
   public int getMaximumCapacity()
   {
     return maximumCapacity;
+  }
+
+  public int getDisplayRoomNumber()
+  {
+    return displayRoomNumber;
   }
 
   public void delete()
@@ -67,7 +82,8 @@ public class DisplayRoom extends Room
   public String toString()
   {
     return super.toString() + "["+
-            "roomNumber" + ":" + getRoomNumber()+ "," +
-            "maximumCapacity" + ":" + getMaximumCapacity()+ "]";
+            "maximumCapacity" + ":" + getMaximumCapacity()+ "," +
+            "displayRoomNumber" + ":" + getDisplayRoomNumber()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "size" + "=" + (getSize() != null ? !getSize().equals(this)  ? getSize().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

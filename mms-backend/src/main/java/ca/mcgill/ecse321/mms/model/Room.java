@@ -4,14 +4,17 @@
 
 import java.util.*;
 
-// line 89 "model.ump"
-// line 194 "model.ump"
-public class Room
+// line 92 "model.ump"
+// line 195 "model.ump"
+public abstract class Room
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //Room Attributes
+  private int roomID;
 
   //Room Associations
   private MMS museumManagementSystem;
@@ -21,8 +24,9 @@ public class Room
   // CONSTRUCTOR
   //------------------------
 
-  public Room(MMS aMuseumManagementSystem)
+  public Room(int aRoomID, MMS aMuseumManagementSystem)
   {
+    roomID = aRoomID;
     boolean didAddMuseumManagementSystem = setMuseumManagementSystem(aMuseumManagementSystem);
     if (!didAddMuseumManagementSystem)
     {
@@ -34,6 +38,19 @@ public class Room
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setRoomID(int aRoomID)
+  {
+    boolean wasSet = false;
+    roomID = aRoomID;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public int getRoomID()
+  {
+    return roomID;
+  }
   /* Code from template association_GetOne */
   public MMS getMuseumManagementSystem()
   {
@@ -69,20 +86,32 @@ public class Room
     int index = artworks.indexOf(aArtwork);
     return index;
   }
-  /* Code from template association_SetOneToMany */
+  /* Code from template association_SetOneToAtMostN */
   public boolean setMuseumManagementSystem(MMS aMuseumManagementSystem)
   {
     boolean wasSet = false;
+    //Must provide museumManagementSystem to room
     if (aMuseumManagementSystem == null)
     {
       return wasSet;
     }
 
+    //museumManagementSystem already at maximum (11)
+    if (aMuseumManagementSystem.numberOfRooms() >= MMS.maximumNumberOfRooms())
+    {
+      return wasSet;
+    }
+    
     MMS existingMuseumManagementSystem = museumManagementSystem;
     museumManagementSystem = aMuseumManagementSystem;
     if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
     {
-      existingMuseumManagementSystem.removeRoom(this);
+      boolean didRemove = existingMuseumManagementSystem.removeRoom(this);
+      if (!didRemove)
+      {
+        museumManagementSystem = existingMuseumManagementSystem;
+        return wasSet;
+      }
     }
     museumManagementSystem.addRoom(this);
     wasSet = true;
@@ -174,4 +203,11 @@ public class Room
     }
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "roomID" + ":" + getRoomID()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "museumManagementSystem = "+(getMuseumManagementSystem()!=null?Integer.toHexString(System.identityHashCode(getMuseumManagementSystem())):"null");
+  }
 }

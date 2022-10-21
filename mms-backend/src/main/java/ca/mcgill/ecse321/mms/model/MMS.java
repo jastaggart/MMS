@@ -5,7 +5,7 @@
 import java.util.*;
 
 // line 11 "model.ump"
-// line 219 "model.ump"
+// line 205 "model.ump"
 public class MMS
 {
 
@@ -175,10 +175,7 @@ public class MMS
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public User addUser(String aUsername, String aPassword, String aEmail)
-  {
-    return new User(aUsername, aPassword, aEmail, this);
-  }
+
 
   public boolean addUser(User aUser)
   {
@@ -246,16 +243,23 @@ public class MMS
   {
     return 0;
   }
-  /* Code from template association_AddManyToOne */
-  public Room addRoom()
+  /* Code from template association_MaximumNumberOfMethod */
+  public static int maximumNumberOfRooms()
   {
-    return new Room(this);
+    return 11;
   }
+  /* Code from template association_AddOptionalNToOne */
+
 
   public boolean addRoom(Room aRoom)
   {
     boolean wasAdded = false;
     if (rooms.contains(aRoom)) { return false; }
+    if (numberOfRooms() >= maximumNumberOfRooms())
+    {
+      return wasAdded;
+    }
+
     MMS existingMuseumManagementSystem = aRoom.getMuseumManagementSystem();
     boolean isNewMuseumManagementSystem = existingMuseumManagementSystem != null && !this.equals(existingMuseumManagementSystem);
     if (isNewMuseumManagementSystem)

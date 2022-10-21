@@ -5,17 +5,14 @@
 import java.util.*;
 import java.sql.Date;
 
-// line 33 "model.ump"
-// line 130 "model.ump"
-public class StaffMember extends User
+// line 34 "model.ump"
+// line 131 "model.ump"
+public abstract class StaffMember extends User
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
-
-  //StaffMember Attributes
-  private int staffMemberID;
 
   //StaffMember Associations
   private List<Loan> loans;
@@ -24,29 +21,15 @@ public class StaffMember extends User
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem, int aStaffMemberID)
+  public StaffMember(String aUsername, String aPassword, String aEmail, MMS aMuseumManagementSystem)
   {
     super(aUsername, aPassword, aEmail, aMuseumManagementSystem);
-    staffMemberID = aStaffMemberID;
     loans = new ArrayList<Loan>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setStaffMemberID(int aStaffMemberID)
-  {
-    boolean wasSet = false;
-    staffMemberID = aStaffMemberID;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public int getStaffMemberID()
-  {
-    return staffMemberID;
-  }
   /* Code from template association_GetMany */
   public Loan getLoan(int index)
   {
@@ -160,10 +143,4 @@ public class StaffMember extends User
     super.delete();
   }
 
-
-  public String toString()
-  {
-    return super.toString() + "["+
-            "staffMemberID" + ":" + getStaffMemberID()+ "]";
-  }
 }
