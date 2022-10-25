@@ -20,8 +20,8 @@ public class DisplayRoom extends Room
   //------------------------
 
   //DisplayRoom Attributes
-  @Column(name="roomSize")
-  private RoomSize size;
+  @Column(name="roomSize", columnDefinition="VARCHAR(40)")
+  private String size;
 
   @Column(name="roomMaximumCapacity")
   private int maximumCapacity;
@@ -33,7 +33,11 @@ public class DisplayRoom extends Room
   // CONSTRUCTOR
   //------------------------
 
-  public DisplayRoom(int aRoomID, MMS aMuseumManagementSystem, RoomSize aSize, int aMaximumCapacity, int aDisplayRoomNumber)
+  public DisplayRoom() {
+    super();
+  }
+
+  public DisplayRoom(int aRoomID, MMS aMuseumManagementSystem, String aSize, int aMaximumCapacity, int aDisplayRoomNumber)
   {
     super(aRoomID, aMuseumManagementSystem);
     size = aSize;
@@ -45,7 +49,7 @@ public class DisplayRoom extends Room
   // INTERFACE
   //------------------------
 
-  public boolean setSize(RoomSize aSize)
+  public boolean setSize(String aSize)
   {
     boolean wasSet = false;
     size = aSize;
@@ -69,7 +73,7 @@ public class DisplayRoom extends Room
     return wasSet;
   }
 
-  public RoomSize getSize()
+  public String getSize()
   {
     return size;
   }

@@ -35,7 +35,7 @@ public class Artwork
   private boolean availableForLoan;
 
   @Column(name="displayStatus")
-  private DisplayStatus status;
+  private String status;
 
   @Column(name="artworkName")
   private String name;
@@ -57,7 +57,7 @@ public class Artwork
   // CONSTRUCTOR
   //------------------------
 
-  public Artwork(boolean aAvailableForLoan, DisplayStatus aStatus, int aArtworkID, String aName, String aArtist, MMS aMuseumManagementSystem)
+  public Artwork(boolean aAvailableForLoan, String aStatus, int aArtworkID, String aName, String aArtist, MMS aMuseumManagementSystem)
   {
     availableForLoan = aAvailableForLoan;
     status = aStatus;
@@ -84,7 +84,7 @@ public class Artwork
     return wasSet;
   }
 
-  public boolean setStatus(DisplayStatus aStatus)
+  public boolean setStatus(String aStatus)
   {
     boolean wasSet = false;
     status = aStatus;
@@ -121,7 +121,7 @@ public class Artwork
     return availableForLoan;
   }
 
-  public DisplayStatus getStatus()
+  public String getStatus()
   {
     return status;
   }
@@ -283,14 +283,8 @@ public class Artwork
     {
       return wasSet;
     }
-
-    MMS existingMuseumManagementSystem = museumManagementSystem;
+    
     museumManagementSystem = aMuseumManagementSystem;
-    if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
-    {
-      existingMuseumManagementSystem.removeArtwork(this);
-    }
-    museumManagementSystem.addArtwork(this);
     wasSet = true;
     return wasSet;
   }
@@ -308,12 +302,8 @@ public class Artwork
       this.room = null;
       placeholderRoom.removeArtwork(this);
     }
-    MMS placeholderMuseumManagementSystem = museumManagementSystem;
     this.museumManagementSystem = null;
-    if(placeholderMuseumManagementSystem != null)
-    {
-      placeholderMuseumManagementSystem.removeArtwork(this);
-    }
+   
   }
 
 

@@ -116,14 +116,7 @@ public abstract class StaffMember extends User
     {
       return wasSet;
     }
-
-    MMS existingMuseumManagementSystem = museumManagementSystem;
     museumManagementSystem = aMuseumManagementSystem;
-    if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
-    {
-      existingMuseumManagementSystem.removeStaffMember(this);
-    }
-    museumManagementSystem.addStaffMember(this);
     wasSet = true;
     return wasSet;
   }
@@ -202,12 +195,8 @@ public abstract class StaffMember extends User
 
   public void delete()
   {
-    MMS placeholderMuseumManagementSystem = museumManagementSystem;
     this.museumManagementSystem = null;
-    if(placeholderMuseumManagementSystem != null)
-    {
-      placeholderMuseumManagementSystem.removeStaffMember(this);
-    }
+   
     for(int i=loans.size(); i > 0; i--)
     {
       Loan aLoan = loans.get(i - 1);

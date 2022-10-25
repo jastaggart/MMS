@@ -42,6 +42,9 @@ public abstract class Room
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  public Room() {
+
+  }
 
   public Room(int aRoomID, MMS aMuseumManagementSystem)
   {
@@ -114,25 +117,14 @@ public abstract class Room
     {
       return wasSet;
     }
-
-    //museumManagementSystem already at maximum (11)
-    if (aMuseumManagementSystem.numberOfRooms() >= MMS.maximumNumberOfRooms())
-    {
-      return wasSet;
-    }
     
     MMS existingMuseumManagementSystem = museumManagementSystem;
     museumManagementSystem = aMuseumManagementSystem;
     if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
     {
-      boolean didRemove = existingMuseumManagementSystem.removeRoom(this);
-      if (!didRemove)
-      {
-        museumManagementSystem = existingMuseumManagementSystem;
-        return wasSet;
+      museumManagementSystem = existingMuseumManagementSystem;
+      return wasSet;
       }
-    }
-    museumManagementSystem.addRoom(this);
     wasSet = true;
     return wasSet;
   }
@@ -210,18 +202,12 @@ public abstract class Room
 
   public void delete()
   {
-    MMS placeholderMuseumManagementSystem = museumManagementSystem;
     this.museumManagementSystem = null;
-    if(placeholderMuseumManagementSystem != null)
-    {
-      placeholderMuseumManagementSystem.removeRoom(this);
-    }
     while( !artworks.isEmpty() )
     {
       artworks.get(0).setRoom(null);
     }
   }
-
 
   public String toString()
   {

@@ -145,13 +145,8 @@ public class Visitor extends User
       return wasSet;
     }
 
-    MMS existingMuseumManagementSystem = museumManagementSystem;
     museumManagementSystem = aMuseumManagementSystem;
-    if (existingMuseumManagementSystem != null && !existingMuseumManagementSystem.equals(aMuseumManagementSystem))
-    {
-      existingMuseumManagementSystem.removeVisitor(this);
-    }
-    museumManagementSystem.addVisitor(this);
+   
     wasSet = true;
     return wasSet;
   }
@@ -302,12 +297,8 @@ public class Visitor extends User
 
   public void delete()
   {
-    MMS placeholderMuseumManagementSystem = museumManagementSystem;
     this.museumManagementSystem = null;
-    if(placeholderMuseumManagementSystem != null)
-    {
-      placeholderMuseumManagementSystem.removeVisitor(this);
-    }
+   
     for(int i=passes.size(); i > 0; i--)
     {
       Pass aPass = passes.get(i - 1);

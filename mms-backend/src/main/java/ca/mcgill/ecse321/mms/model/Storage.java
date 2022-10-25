@@ -22,6 +22,10 @@ public class Storage extends Room
   // CONSTRUCTOR
   //------------------------
 
+  public Storage() {
+    
+  }
+
   public Storage(int aRoomID, MMS aMuseumManagementSystem)
   {
     super(aRoomID, aMuseumManagementSystem);
