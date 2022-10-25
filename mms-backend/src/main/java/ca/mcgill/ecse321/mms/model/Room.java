@@ -43,7 +43,7 @@ public abstract class Room
   // CONSTRUCTOR
   //------------------------
   public Room() {
-
+    artworks = new ArrayList<Artwork>();
   }
 
   public Room(int aRoomID, MMS aMuseumManagementSystem)
