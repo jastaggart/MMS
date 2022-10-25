@@ -29,7 +29,12 @@ public class Owner extends StaffMember
   //------------------------
   // CONSTRUCTOR
   //------------------------
-
+  
+  public Owner() {
+    super();
+    shifts = new ArrayList<Shift>();
+  }
+  
   public Owner(String aUsername, String aPassword, String aEmail, int aStaffMemberID, MMS aMuseumManagementSystem)
   {
     super(aUsername, aPassword, aEmail, aStaffMemberID, aMuseumManagementSystem);

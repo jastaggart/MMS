@@ -45,6 +45,11 @@ public abstract class StaffMember extends User
   // CONSTRUCTOR
   //------------------------
 
+  public StaffMember() {
+    super();
+    loans = new ArrayList<Loan>();
+  }
+  
   public StaffMember(String aUsername, String aPassword, String aEmail, int aStaffMemberID, MMS aMuseumManagementSystem)
   {
     super(aUsername, aPassword, aEmail);

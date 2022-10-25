@@ -31,6 +31,11 @@ public class Employee extends StaffMember
   // CONSTRUCTOR
   //------------------------
 
+  public Employee() {
+    super();
+    shifts = new ArrayList<Shift>();
+  }
+  
   public Employee(String aUsername, String aPassword, String aEmail, int aStaffMemberID, MMS aMuseumManagementSystem)
   {
     super(aUsername, aPassword, aEmail, aStaffMemberID, aMuseumManagementSystem);

@@ -48,6 +48,9 @@ public class Shift
   // CONSTRUCTOR
   //------------------------
 
+  public Shift() {
+  }
+  
   public Shift(Date aDate, Time aStartHour, Time aEndHour, int aShiftID, Owner aShiftAssigner, Employee aShiftAssignee)
   {
     date = aDate;
