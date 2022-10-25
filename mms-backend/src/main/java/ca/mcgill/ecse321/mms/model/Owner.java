@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.mms.model;
 import java.util.*;
+import java.sql.Time;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -74,7 +75,7 @@ public class Owner extends StaffMember
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Shift addShift(Date aDate, String aStartHour, String aEndHour, int aShiftID, Employee aShiftAssignee)
+  public Shift addShift(Date aDate, Time aStartHour, Time aEndHour, int aShiftID, Employee aShiftAssignee)
   {
     return new Shift(aDate, aStartHour, aEndHour, aShiftID, this, aShiftAssignee);
   }

@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse321.mms.model;
 import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,10 +31,10 @@ public class Shift
   private Date date;
 
   @Column(name="shiftStartTime")
-  private String startHour;
+  private Time startHour;
 
   @Column(name="shiftEndTime")
-  private String endHour;
+  private Time endHour;
 
 
   //Shift Associations
@@ -47,7 +48,7 @@ public class Shift
   // CONSTRUCTOR
   //------------------------
 
-  public Shift(Date aDate, String aStartHour, String aEndHour, int aShiftID, Owner aShiftAssigner, Employee aShiftAssignee)
+  public Shift(Date aDate, Time aStartHour, Time aEndHour, int aShiftID, Owner aShiftAssigner, Employee aShiftAssignee)
   {
     date = aDate;
     startHour = aStartHour;
@@ -77,7 +78,7 @@ public class Shift
     return wasSet;
   }
 
-  public boolean setStartHour(String aStartHour)
+  public boolean setStartHour(Time aStartHour)
   {
     boolean wasSet = false;
     startHour = aStartHour;
@@ -85,7 +86,7 @@ public class Shift
     return wasSet;
   }
 
-  public boolean setEndHour(String aEndHour)
+  public boolean setEndHour(Time aEndHour)
   {
     boolean wasSet = false;
     endHour = aEndHour;
@@ -106,12 +107,12 @@ public class Shift
     return date;
   }
 
-  public String getStartHour()
+  public Time getStartHour()
   {
     return startHour;
   }
 
-  public String getEndHour()
+  public Time getEndHour()
   {
     return endHour;
   }
