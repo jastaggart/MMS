@@ -17,6 +17,7 @@ import ca.mcgill.ecse321.mms.model.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class LoanRepositoryTests {
+
     @Autowired
     private LoanRepository loanRepository;
 

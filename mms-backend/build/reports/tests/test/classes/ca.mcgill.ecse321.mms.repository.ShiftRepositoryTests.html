@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - LoanRepositoryTests</title>
+<title>Test results - ShiftRepositoryTests</title>
 <link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <script src="../js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>LoanRepositoryTests</h1>
+<h1>ShiftRepositoryTests</h1>
 <div class="breadcrumbs">
 <a href="../index.html">all</a> &gt; 
-<a href="../packages/ca.mcgill.ecse321.mms.repository.html">ca.mcgill.ecse321.mms.repository</a> &gt; LoanRepositoryTests</div>
+<a href="../packages/ca.mcgill.ecse321.mms.repository.html">ca.mcgill.ecse321.mms.repository</a> &gt; ShiftRepositoryTests</div>
 <div id="summary">
 <table>
 <tr>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.055s</div>
+<div class="counter">0.483s</div>
 <p>duration</p>
 </div>
 </td>
@@ -73,8 +73,8 @@
 <div id="tab0" class="tab">
 <h2>Failed tests</h2>
 <div class="test">
-<a name="testPersistAndLoadArtwork()"></a>
-<h3 class="failures">testPersistAndLoadArtwork()</h3>
+<a name="testPersistAndLoadShift()"></a>
+<h3 class="failures">testPersistAndLoadShift()</h3>
 <span class="code">
 <pre>org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [fkj6uko2yic74nobkveq7ax8fjv]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:276)
@@ -94,7 +94,7 @@
 	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at app//org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215)
 	at app/jdk.proxy3/jdk.proxy3.$Proxy128.deleteAll(Unknown Source)
-	at app//ca.mcgill.ecse321.mms.repository.LoanRepositoryTests.clearDatabase(LoanRepositoryTests.java:37)
+	at app//ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests.clearDatabase(ShiftRepositoryTests.java:31)
 	at java.base@17/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base@17/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base@17/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -242,8 +242,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 </tr>
 </thead>
 <tr>
-<td class="failures">testPersistAndLoadArtwork()</td>
-<td class="failures">0.055s</td>
+<td class="failures">testPersistAndLoadShift()</td>
+<td class="failures">0.483s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -251,16 +251,61 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2022-10-26 00:43:34.520  INFO 16600 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.mms.repository.LoanRepositoryTests], using SpringBootContextLoader
-2022-10-26 00:43:34.520  INFO 16600 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ca.mcgill.ecse321.mms.repository.LoanRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-2022-10-26 00:43:34.520  INFO 16600 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ca.mcgill.ecse321.mms.repository.LoanRepositoryTests]: LoanRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2022-10-26 00:43:34.520  INFO 16600 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ca.mcgill.ecse321.mms.MmsApplication for test class ca.mcgill.ecse321.mms.repository.LoanRepositoryTests
-2022-10-26 00:43:34.524  INFO 16600 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2022-10-26 00:43:34.524  INFO 16600 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@36f1bd7e, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1c2273f6, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@411e567e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4e58eda2, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@75f9a35a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7acbd3d0, org.springframework.test.context.transaction.TransactionalTestExecutionListener@49d5c751, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@40e90634, org.springframework.test.context.event.EventPublishingTestExecutionListener@78b29e00, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5c438795, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3b4b2c03, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@339b45f8, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5fb58f15, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1f8ac459, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7d43c89f]
-2022-10-26 00:43:34.580  WARN 16600 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23503
-2022-10-26 00:43:34.580 ERROR 16600 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: update or delete on table &quot;staff_member&quot; violates foreign key constraint &quot;fkj6uko2yic74nobkveq7ax8fjv&quot; on table &quot;shift&quot;
+<pre>00:43:28.181 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+00:43:28.193 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+00:43:28.223 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+00:43:28.235 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests], using SpringBootContextLoader
+00:43:28.239 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests]: class path resource [ca/mcgill/ecse321/mms/repository/ShiftRepositoryTests-context.xml] does not exist
+00:43:28.239 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests]: class path resource [ca/mcgill/ecse321/mms/repository/ShiftRepositoryTestsContext.groovy] does not exist
+00:43:28.239 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+00:43:28.239 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests]: ShiftRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:43:28.284 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests]
+00:43:28.353 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\sarah\Documents\Github\project-group-07\mms-backend\build\classes\java\main\ca\mcgill\ecse321\mms\MmsApplication.class]
+00:43:28.357 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ca.mcgill.ecse321.mms.MmsApplication for test class ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests
+00:43:28.466 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [ca.mcgill.ecse321.mms.repository.ShiftRepositoryTests]: using defaults.
+00:43:28.466 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+00:43:28.482 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@77192705, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@226642a5, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@7e809b79, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5cc126dc, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@625e134e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@72bd06ca, org.springframework.test.context.transaction.TransactionalTestExecutionListener@89c10b7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5dbe30be, org.springframework.test.context.event.EventPublishingTestExecutionListener@4fe89c24, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@55795845, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3d08f3f5, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@119f1f2a, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1a1da881, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@5b970f7, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7fd4acee]
+00:43:28.487 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4f936da8 testClass = ShiftRepositoryTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@4215838f testClass = ShiftRepositoryTests, locations = '{}', classes = '{class ca.mcgill.ecse321.mms.MmsApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@79179359, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@db57326, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1a6c1270, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6ee6f53, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7241a47d, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@3d6f0054], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.4)
+
+2022-10-26 00:43:28.826  INFO 16600 --- [    Test worker] c.m.e.m.repository.ShiftRepositoryTests  : Starting ShiftRepositoryTests using Java 17 on DESKTOP-OSHRBDR with PID 16600 (started by sarah in C:\Users\sarah\Documents\Github\project-group-07\mms-backend)
+2022-10-26 00:43:28.826  INFO 16600 --- [    Test worker] c.m.e.m.repository.ShiftRepositoryTests  : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-10-26 00:43:29.576  INFO 16600 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2022-10-26 00:43:29.576  INFO 16600 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-10-26 00:43:29.610  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.ArtworkRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.610  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.LoanRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.614  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.MMSRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.614  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.PassRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.618  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.RoomRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.618  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.ShiftRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.622  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.StaffMemberRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.622  INFO 16600 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ca.mcgill.ecse321.mms.repository.VisitorRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-10-26 00:43:29.622  INFO 16600 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 0 JDBC repository interfaces.
+2022-10-26 00:43:29.637  INFO 16600 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2022-10-26 00:43:29.637  INFO 16600 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-10-26 00:43:29.689  INFO 16600 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 8 JPA repository interfaces.
+2022-10-26 00:43:30.336  INFO 16600 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-26 00:43:30.393  INFO 16600 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.11.Final
+2022-10-26 00:43:30.617  INFO 16600 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-10-26 00:43:30.817  INFO 16600 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-10-26 00:43:31.119  INFO 16600 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-10-26 00:43:31.164  INFO 16600 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2022-10-26 00:43:31.933  INFO 16600 --- [    Test worker] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: ca.mcgill.ecse321.mms.model.Pass (class must be instantiated by Interceptor)
+2022-10-26 00:43:32.443  INFO 16600 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-26 00:43:32.457  INFO 16600 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-26 00:43:32.729  WARN 16600 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-26 00:43:33.902  INFO 16600 --- [    Test worker] c.m.e.m.repository.ShiftRepositoryTests  : Started ShiftRepositoryTests in 5.365 seconds (JVM running for 6.657)
+2022-10-26 00:43:34.393  WARN 16600 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 23503
+2022-10-26 00:43:34.393 ERROR 16600 --- [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: update or delete on table &quot;staff_member&quot; violates foreign key constraint &quot;fkj6uko2yic74nobkveq7ax8fjv&quot; on table &quot;shift&quot;
   Detail: Key (staff_memberid)=(3) is still referenced from table &quot;shift&quot;.
-2022-10-26 00:43:34.580  INFO 16600 --- [    Test worker] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2022-10-26 00:43:34.397  INFO 16600 --- [    Test worker] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
 </pre>
 </span>
 </div>
