@@ -56,6 +56,9 @@ public class Artwork
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  public Artwork() {
+    
+  }
 
   public Artwork(boolean aAvailableForLoan, String aStatus, int aArtworkID, String aName, String aArtist, MMS aMuseumManagementSystem)
   {

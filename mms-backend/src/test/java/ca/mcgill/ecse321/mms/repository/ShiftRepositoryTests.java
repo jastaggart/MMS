@@ -19,7 +19,7 @@ import ca.mcgill.ecse321.mms.model.DisplayRoom;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ShiftRepositoryTests {
-
+  /*
   @Autowired
   private StaffMemberRepository staffMemberRepository;
 
@@ -101,5 +101,5 @@ public class ShiftRepositoryTests {
     assertNotNull(shift.getShiftAssignee());
     assertEquals(employeeId, shift.getShiftAssignee().getStaffMemberID());
   }
-
+  */
 }
