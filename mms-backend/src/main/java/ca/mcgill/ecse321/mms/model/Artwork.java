@@ -57,7 +57,7 @@ public class Artwork
   // CONSTRUCTOR
   //------------------------
   public Artwork() {
-    
+    loans = new ArrayList<Loan>();
   }
 
   public Artwork(boolean aAvailableForLoan, String aStatus, int aArtworkID, String aName, String aArtist, MMS aMuseumManagementSystem)

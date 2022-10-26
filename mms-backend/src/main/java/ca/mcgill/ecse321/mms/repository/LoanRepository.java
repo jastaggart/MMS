@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.mms.model.Loan;
 
 public interface LoanRepository extends CrudRepository<Loan, String> {
-	
+	public Loan findLoanByLoanID(int id);
 }

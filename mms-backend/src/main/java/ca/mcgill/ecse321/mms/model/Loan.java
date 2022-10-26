@@ -52,7 +52,10 @@ public class Loan
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  public Loan() {
 
+  }
+  
   public Loan(int aLoanFee, Date aStartDate, Date aEndDate, int aLoanID, boolean aIsApproved, Visitor aLoanRequestor, StaffMember aLoanApprover, Artwork aArtwork)
   {
     loanFee = aLoanFee;

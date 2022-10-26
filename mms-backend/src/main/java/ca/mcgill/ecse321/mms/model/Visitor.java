@@ -41,6 +41,11 @@ public class Visitor extends User
   //------------------------
   // CONSTRUCTOR
   //------------------------
+  public Visitor() {
+    super();
+    passes = new ArrayList<Pass>();
+    loans = new ArrayList<Loan>();
+  }
 
   public Visitor(String aUsername, String aPassword, String aEmail, int aVisitorID, MMS aMuseumManagementSystem)
   {

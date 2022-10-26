@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.Time;
+import java.sql.Date;
 
 import ca.mcgill.ecse321.mms.model.*;
 
@@ -21,6 +22,9 @@ public class ArtworkRepositoryTests {
     private ArtworkRepository artworkRepository;
 
     @Autowired
+    private LoanRepository loanRepository;
+
+    @Autowired
     private MMSRepository mmsRepository;
     
     @Autowired
@@ -29,6 +33,7 @@ public class ArtworkRepositoryTests {
     @AfterEach
     public void clearDatabase() {
         artworkRepository.deleteAll();
+        loanRepository.deleteAll();
         roomRepository.deleteAll();
         mmsRepository.deleteAll();
     }
@@ -62,8 +67,22 @@ public class ArtworkRepositoryTests {
         int storageID = storage.getRoomID();
         
 
-        // Creating the fields that will be set to the created Loan object
-        
+        // Creating fields for Loan object
+        int loanFee = 10;
+        Date startDate = Date.valueOf("2022-10-25");
+        Date endDate = Date.valueOf("2022-10-31");
+        boolean isApproved = true;
+        // Creating Loan object
+        Loan loan = new Loan();
+        // Setting fields of Loan object
+        loan.setLoanFee(loanFee);
+        loan.setStartDate(startDate);
+        loan.setEndDate(endDate);
+        loan.setIsApproved(isApproved);
+        // Save Loan object in loanRepository table and fetch ID
+        loan = loanRepository.save(loan);
+        int loanID = loan.getLoanID();
+
 
         // Creating fields for Artwork object
         boolean availableForLoan = true;
@@ -79,6 +98,7 @@ public class ArtworkRepositoryTests {
         artwork.setStatus(status);
         artwork.setRoom(storage);
         artwork.setMuseumManagementSystem(museum);
+        artwork.addLoan(loan);
         // Saving Artwork instance in artworkRepository table and fetch ID
         artwork = artworkRepository.save(artwork);
         int artworkID = artwork.getArtworkID();
@@ -97,15 +117,14 @@ public class ArtworkRepositoryTests {
         assertEquals(name, artwork.getName());
         assertEquals(artist, artwork.getArtist());
         // Check Associations
-        
+        assertNotNull(artwork.getLoans());
+        assertEquals(loanID, artwork.getLoan(0).getLoanID());
 
-        MMS artworkMMSFromDB = artwork.getMuseumManagementSystem();
-        assertNotNull(artworkMMSFromDB);
-        assertEquals(museumID, artworkMMSFromDB.getMuseumID());
+        assertNotNull(artwork.getMuseumManagementSystem());
+        assertEquals(museumID, artwork.getMuseumManagementSystem().getMuseumID());
 
-        Storage artworkRoomFromDB = (Storage) artwork.getRoom();
-        assertNotNull(artworkRoomFromDB);
-        assertNotNull(artworkRoomFromDB);
+        assertNotNull(artwork.getRoom());
+        assertEquals(storageID, artwork.getRoom().getRoomID()); 
         
         
 
