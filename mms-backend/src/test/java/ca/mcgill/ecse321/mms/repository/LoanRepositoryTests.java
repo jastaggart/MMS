@@ -18,6 +18,9 @@ import ca.mcgill.ecse321.mms.model.*;
 @SpringBootTest
 public class LoanRepositoryTests {
     @Autowired
+    private LoanRepository loanRepository;
+
+    @Autowired
     private VisitorRepository visitorRepository;
     
     @Autowired
@@ -28,6 +31,7 @@ public class LoanRepositoryTests {
 
     @AfterEach
     public void clearDatabase() {
+        loanRepository.deleteAll();
         visitorRepository.deleteAll();
         staffMemberRepository.deleteAll();
         artworkRepository.deleteAll();
@@ -35,17 +39,16 @@ public class LoanRepositoryTests {
 
     @Test
     public void testPersistAndLoadArtwork() {
-        /*
         // Creating fields for Visitor object
         String loanReqUsername = "mary";
         String loanReqPassword = "pass123";
-        String loanReqEmail "mary@mail.com";
+        String loanReqEmail = "mary@mail.com";
         // Creating the Visitor object
         Visitor loanRequestor = new Visitor();
         // Setting fields of Visitor object
         loanRequestor.setUsername(loanReqUsername);
         loanRequestor.setPassword(loanReqPassword);
-        loanRequestor.setEmail(loanReqEmail)
+        loanRequestor.setEmail(loanReqEmail);
         // Saving the Visitor object in the visitorRepository table and fetch ID
         loanRequestor =  visitorRepository.save(loanRequestor);
         int loanReqID = loanRequestor.getVisitorID();
@@ -60,7 +63,7 @@ public class LoanRepositoryTests {
         // Setting fields of Employee object
         loanApprover.setUsername(loanAppUsername);
         loanApprover.setPassword(loanAppPassword);
-        loanApprover.setEmail(loanAppEmail)
+        loanApprover.setEmail(loanAppEmail);
         // Saving the Employee object in the staffMemberRepository table and fetch ID
         loanApprover =  staffMemberRepository.save(loanApprover);
         int loanAppID = loanApprover.getStaffMemberID();
@@ -85,8 +88,8 @@ public class LoanRepositoryTests {
 
         // Creating fields for Loan object
         int loanFee = 10;
-        Date startDate = Date.valueOf("2022-10-25")
-        Date endDate = Date.valueOf("2022-10-31")
+        Date startDate = Date.valueOf("2022-10-25");
+        Date endDate = Date.valueOf("2022-10-31");
         boolean isApproved = true;
         // Creating Loan object
         Loan loan = new Loan();
@@ -111,7 +114,7 @@ public class LoanRepositoryTests {
         // Check not null
         assertNotNull(loan);
         // Check attributes
-        assertEquals(loanFee, loan.getAvailableForLoan());
+        assertEquals(loanFee, loan.getLoanFee());
         assertEquals(startDate, loan.getStartDate());
         assertEquals(endDate, loan.getEndDate());
         assertEquals(isApproved, loan.getIsApproved());
@@ -124,11 +127,6 @@ public class LoanRepositoryTests {
 
         assertNotNull(loan.getArtwork());
         assertEquals(artworkID, loan.getArtwork().getArtworkID());
-
-        
-        
-        */
-    
 
     }
 
