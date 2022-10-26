@@ -28,8 +28,8 @@ public class StaffMemberRepositoryTests {
 
   @AfterEach
   public void clearDatabase() {
-    staffMemberRepository.deleteAll();
     loanRepository.deleteAll();
+    staffMemberRepository.deleteAll();
   }
   
   @Test
@@ -110,6 +110,6 @@ public class StaffMemberRepositoryTests {
     assertEquals(isApproved, loan.getIsApproved());
     
     //check for the employee/loan association
-    assertEquals(employee, loan.getLoanApprover());
+    assertEquals(employeeId, loan.getLoanApprover().getStaffMemberID());
   }
 }
