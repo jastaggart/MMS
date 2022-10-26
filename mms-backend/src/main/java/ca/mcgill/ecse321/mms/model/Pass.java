@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 // line 137 "model.ump"
 @Entity
 
+
 public class Pass
 {
 
@@ -38,6 +39,10 @@ public class Pass
   // CONSTRUCTOR
   //------------------------
 
+  public Pass() {
+
+  }
+  
   public Pass(int aPassID, Date aPassDate, Visitor aPassPurchaser)
   {
     passID = aPassID;

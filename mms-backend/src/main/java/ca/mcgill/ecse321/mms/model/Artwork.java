@@ -34,7 +34,7 @@ public class Artwork
   @Column(name="isAvailableForLoan")
   private boolean availableForLoan;
 
-  @Column(name="displayStatus")
+  @Column(name="displayStatus", columnDefinition="VARCHAR(40)")
   private String status;
 
   @Column(name="artworkName")

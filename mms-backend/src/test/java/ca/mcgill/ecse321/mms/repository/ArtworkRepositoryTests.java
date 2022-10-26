@@ -81,8 +81,6 @@ public class ArtworkRepositoryTests {
         loan.setIsApproved(isApproved);
         // Save Loan object in loanRepository table and fetch ID
         loan = loanRepository.save(loan);
-        int loanID = loan.getLoanID();
-
 
         // Creating fields for Artwork object
         boolean availableForLoan = true;
@@ -111,14 +109,15 @@ public class ArtworkRepositoryTests {
         // Assertions
         // Check not null
         assertNotNull(artwork);
+
         // Check attributes
         assertEquals(availableForLoan, artwork.getAvailableForLoan());
         assertEquals(status, artwork.getStatus());
         assertEquals(name, artwork.getName());
         assertEquals(artist, artwork.getArtist());
+        
         // Check Associations
         assertNotNull(artwork.getLoans());
-        //assertEquals(loanID, artwork.getLoans().getLoanID());
 
         assertNotNull(artwork.getMuseumManagementSystem());
         assertEquals(museumID, artwork.getMuseumManagementSystem().getMuseumID());

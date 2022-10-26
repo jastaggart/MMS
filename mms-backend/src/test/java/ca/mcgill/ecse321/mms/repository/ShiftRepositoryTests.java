@@ -28,8 +28,8 @@ public class ShiftRepositoryTests {
 
   @AfterEach
   public void clearDatabase() {
-    staffMemberRepository.deleteAll();
     shiftRepository.deleteAll();
+    staffMemberRepository.deleteAll();
   }
   
   @Test
@@ -45,7 +45,6 @@ public class ShiftRepositoryTests {
     
     // Creating and setting fields to the owner and employee objects
     Owner owner = new Owner();
-    DisplayRoom smallDisplayRoom = new DisplayRoom();
     Employee employee = new Employee();
     
     owner.setUsername(ownerUsername);
@@ -79,9 +78,6 @@ public class ShiftRepositoryTests {
     // Saving the shift object in the shiftRepository table, fetch Id 
     shift =  shiftRepository.save(shift);
     int shiftId = shift.getShiftID();
-    
-    
-    
     
     shift = null;
     
