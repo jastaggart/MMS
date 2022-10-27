@@ -11,7 +11,7 @@ The goal of this project is to design an application for the museum of a small t
 
 |    Name       | Major           |   Year       |   Project Role | GitHub Username |
 | ------------- | -------------   | -----------  | ------------- | ---------------
-| Chrisovalantis Vatos  | Software Engineering |   U2 |  | [cvatos](https://github.com/ChrisVatos) |
+| Chrisovalantis Vatos  | Software Engineering |   U2 | Software Developer  | [cvatos](https://github.com/ChrisVatos) |
 | Sadek Mahmood | Software Engineering    |    U2          | |[smahm01](https://github.com/smahm01)|
 | Jasmine Taggart  | Software Engineering | U2             | |[jastaggart](https://github.com/jastaggart) |
 | Sarah Zhang   | Software Engineering  | U3     |       | [sarah-e-z](https://github.com/sarah-e-z) |
