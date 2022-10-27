@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.mms.model.Visitor;
 
 public interface VisitorRepository extends CrudRepository<Visitor, String> {
-	
+	public Visitor findVisitorByVisitorID(int id);
 }
