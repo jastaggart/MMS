@@ -39,7 +39,7 @@ public class LoanRepositoryTests {
     }
 
     @Test
-    public void testPersistAndLoadArtwork() {
+    public void testPersistAndLoadLoan() {
         // Creating fields for Visitor object
         String loanReqUsername = "mary";
         String loanReqPassword = "pass123";
