@@ -33,7 +33,7 @@ public class StaffMemberRepositoryTests {
   }
   
   @Test
-  public void testPersistAndLoadShift() {
+  public void testPersistAndLoadStaffMember() {
     // Creating the fields that will be set to the created owner and employee objects
     String ownerUsername = "Marwan";
     String ownerPassword = "password";
