@@ -13,12 +13,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ca.mcgill.ecse321.mms.model.Shift;
 import ca.mcgill.ecse321.mms.model.Owner;
+import ca.mcgill.ecse321.mms.model.MMS;
 import ca.mcgill.ecse321.mms.model.Employee;
 import ca.mcgill.ecse321.mms.model.DisplayRoom;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ShiftRepositoryTests {
+  
+  @Autowired
+  private MMSRepository mmsRepository;
   
   @Autowired
   private StaffMemberRepository staffMemberRepository;
@@ -30,11 +34,28 @@ public class ShiftRepositoryTests {
   public void clearDatabase() {
     shiftRepository.deleteAll();
     staffMemberRepository.deleteAll();
+    mmsRepository.deleteAll();
   }
-  
+
   @Test
   public void testPersistAndLoadShift() {
-    // Creating the fields that will be set to the created owner and employee objects
+    // Creating the fields that will be set to the MMS instance
+    Time openingTime = Time.valueOf("08:00:00");
+    Time closingTime = Time.valueOf("17:00:00");
+    int museumPassFee = 25;
+
+    // Creating and setting fields to the MMS instance 
+    MMS museum = new MMS();
+
+    museum.setOpeningHours(openingTime);
+    museum.setClosingHours(closingTime);
+    museum.setPassFee(museumPassFee);
+
+    // Saving the MMS instance in the mmsRepository table
+    museum =  mmsRepository.save(museum);
+    
+    
+    // Creating the fields that will be set to the owner and employee objects
     String ownerUsername = "Marwan";
     String ownerPassword = "password";
     String ownerEmail = "marwan@mail.com";
@@ -50,10 +71,12 @@ public class ShiftRepositoryTests {
     owner.setUsername(ownerUsername);
     owner.setPassword(ownerPassword);
     owner.setEmail(ownerEmail);
+    owner.setMuseumManagementSystem(museum);
     
     employee.setUsername(employeeUsername);
     employee.setPassword(employeePassword);
     employee.setEmail(employeeEmail);
+    employee.setMuseumManagementSystem(museum);
 
     // Saving the owner and employee objects in the staffMemberRepository table, fetch Id 
     owner =  staffMemberRepository.save(owner);
@@ -67,7 +90,7 @@ public class ShiftRepositoryTests {
     Time startHour = Time.valueOf("08:00:00");
     Time endHour = Time.valueOf("17:00:00");
     
-    //Creating and setting fields to the shift object, fetch Id from created object
+    //Creating and setting fields to the shift object
     Shift shift = new Shift();
     shift.setDate(date);
     shift.setStartHour(startHour);
