@@ -15,7 +15,7 @@ The goal of this project is to design an application for the museum of a small t
 | Sadek Mahmood | Software Engineering    |    U2          | |[smahm01](https://github.com/smahm01)|
 | Jasmine Taggart  | Software Engineering | U2             | |[jastaggart](https://github.com/jastaggart) |
 | Sarah Zhang   | Software Engineering  | U3     |       | [sarah-e-z](https://github.com/sarah-e-z) |
-| Jean Kazanji  | Software Engineering    |U2              | ||  
+| Jean Kaznji  | Software Engineering    |U2              | software Developer|[JeanKa25](https://github.com/JeanKa25) |  
 | Minji Chang| Software Engineering |   U2 | Software Developer | [mmmccccc](https://github.com/mmmccccc) |
 
 # Hours Spent
@@ -25,7 +25,7 @@ The goal of this project is to design an application for the museum of a small t
 | Sadek Mahmood         |                      |                      |                      |                      |
 | Jasmine Taggart       |                      |                      |                      |                      |
 | Sarah Zhang           |                      |                      |                      |                      |
-| Jean Kazanji          |                      |                      |                      |                      |
+| Jean Kaznji          | 11                     |                      |                      |                      |
 | Minji Chang           | 12                   |                      |                      |                      |
 
 
