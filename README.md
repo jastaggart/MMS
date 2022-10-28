@@ -14,8 +14,8 @@ The goal of this project is to design an application for the museum of a small t
 | Chrisovalantis Vatos  | Software Engineering |   U2 | Software Developer  | [cvatos](https://github.com/ChrisVatos) |
 | Sadek Mahmood | Software Engineering    |    U2          | |[smahm01](https://github.com/smahm01)|
 | Jasmine Taggart  | Software Engineering | U2             | Software Developer |[jastaggart](https://github.com/jastaggart) |
-| Sarah Zhang   | Software Engineering  | U3     |       | [sarah-e-z](https://github.com/sarah-e-z) |
-| Jean Kaznji  | Software Engineering    |U2              | software Developer|[JeanKa25](https://github.com/JeanKa25) |  
+| Sarah Zhang   | Software Engineering  | U3     | Software Developer | [sarah-e-z](https://github.com/sarah-e-z) |
+| Jean Kaznji  | Software Engineering    |U2              | Software Developer|[JeanKa25](https://github.com/JeanKa25) |  
 | Minji Chang| Software Engineering |   U2 | Software Developer | [mmmccccc](https://github.com/mmmccccc) |
 
 # Hours Spent
@@ -24,7 +24,7 @@ The goal of this project is to design an application for the museum of a small t
 | Chrisovalantis Vatos  | 12                   |                      |                      |                      |
 | Sadek Mahmood         |                      |                      |                      |                      |
 | Jasmine Taggart       |     10                 |                      |                      |                      |
-| Sarah Zhang           |                      |                      |                      |                      |
+| Sarah Zhang           | 11                   |                      |                      |                      |
 | Jean Kaznji          | 11                     |                      |                      |                      |
 | Minji Chang           | 12                   |                      |                      |                      |
 
