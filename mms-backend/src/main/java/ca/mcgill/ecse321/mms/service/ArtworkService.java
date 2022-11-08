@@ -25,15 +25,26 @@ public class ArtworkService {
 	public ArtworkResponseDto getArtworkById(int id) {
 		Artwork artwork = artworkRepository.findArtworkByArtworkID(id);
 		if (artwork == null) {
-			//throw new EventRegistrationException(HttpStatus.NOT_FOUND, "Registration not found.");
+			throw new RuntimeException("Artwork not found.");
 		}
 		return new ArtworkResponseDto(artwork);
 	}
 
-    //@Transactional
-	//public List<ArtworkResponseDto> getAllArtworks() {
-		
-	//}
+    @Transactional
+	public List<ArtworkResponseDto> getAllArtworks() {
+		List<Artwork> artworks = artworkRepository.findAll();
+
+        if (artworks == null) {
+            throw new RuntimeException("No artworks to display.");
+        }
+
+
+        List<ArtworkResponseDto> artworkResponses = new ArrayList<ArtworkResponseDto>();
+        for (Artwork artwork : artworks) {
+            artworkResponses.add(new ArtworkResponseDto(artwork));
+        }
+        return artworkResponses;
+	}
 
     @Transactional
     public ArtworkResponseDto createArtwork(ArtworkRequestDto artworkRequest) {
@@ -53,14 +64,6 @@ public class ArtworkService {
         artwork = artworkRepository.save(artwork);
         return new ArtworkResponseDto(artwork);
     }
-
-    private <T> List<T> toList(Iterable<T> iterable){
-		List<T> resultList = new ArrayList<T>();
-		for (T t : iterable) {
-			resultList.add(t);
-		}
-		return resultList;
-	}
 
     // TODO 
     // move artworks between rooms
