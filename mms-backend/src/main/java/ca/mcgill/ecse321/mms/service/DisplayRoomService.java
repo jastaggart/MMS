@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.mms.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class DisplayRoomService {
     @Autowired(required = true)
     MMSRepository mmsRepository;
 
+    @Transactional
     public DisplayRoom createDisplayRoom(DisplayRoom displayRoom) {
 
         parameterCheckForDisplayRoom(displayRoom.getSize(), displayRoom.getMaximumCapacity(), displayRoom.getDisplayRoomNumber());
