@@ -67,7 +67,6 @@ public class ArtworkService {
 
     // TODO 
     // move artworks between rooms
-    // set loan fee?
 
     
 }
