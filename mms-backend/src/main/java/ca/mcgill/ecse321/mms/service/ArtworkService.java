@@ -19,10 +19,28 @@ public class ArtworkService {
 
     @Transactional
     public ArtworkResponseDto createArtwork(ArtworkRequestDto artworkRequest) {
+        Artwork artwork = new Artwork();
+        artwork.setName(artworkRequest.getName());
+        artwork.setArtist(artworkRequest.getArtist());
 
-       
-      
+        artwork.setName(artworkRequest.getName());
+        artwork.setArtist(artworkRequest.getArtist());
+
+        artwork.setAvailableForLoan(true);
+        artwork.setStatus(DisplayStatus.InStorage.name());
+
+        // TODO set room, mms
+        // loans remains empty
+
+        artwork = artworkRepository.save(artwork);
+        return new ArtworkResponseDto(artwork);
     }
+
+    
+
+    // TODO 
+    // move artworks between rooms
+    // set loan fee?
 
     
 }
