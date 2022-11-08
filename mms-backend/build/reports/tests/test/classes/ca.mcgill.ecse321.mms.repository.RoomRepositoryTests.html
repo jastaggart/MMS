@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.051s</div>
+<div class="counter">0.024s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">testPersistAndLoadRoom()</td>
-<td class="success">0.051s</td>
+<td class="success">0.024s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,12 +87,29 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2022-10-27 09:23:05.447  INFO 73573 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.mms.repository.RoomRepositoryTests], using SpringBootContextLoader
-2022-10-27 09:23:05.448  INFO 73573 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ca.mcgill.ecse321.mms.repository.RoomRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-2022-10-27 09:23:05.448  INFO 73573 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ca.mcgill.ecse321.mms.repository.RoomRepositoryTests]: RoomRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2022-10-27 09:23:05.450  INFO 73573 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ca.mcgill.ecse321.mms.MmsApplication for test class ca.mcgill.ecse321.mms.repository.RoomRepositoryTests
-2022-10-27 09:23:05.454  INFO 73573 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2022-10-27 09:23:05.455  INFO 73573 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@33315925, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@366c9912, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@628b9af5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@137db13f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2a3c3a04, org.springframework.test.context.support.DirtiesContextTestExecutionListener@78ca8258, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4628f386, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@38224635, org.springframework.test.context.event.EventPublishingTestExecutionListener@7385a72f, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5ff12345, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5e445ffe, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@74fda9ed, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2a9fd482, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7ca2319f, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@653a5a]
+<pre>2022-11-07 20:31:06.760  INFO 7983 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ca.mcgill.ecse321.mms.repository.RoomRepositoryTests], using SpringBootContextLoader
+2022-11-07 20:31:06.760  INFO 7983 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ca.mcgill.ecse321.mms.repository.RoomRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-11-07 20:31:06.760  INFO 7983 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ca.mcgill.ecse321.mms.repository.RoomRepositoryTests]: RoomRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-11-07 20:31:06.761  INFO 7983 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ca.mcgill.ecse321.mms.MmsApplication for test class ca.mcgill.ecse321.mms.repository.RoomRepositoryTests
+2022-11-07 20:31:06.762  INFO 7983 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-11-07 20:31:06.763  INFO 7983 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2fda92e0, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@535adf36, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4ea4290f, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@25cef4b3, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@5e783f78, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5bdef8ee, org.springframework.test.context.transaction.TransactionalTestExecutionListener@345d4ecb, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@66e44f9f, org.springframework.test.context.event.EventPublishingTestExecutionListener@79f82fc4, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@554db19d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@bb896e9, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@4fe4b8b6, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@77da2881, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@4fa3bebe, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@63767d]
+Hibernate: insert into mms (museum_closing_time, museum_opening_time, pass_fee) values (?, ?, ?)
+Hibernate: insert into room (museum_management_system_museumid, display_room_number, room_maximum_capacity, room_size, room_type) values (?, ?, ?, ?, 'DisplayRoom')
+Hibernate: insert into room (museum_management_system_museumid, display_room_number, room_maximum_capacity, room_size, room_type) values (?, ?, ?, ?, 'DisplayRoom')
+Hibernate: insert into room (museum_management_system_museumid, room_type) values (?, 'StorageRoom')
+Hibernate: select room0_.roomid as roomid2_4_, room0_.museum_management_system_museumid as museum_m6_4_, room0_.display_room_number as display_3_4_, room0_.room_maximum_capacity as room_max4_4_, room0_.room_size as room_siz5_4_, room0_.room_type as room_typ1_4_ from room room0_ where room0_.roomid=?
+Hibernate: select mms0_.museumid as museumid1_2_0_, mms0_.museum_closing_time as museum_c2_2_0_, mms0_.museum_opening_time as museum_o3_2_0_, mms0_.pass_fee as pass_fee4_2_0_ from mms mms0_ where mms0_.museumid=?
+Hibernate: select room0_.roomid as roomid2_4_, room0_.museum_management_system_museumid as museum_m6_4_, room0_.display_room_number as display_3_4_, room0_.room_maximum_capacity as room_max4_4_, room0_.room_size as room_siz5_4_, room0_.room_type as room_typ1_4_ from room room0_ where room0_.roomid=?
+Hibernate: select mms0_.museumid as museumid1_2_0_, mms0_.museum_closing_time as museum_c2_2_0_, mms0_.museum_opening_time as museum_o3_2_0_, mms0_.pass_fee as pass_fee4_2_0_ from mms mms0_ where mms0_.museumid=?
+Hibernate: select room0_.roomid as roomid2_4_, room0_.museum_management_system_museumid as museum_m6_4_, room0_.display_room_number as display_3_4_, room0_.room_maximum_capacity as room_max4_4_, room0_.room_size as room_siz5_4_, room0_.room_type as room_typ1_4_ from room room0_ where room0_.roomid=?
+Hibernate: select mms0_.museumid as museumid1_2_0_, mms0_.museum_closing_time as museum_c2_2_0_, mms0_.museum_opening_time as museum_o3_2_0_, mms0_.pass_fee as pass_fee4_2_0_ from mms mms0_ where mms0_.museumid=?
+Hibernate: select room0_.roomid as roomid2_4_, room0_.museum_management_system_museumid as museum_m6_4_, room0_.display_room_number as display_3_4_, room0_.room_maximum_capacity as room_max4_4_, room0_.room_size as room_siz5_4_, room0_.room_type as room_typ1_4_ from room room0_
+Hibernate: select mms0_.museumid as museumid1_2_0_, mms0_.museum_closing_time as museum_c2_2_0_, mms0_.museum_opening_time as museum_o3_2_0_, mms0_.pass_fee as pass_fee4_2_0_ from mms mms0_ where mms0_.museumid=?
+Hibernate: delete from room where roomid=?
+Hibernate: delete from room where roomid=?
+Hibernate: delete from room where roomid=?
+Hibernate: select mms0_.museumid as museumid1_2_, mms0_.museum_closing_time as museum_c2_2_, mms0_.museum_opening_time as museum_o3_2_, mms0_.pass_fee as pass_fee4_2_ from mms mms0_
+Hibernate: delete from mms where museumid=?
 </pre>
 </span>
 </div>
@@ -104,7 +121,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.5</a> at Oct. 27, 2022, 9:23:05 a.m.</p>
+<a href="http://www.gradle.org">Gradle 7.5</a> at Nov. 7, 2022, 8:31:06 p.m.</p>
 </div>
 </div>
 </body>

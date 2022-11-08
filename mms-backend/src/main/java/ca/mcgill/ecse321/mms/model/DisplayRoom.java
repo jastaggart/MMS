@@ -21,6 +21,7 @@ public class DisplayRoom extends Room
 
   //DisplayRoom Attributes
   @Column(name="roomSize", columnDefinition="VARCHAR(40)")
+  
   private String size;
 
   @Column(name="roomMaximumCapacity")
