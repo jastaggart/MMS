@@ -21,9 +21,21 @@ public class ArtworkService {
     @Autowired(required = true)
     ArtworkRepository artworkRepository;
 
+    @Autowired(required = true)
+    MMSRepository mmsRepository;
+
     @Transactional
 	public ArtworkResponseDto getArtworkById(int id) {
 		Artwork artwork = artworkRepository.findArtworkByArtworkID(id);
+		if (artwork == null) {
+			throw new RuntimeException("Artwork not found.");
+		}
+		return new ArtworkResponseDto(artwork);
+	}
+
+     @Transactional
+	public ArtworkResponseDto getArtworkByName(String name) {
+		Artwork artwork = artworkRepository.findArtworkByName(name);
 		if (artwork == null) {
 			throw new RuntimeException("Artwork not found.");
 		}
@@ -58,7 +70,9 @@ public class ArtworkService {
         artwork.setAvailableForLoan(true);
         artwork.setStatus(DisplayStatus.InStorage.name());
 
-        // TODO set room, mms
+        artwork.setMuseumManagementSystem(mmsRepository.findMMSByMuseumID(1));
+
+        // TODO set room
         // loans remains empty
 
         artwork = artworkRepository.save(artwork);
@@ -67,6 +81,9 @@ public class ArtworkService {
 
     // TODO 
     // move artworks between rooms
+    // get by name
+    // get all artworks by room
+
 
     
 }

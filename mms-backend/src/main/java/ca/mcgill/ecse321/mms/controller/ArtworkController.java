@@ -27,6 +27,12 @@ public class ArtworkController {
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
 	}
 
+	@GetMapping("/artwork/{name}")
+	public ResponseEntity<ArtworkResponseDto> getArtworkById(@PathVariable String name) {
+		ArtworkResponseDto artwork = artworkService.getArtworkByName(name);
+		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
+	}
+
     @GetMapping("/artworks")
 	public ResponseEntity<List<ArtworkResponseDto>> getAllArtworks() {
 		List<ArtworkResponseDto> artworks = artworkService.getAllArtworks();
