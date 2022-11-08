@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.eventregistration.controller;
+package ca.mcgill.ecse321.mms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
