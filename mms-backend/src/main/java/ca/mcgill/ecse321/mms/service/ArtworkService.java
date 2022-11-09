@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 
 import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.model.DisplayStatus;
@@ -16,6 +17,7 @@ import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
 import ca.mcgill.ecse321.mms.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.mms.dto.ArtworkResponseDto;
+import ca.mcgill.ecse321.mms.exception.MMSException;
 
 @Service
 public class ArtworkService {
@@ -33,7 +35,7 @@ public class ArtworkService {
 	public ArtworkResponseDto getArtworkById(int id) {
 		Artwork artwork = artworkRepository.findArtworkByArtworkID(id);
 		if (artwork == null) {
-			throw new RuntimeException("Artwork not found.");
+			throw new MMSException(HttpStatus.NOT_FOUND, "Artwork with ID " + id + " not found.");
 		}
 		return new ArtworkResponseDto(artwork);
 	}
@@ -42,7 +44,7 @@ public class ArtworkService {
 	public ArtworkResponseDto getArtworkByName(String name) {
 		Artwork artwork = artworkRepository.findArtworkByName(name);
 		if (artwork == null) {
-			throw new RuntimeException("Artwork not found.");
+			throw new MMSException(HttpStatus.NOT_FOUND, "Artwork with name " + name + " not found.");
 		}
 		return new ArtworkResponseDto(artwork);
 	}
@@ -51,7 +53,7 @@ public class ArtworkService {
 	public ArtworkResponseDto getArtworkByArtist(String artist) {
 		Artwork artwork = artworkRepository.findArtworkByArtist(artist);
 		if (artwork == null) {
-			throw new RuntimeException("Artwork not found.");
+			throw new MMSException(HttpStatus.NOT_FOUND, "Artwork with artist " + artist + " not found.");
 		}
 		return new ArtworkResponseDto(artwork);
 	}
@@ -61,7 +63,7 @@ public class ArtworkService {
 		List<Artwork> artworks = artworkRepository.findArtworkByRoomRoomID(roomID);
 
 		if (artworks == null) {
-			throw new RuntimeException("No artworks in room with id " + roomID + ".");
+			throw new MMSException(HttpStatus.NOT_FOUND, "No artworks in room with roomID " + roomID + ".");
 		}
 
 		List<ArtworkResponseDto> artworkResponses = new ArrayList<ArtworkResponseDto>();
@@ -76,7 +78,7 @@ public class ArtworkService {
 		List<Artwork> artworks = artworkRepository.findAll();
 
         if (artworks == null) {
-            throw new RuntimeException("No artworks to display.");
+            throw new MMSException(HttpStatus.NOT_FOUND, "No artworks to display.");
         }
 
 
@@ -114,7 +116,7 @@ public class ArtworkService {
         Artwork artwork = artworkRepository.findArtworkByArtworkID(artworkID);
 
         if (artwork == null) {
-			throw new RuntimeException("Artwork not found.");
+			throw new MMSException(HttpStatus.NOT_FOUND, "Artwork with ID " + artworkID + " not found.");
 		}
 
         artwork.setRoom(roomRepository.findRoomByRoomID(roomID));

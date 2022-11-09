@@ -1,9 +1,7 @@
 package ca.mcgill.ecse321.mms.dto;
 
 import ca.mcgill.ecse321.mms.model.Artwork;
-import ca.mcgill.ecse321.mms.model.Loan;
-import ca.mcgill.ecse321.mms.model.Room;
-import ca.mcgill.ecse321.mms.model.MMS;
+//import ca.mcgill.ecse321.mms.dto.MMSResponseDto;
 
 public class ArtworkResponseDto {
     private int artworkID;
@@ -11,16 +9,16 @@ public class ArtworkResponseDto {
     private String status;
     private String name;
     private String artist;
-    private Room room;
-    private MMS museumManagementSystem;
+    private int roomRoomID;
+    //private MMSResponseDto museumManagementSystem;
 
     public ArtworkResponseDto(Artwork artwork) {
         this.artworkID = artwork.getArtworkID();
         this.availableForLoan = artwork.getAvailableForLoan();
         this.status = artwork.getStatus();
         this.artist = artwork.getArtist();
-        this.room = artwork.getRoom();
-        this.museumManagementSystem = artwork.getMuseumManagementSystem();
+        this.roomRoomID = artwork.getRoom().getRoomID();
+        //this.museumManagementSystem = new MMSResponseDTO(artwork.getMuseumManagementSystem());
     }
 
     public int getArtworkID()
@@ -48,14 +46,14 @@ public class ArtworkResponseDto {
         return artist;
     }
 
-    public Room getRoom()
+    public int getRoomRoomID()
     {
-        return room;
+        return roomRoomID;
     }
 
-    public MMS getMuseumManagementSystem()
-    {
-        return museumManagementSystem;
-    }
+    // public MMSResponseDTO getMuseumManagementSystem()
+    // {
+    //     return museumManagementSystem;
+    // }
 
 }
