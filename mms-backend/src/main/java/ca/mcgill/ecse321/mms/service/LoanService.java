@@ -63,10 +63,37 @@ public class LoanService {
         return loanResponses;
 	}
 
-    /*
-        get loan by staff member
+    @Transactional
+	public List<LoanResponseDto> getLoansByVisitorID(int visitorID) {
+		List<Loan> loans = loanRepository.findLoanByLoanRequestorVisitorID(visitorID);
 
-        get loan by visitor
+		if (loans == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "No loans made by visitor with visitorID " + visitorID + ".");
+		}
+
+		List<LoanResponseDto> loanResponses = new ArrayList<LoanResponseDto>();
+        for (Loan loan : loans) {
+            loanResponses.add(new LoanResponseDto(loan));
+        }
+        return loanResponses;
+	}
+
+    @Transactional
+	public List<LoanResponseDto> getLoansByStaffMemberID(int staffMemberID) {
+		List<Loan> loans = loanRepository.findLoanByLoanApproverStaffMemberID(staffMemberID);
+
+		if (loans == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "No loans to approve for staff member with staffMemberID " + staffMemberID + ".");
+		}
+
+		List<LoanResponseDto> loanResponses = new ArrayList<LoanResponseDto>();
+        for (Loan loan : loans) {
+            loanResponses.add(new LoanResponseDto(loan));
+        }
+        return loanResponses;
+	}
+
+    /*
 
         create loan
 

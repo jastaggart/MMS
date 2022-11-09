@@ -36,6 +36,18 @@ public class LoanController {
 		List<LoanResponseDto> loans = loanService.getAllLoans();
 		return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
 	}
+
+	@GetMapping("/loan/{visitorID}") 
+	public ResponseEntity<List<LoanResponseDto>> getLoansByVisitorID(@PathVariable int visitorID) {
+		List<LoanResponseDto> loans = loanService.getLoansByVisitorID(visitorID);
+		return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
+	}
+
+	@GetMapping("/loan/{staffMemberID}") 
+	public ResponseEntity<List<LoanResponseDto>> getLoansByStaffMemberID(@PathVariable int staffMemberID) {
+		List<LoanResponseDto> loans = loanService.getLoansByStaffMemberID(staffMemberID);
+		return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
+	}
 	
 
 }
