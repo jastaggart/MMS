@@ -1,4 +1,6 @@
 package ca.mcgill.ecse321.mms.dto;
+import java.util.List;
+
 import ca.mcgill.ecse321.mms.model.DisplayRoom;
 import ca.mcgill.ecse321.mms.model.MMS;
 
