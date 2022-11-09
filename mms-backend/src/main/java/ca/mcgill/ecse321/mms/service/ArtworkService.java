@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.model.DisplayStatus;
+import ca.mcgill.ecse321.mms.model.Room;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
+import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
 import ca.mcgill.ecse321.mms.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.mms.dto.ArtworkResponseDto;
@@ -20,6 +22,9 @@ public class ArtworkService {
 
     @Autowired(required = true)
     ArtworkRepository artworkRepository;
+
+    @Autowired(required = true)
+    RoomRepository roomRepository;
 
     @Autowired(required = true)
     MMSRepository mmsRepository;
@@ -33,13 +38,37 @@ public class ArtworkService {
 		return new ArtworkResponseDto(artwork);
 	}
 
-     @Transactional
+    @Transactional
 	public ArtworkResponseDto getArtworkByName(String name) {
 		Artwork artwork = artworkRepository.findArtworkByName(name);
 		if (artwork == null) {
 			throw new RuntimeException("Artwork not found.");
 		}
 		return new ArtworkResponseDto(artwork);
+	}
+
+    @Transactional
+	public ArtworkResponseDto getArtworkByArtist(String artist) {
+		Artwork artwork = artworkRepository.findArtworkByArtist(artist);
+		if (artwork == null) {
+			throw new RuntimeException("Artwork not found.");
+		}
+		return new ArtworkResponseDto(artwork);
+	}
+
+    @Transactional
+	public List<ArtworkResponseDto> getArtworksByRoomID(int roomID) {
+		List<Artwork> artworks = artworkRepository.findArtworkByRoomRoomID(roomID);
+
+		if (artworks == null) {
+			throw new RuntimeException("No artworks in room with id " + roomID + ".");
+		}
+
+		List<ArtworkResponseDto> artworkResponses = new ArrayList<ArtworkResponseDto>();
+        for (Artwork artwork : artworks) {
+            artworkResponses.add(new ArtworkResponseDto(artwork));
+        }
+        return artworkResponses;
 	}
 
     @Transactional
@@ -70,20 +99,27 @@ public class ArtworkService {
         artwork.setAvailableForLoan(true);
         artwork.setStatus(DisplayStatus.InStorage.name());
 
+        artwork.setRoom(roomRepository.findRoomByRoomID(1)); // Set to storage room
+
         artwork.setMuseumManagementSystem(mmsRepository.findMMSByMuseumID(1));
 
-        // TODO set room
-        // loans remains empty
+        // Note: Loans remains empty 
 
         artwork = artworkRepository.save(artwork);
         return new ArtworkResponseDto(artwork);
     }
 
-    // TODO 
-    // move artworks between rooms
-    // get by name
-    // get all artworks by room
+     @Transactional
+    public ArtworkResponseDto moveArtworkToRoom(int artworkID, int roomID) {
+        Artwork artwork = artworkRepository.findArtworkByArtworkID(artworkID);
 
+        if (artwork == null) {
+			throw new RuntimeException("Artwork not found.");
+		}
 
-    
+        artwork.setRoom(roomRepository.findRoomByRoomID(roomID));
+
+        return new ArtworkResponseDto(artwork);
+    }
+
 }
