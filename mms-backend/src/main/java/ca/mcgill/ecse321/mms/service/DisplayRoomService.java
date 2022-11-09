@@ -47,6 +47,11 @@ public class DisplayRoomService {
     @Transactional
     public DisplayRoom getDisplayRoomById(int roomID) {
 
+
+        if(roomID == 1) {
+            throw new MMSException(HttpStatus.NOT_FOUND, "No room exists with provided roomID");
+        }
+
         DisplayRoom fetchedDisplayRoom = (DisplayRoom) roomRepository.findRoomByRoomID(roomID);
         if(fetchedDisplayRoom == null) {
             throw new MMSException(HttpStatus.NOT_FOUND, "No room exists with provided roomID");

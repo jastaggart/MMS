@@ -180,9 +180,6 @@ public class DisplayRoomIntegrationTests {
     }
 }
 
-
-
-
     class DisplayRoomDto {
     
         public int roomID;
