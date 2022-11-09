@@ -5,4 +5,9 @@
 /.gradle/
 /build/
 .vscode
+./mms-backend/.gradle
+./mms-backend/bin 
+./mms-backend/build
+
+
 
