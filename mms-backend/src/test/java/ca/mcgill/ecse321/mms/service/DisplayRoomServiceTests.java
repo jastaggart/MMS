@@ -7,10 +7,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -65,9 +63,54 @@ public class DisplayRoomServiceTests {
 	}
 
 	@Test
-	public void testCreateInvalidDisplayRoom() {
+	public void testCreateInvalidDisplayRoomBySize() {
 
+		final String size = "Invalied Size";
+        final int maximumCapacity = 200;
+        final int displayRoomNumber = 5;
+		final DisplayRoom newDisplayRoom = new DisplayRoom();
+        newDisplayRoom.setSize(size);
+        newDisplayRoom.setMaximumCapacity(maximumCapacity);
+        newDisplayRoom.setDisplayRoomNumber(displayRoomNumber);
+		MMSException exception = assertThrows(MMSException.class, () -> displayRoomService.createDisplayRoom(newDisplayRoom));
+
+		assertEquals("Size of room must be Big or Small", exception.getMessage());
+		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
 	}
+
+	@Test
+	public void testCreateInvalidDisplayRoomByRoomNumber() {
+
+		final String size = "Small";
+        final int maximumCapacity = 200;
+        final int displayRoomNumber = -10;
+		final DisplayRoom newDisplayRoom = new DisplayRoom();
+        newDisplayRoom.setSize(size);
+        newDisplayRoom.setMaximumCapacity(maximumCapacity);
+        newDisplayRoom.setDisplayRoomNumber(displayRoomNumber);
+		MMSException exception = assertThrows(MMSException.class, () -> displayRoomService.createDisplayRoom(newDisplayRoom));
+
+		assertEquals("Display room number cannot be less than 0", exception.getMessage());
+		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+	}
+
+	@Test
+	public void testCreateInvalidDisplayRoomBySizeAndMaxCapacity() {
+
+		final String size = "Big";
+        final int maximumCapacity = 200;
+        final int displayRoomNumber = 5;
+		final DisplayRoom newDisplayRoom = new DisplayRoom();
+        newDisplayRoom.setSize(size);
+        newDisplayRoom.setMaximumCapacity(maximumCapacity);
+        newDisplayRoom.setDisplayRoomNumber(displayRoomNumber);
+
+		MMSException exception = assertThrows(MMSException.class, () -> displayRoomService.createDisplayRoom(newDisplayRoom));
+
+		assertEquals("Incompatible entries for room size and maximum capacity", exception.getMessage());
+		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+	}
+
 
 	@Test
 	public void testGetDisplayRoomByID() {
