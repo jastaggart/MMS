@@ -16,6 +16,7 @@ public class ArtworkResponseDto {
         this.artworkID = artwork.getArtworkID();
         this.availableForLoan = artwork.getAvailableForLoan();
         this.status = artwork.getStatus();
+        this.name = artwork.getName();
         this.artist = artwork.getArtist();
         this.roomRoomID = artwork.getRoom().getRoomID();
         //this.museumManagementSystem = new MMSResponseDTO(artwork.getMuseumManagementSystem());
