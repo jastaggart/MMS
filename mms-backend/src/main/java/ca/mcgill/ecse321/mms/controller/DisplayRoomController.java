@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
-
 import ca.mcgill.ecse321.mms.dto.DisplayRoomRequestDto;
 import ca.mcgill.ecse321.mms.dto.DisplayRoomResponseDto;
 import ca.mcgill.ecse321.mms.model.DisplayRoom;

@@ -3,11 +3,11 @@
 /workspace.xml
 /bin
 /.gradle/
-/build/
+build/
+.gradle
 .vscode/
-/mms-backend/.gradle/
-/mms-backend/bin/
-/mms-backend/build/
+bin/
+.idea
 .DS_Store
 
 
