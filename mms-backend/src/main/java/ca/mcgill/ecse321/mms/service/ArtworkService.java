@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.model.DisplayStatus;
 import ca.mcgill.ecse321.mms.model.Room;
+import ca.mcgill.ecse321.mms.model.DisplayRoom;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
@@ -125,7 +126,16 @@ public class ArtworkService {
             artwork.setStatus(DisplayStatus.InStorage.name());
         }
         else { // moving to a display room
-            artwork.setStatus(DisplayStatus.OnDisplay.name());
+            DisplayRoom destinationRoom = (DisplayRoom) roomRepository.findRoomByRoomID(roomID);
+
+            // If the display room is not full (number of artworks in display room < max capacity)
+            if (destinationRoom.getArtworks().size() < destinationRoom.getMaximumCapacity()) {
+                artwork.setStatus(DisplayStatus.OnDisplay.name());
+            }
+            else {
+                throw new MMSException(HttpStatus.CONFLICT, "Display room is full.");
+            }
+            
         }
 
         return new ArtworkResponseDto(artwork);
