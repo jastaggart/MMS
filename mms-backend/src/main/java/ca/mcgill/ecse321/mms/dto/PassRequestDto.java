@@ -1,11 +1,16 @@
 package ca.mcgill.ecse321.mms.dto;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ca.mcgill.ecse321.mms.model.Pass;
+import ca.mcgill.ecse321.mms.repository.VisitorRepository;
 
 public class PassRequestDto {
 
@@ -13,11 +18,10 @@ public class PassRequestDto {
     private int passID;
 
     @NotNull
-    private Date passDate;
+    private String passDate;
 
     @NotNull
-    private VisitorRequestDto visitor;
-
+    private int visitorID;
 
     public int getPassId() {
         return this.passID;
@@ -27,27 +31,29 @@ public class PassRequestDto {
         this.passID = passID;
     }
 
-    public Date getPassDate() {
+    public String getPassDate() {
         return this.passDate;
     }
 
-    public void setPassDate(Date passDate) {
+    public void setPassDate(String passDate) {
         this.passDate = passDate;
     }
 
-    public VisitorRequestDto getPassPurchaser() {
-        return this.visitor;
+    public int getVisitorID() {
+        return this.visitorID;
     }
 
-    public void setPassPurchaser(VisitorRequestDto visitor) {
-        this.visitor = visitor;
+    public void setVisitorID(int visitorID) {
+        this.visitorID = visitorID;
     }
 
-    public Pass toModel() {
+    public Pass toModel() throws ParseException {
         Pass pass = new Pass();
-        pass.setPassDate(this.passDate);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        Date date = formatter.parse(this.passDate);
+        pass.setPassDate(date);
         pass.setPassID(this.passID);
-        pass.setPassPurchaser(this.visitor.toModel());
+       // pass.setPassPurchaser(this.visitorID);
 
         return pass;
     }

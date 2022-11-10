@@ -1,8 +1,11 @@
 package ca.mcgill.ecse321.mms.service;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.transaction.Transactional;
 
@@ -70,15 +73,27 @@ public class PassService {
 	}
 
 
-    @Transactional
-    public PassResponseDto createPass(PassRequestDto passRequest) {
-        Pass pass = new Pass();
-        pass.setPassDate(passRequest.getPassDate());
-        pass.setPassID(passRequest.getPassId());
-        pass.setPassPurchaser(passRequest.getPassPurchaser().toModel());
+    // @Transactional
+    // public PassResponseDto createPass(PassRequestDto passRequest) throws ParseException {
+    //     Pass pass = new Pass();
+    //     SimpleDateFormat formatter = new SimpleDateFormat("DD/MM/YY", Locale.ENGLISH);
+    //     Date date = formatter.parse(passRequest.getPassDate());
+    //     pass.setPassDate(date);
+    //     pass.setPassPurchaser(visitorRepository.findVisitorByVisitorID(passRequest.getPassPurchaserID()));
 
+    //     pass = passRepository.save(pass);
+    //     return new PassResponseDto(pass);
+    // }
+
+    @Transactional
+    public Pass createPass(Visitor visitor, String date) throws ParseException {
+        Pass pass = new Pass();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        Date parsedDate = formatter.parse(date);
+        pass.setPassDate(parsedDate);
+        pass.setPassPurchaser(visitor);
         pass = passRepository.save(pass);
-        return new PassResponseDto(pass);
+        return pass;
     }
 
 }

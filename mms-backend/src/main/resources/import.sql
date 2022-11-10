@@ -8,4 +8,7 @@ On CONFLICT(staff_memberid) DO NOTHING;
 insert into room(room_type, roomid, display_room_number, room_maximum_capacity, room_size, museum_management_system_museumid) values ('StorageRoom', 1, NULL, NULL, NULL, 1)
 On CONFLICT(roomid) DO NOTHING;
 
+insert into visitor(visitorid, email, password, username, museum_management_system_museumid) values (1, 'theo@email.com', 'soccer123', 'theosoccer', 1)
+On CONFLICT(visitorid) DO NOTHING;
+
 

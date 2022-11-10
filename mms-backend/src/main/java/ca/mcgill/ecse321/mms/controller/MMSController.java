@@ -41,7 +41,6 @@ public class MMSController {
     public ResponseEntity<MMSResponseDto> updateMuseumPassFee(@PathVariable int passFee) {
         MMS museum = mmsService.updateMuseumPassFee(passFee);
         return new ResponseEntity<MMSResponseDto>(new MMSResponseDto(museum), HttpStatus.OK);
-
     }
     
 }

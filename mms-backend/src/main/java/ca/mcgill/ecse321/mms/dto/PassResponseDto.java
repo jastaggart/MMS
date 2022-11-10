@@ -1,17 +1,17 @@
 package ca.mcgill.ecse321.mms.dto;
-import java.sql.Date;
+import java.util.Date;
 
 import ca.mcgill.ecse321.mms.model.Pass;
 
 public class PassResponseDto {
-    private int passID;
-    private Date passDate;
-    private VisitorResponseDto visitor;
+    public int passID;
+    public Date passDate;
+    public int visitorID;
 
     public PassResponseDto(Pass pass) {
         this.passID = pass.getPassID();
         this.passDate = pass.getPassDate();
-        this.visitor = new VisitorResponseDto(pass.getPassPurchaser());
+        this.visitorID = pass.getPassPurchaser().getVisitorID();
     }
 
     public int getPassID() {
@@ -22,8 +22,20 @@ public class PassResponseDto {
         return this.passDate;
     }
 
-    public VisitorResponseDto getVisitor() {
-        return this.visitor;
+    public int getVisitorID() {
+        return this.visitorID;
+    }
+
+    public void setPassID(int passID) {
+        this.passID = passID;
+    }
+
+    public void setPassDate(Date passDate) {
+        this.passDate = passDate;
+    }
+
+    public void setVisitorID(int visitorID) {
+        this.visitorID = visitorID;
     }
 
 
