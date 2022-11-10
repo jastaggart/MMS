@@ -121,6 +121,13 @@ public class ArtworkService {
 
         artwork.setRoom(roomRepository.findRoomByRoomID(roomID));
 
+        if (roomID == 1) { // moving to storage
+            artwork.setStatus(DisplayStatus.InStorage.name());
+        }
+        else { // moving to a display room
+            artwork.setStatus(DisplayStatus.OnDisplay.name());
+        }
+
         return new ArtworkResponseDto(artwork);
     }
 

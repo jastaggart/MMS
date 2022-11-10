@@ -23,6 +23,8 @@ import ca.mcgill.ecse321.mms.dto.LoanRequestDto;
 import ca.mcgill.ecse321.mms.dto.LoanResponseDto;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 
+import java.sql.Date;
+
 @Service
 public class LoanService {
 
@@ -93,16 +95,56 @@ public class LoanService {
         return loanResponses;
 	}
 
-    /*
+    @Transactional
+    public LoanResponseDto createLoan(LoanRequestDto loanRequest) {
+        final int initialLoanFee = 10;
 
-        create loan
+        Loan loan = new Loan();
+        loan.setLoanFee(initialLoanFee);
+        loan.setStartDate(loanRequest.getStartDate());
+        loan.setEndDate(loanRequest.getEndDate());
+        loan.setIsApproved(false); // not approved yet
+        // loan.setLoanRequestor(loanRequest.getLoanRequestor().toModel());
+        // loan.setLoanApprover(loanRequest.getLoanApprover().toModel());
+        // Note: Before loan is approved, artwork status remains the same 
+        // i.e. it stays in storage or its current display room
+        loan.setArtwork(loanRequest.getArtwork().toModel()); 
+        
+        loan = loanRepository.save(loan);
 
-        approve loan
+        return new LoanResponseDto(loan);
+    }
 
-        reject loan
+    @Transactional
+    public LoanResponseDto approveLoan(int loanID) {
+        Loan loan = loanRepository.findLoanByLoanID(loanID);
+        loan.setIsApproved(true);
+        loan.getArtwork().setStatus(DisplayStatus.OnLoan.name());
 
-        loan fee?
-    
-     */
+        return new LoanResponseDto(loan);
+    }
 
+    @Transactional
+    public LoanResponseDto rejectLoan(int loanID) {
+        Loan loan = loanRepository.findLoanByLoanID(loanID);
+        if (loan == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "Loan with ID " + loanID + " not found.");
+		}
+        loan.setIsApproved(false);
+        // Note: If loan is rejected, artwork status remains the same
+        // i.e. it stays in storage or its current display room
+
+        return new LoanResponseDto(loan);
+    }
+
+    @Transactional
+    public LoanResponseDto updateLoanFee(int loanID, int loanFee) {
+        Loan loan = loanRepository.findLoanByLoanID(loanID);
+        if (loan == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "Loan with ID " + loanID + " not found.");
+		}
+        loan.setLoanFee(loanFee);
+
+        return new LoanResponseDto(loan);
+    }
 }

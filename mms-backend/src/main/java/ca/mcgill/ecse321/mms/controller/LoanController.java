@@ -48,6 +48,30 @@ public class LoanController {
 		List<LoanResponseDto> loans = loanService.getLoansByStaffMemberID(staffMemberID);
 		return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
 	}
+
+	@PostMapping("/loan")
+	public ResponseEntity<LoanResponseDto> createLoan(@Valid @RequestBody LoanRequestDto loanRequest) {
+		LoanResponseDto loan = loanService.createLoan(loanRequest);
+		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/loans/approve/{loanID}")
+	public ResponseEntity<LoanResponseDto> approveLoan(@PathVariable int loanID) {
+		LoanResponseDto loan = loanService.approveLoan(loanID);
+		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
+	}
+
+	@PutMapping("/loans/reject/{loanID}")
+	public ResponseEntity<LoanResponseDto> rejectLoan(@PathVariable int loanID) {
+		LoanResponseDto loan = loanService.rejectLoan(loanID);
+		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
+	}
+
+	@PutMapping("/loans/updateLoanFee/{loanID}")
+	public ResponseEntity<LoanResponseDto> updateLoanFee(@PathVariable int loanID, @RequestParam int loanFee) {
+		LoanResponseDto loan = loanService.updateLoanFee(loanID, loanFee);
+		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
+	}
 	
 
 }
