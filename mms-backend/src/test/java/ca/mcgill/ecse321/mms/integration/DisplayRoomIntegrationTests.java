@@ -154,7 +154,7 @@ public class DisplayRoomIntegrationTests {
 		assertEquals("Small", response.getBody().size);
         assertEquals(200, response.getBody().maximumCapacity);
         assertEquals(20, response.getBody().displayRoomNumber);
-		assertTrue(response.getBody(). roomID > 0);
+		assertTrue(response.getBody().roomID > 0);
 
         return response.getBody().displayRoomNumber;
 	}
