@@ -16,7 +16,7 @@ public class PassRequestDto {
     private Date passDate;
 
     @NotNull
-    private VisitorResponseDto visitor;
+    private VisitorRequestDto visitor;
 
 
     public int getPassId() {
@@ -39,7 +39,7 @@ public class PassRequestDto {
         return this.visitor;
     }
 
-    public void setPassPurchaser(VisitorResponseDto visitor) {
+    public void setPassPurchaser(VisitorRequestDto visitor) {
         this.visitor = visitor;
     }
 

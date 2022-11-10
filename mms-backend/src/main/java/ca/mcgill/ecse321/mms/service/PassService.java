@@ -75,7 +75,7 @@ public class PassService {
         Pass pass = new Pass();
         pass.setPassDate(passRequest.getPassDate());
         pass.setPassID(passRequest.getPassId());
-        pass.setPassPurchaser(passRequest.getPassPurchaser());
+        pass.setPassPurchaser(passRequest.getPassPurchaser().toModel());
 
         pass = passRepository.save(pass);
         return new PassResponseDto(pass);
