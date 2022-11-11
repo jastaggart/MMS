@@ -24,7 +24,7 @@ public class StaffMemberService {
     public StaffMemberResponseDto findStaffMemberById(int id) {
     	StaffMember staffMember = staffMemberRepository.findStaffMemberByStaffMemberID(id);
     	if(staffMember == null) {
-    		throw new MMSException(HttpStatus.NOT_FOUND, "No staffmember with the id " + id + " was found.");
+    		throw new MMSException(HttpStatus.NOT_FOUND, "No staff member with the id " + id + " was found.");
     	}
     	
     	return new StaffMemberResponseDto(staffMember);
