@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.mms.service;
+package ca.mcgill.ecse321.mms.repository;
 
 import java.util.List;
 
