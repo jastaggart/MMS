@@ -19,8 +19,8 @@ The goal of this project is to design an application for the museum of a small t
 | Minji Chang| Software Engineering |   U2 | Software Developer | [mmmccccc](https://github.com/mmmccccc) |
 
 # Hours Spent
-|    Name               | Hours Spent (Del. 1)   | Hours Spent (Del. 2) | Hours Spent (Del. 3) | Hours Spent (Del. 4) |
-| -------------         | ------------------------| -------------------  | -------------------- | ---------------------| 
+|    Name               | Deliverable 1   | Deliverable 2   | Deliverable 3   | Deliverable 4   |
+| -------------         | :------------------------:| :-------------------: | :--------------------: | :---------------------:| 
 | Chrisovalantis Vatos  | 12                   |    35                  |                      |                      |
 | Sadek Mahmood         |    10                  |                      |                      |                      |
 | Jasmine Taggart       |     10                 |                      |                      |                      |
