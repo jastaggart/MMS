@@ -10,7 +10,7 @@ import java.util.List;
 public interface ArtworkRepository extends CrudRepository<Artwork, String> {
 	public Artwork findArtworkByArtworkID(int id);
 	public Artwork findArtworkByName(String name);
-	public Artwork findArtworkByArtist(String artist);
-	public List<Artwork> findArtworkByRoomRoomID(int roomID);
+	public List<Artwork> findAllByArtist(String artist);
+	public List<Artwork> findAllByRoomRoomID(int roomID);
 	public List<Artwork> findAll();
 }

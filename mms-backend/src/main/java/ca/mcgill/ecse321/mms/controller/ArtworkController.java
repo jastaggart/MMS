@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.mms.dto.ArtworkResponseDto;
 import ca.mcgill.ecse321.mms.service.ArtworkService;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 public class ArtworkController {
@@ -27,46 +29,54 @@ public class ArtworkController {
 
     @GetMapping("/artwork/{id}")
 	public ResponseEntity<ArtworkResponseDto> getArtworkById(@PathVariable int id) {
-		ArtworkResponseDto artwork = artworkService.getArtworkById(id);
+		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.getArtworkById(id));
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
 	}
 
 	@GetMapping("/artwork/{name}")
 	public ResponseEntity<ArtworkResponseDto> getArtworkByName(@PathVariable String name) {
-		ArtworkResponseDto artwork = artworkService.getArtworkByName(name);
+		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.getArtworkByName(name));
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
 	}
 
 	@GetMapping("/artwork/{artist}")
-	public ResponseEntity<ArtworkResponseDto> getArtworkByArtist(@PathVariable String artist) {
-		ArtworkResponseDto artwork = artworkService.getArtworkByArtist(artist);
-		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
+	public ResponseEntity<List<ArtworkResponseDto>> getArtworksByArtist(@PathVariable String artist) {
+		List<ArtworkResponseDto> artworks = convListToDto(artworkService.getArtworksByArtist(artist));
+		return new ResponseEntity<List<ArtworkResponseDto>>(artworks, HttpStatus.OK);
 	}
 
 
 	@GetMapping("/artwork/{roomID}") 
 	public ResponseEntity<List<ArtworkResponseDto>> getArtworksByRoomID(@PathVariable int roomID) {
-		List<ArtworkResponseDto> artworks = artworkService.getArtworksByRoomID(roomID);
+		List<ArtworkResponseDto> artworks = convListToDto(artworkService.getArtworksByRoomID(roomID));
 		return new ResponseEntity<List<ArtworkResponseDto>>(artworks, HttpStatus.OK);
 	}
 
     @GetMapping("/artworks")
 	public ResponseEntity<List<ArtworkResponseDto>> getAllArtworks() {
-		List<ArtworkResponseDto> artworks = artworkService.getAllArtworks();
+		List<ArtworkResponseDto> artworks = convListToDto(artworkService.getAllArtworks());
 		return new ResponseEntity<List<ArtworkResponseDto>>(artworks, HttpStatus.OK);
 	}
 
     @PostMapping("/artwork")
 	public ResponseEntity<ArtworkResponseDto> createArtwork(@Valid @RequestBody ArtworkRequestDto artworkRequest) {
-		ArtworkResponseDto artwork = artworkService.createArtwork(artworkRequest);
+		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.createArtwork(artworkRequest.toModel()));
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/artworks")
 	public ResponseEntity<ArtworkResponseDto> moveArtworkToRoom(@RequestParam int artworkID, @RequestParam int roomID) {
 		// Note: use roomID of storage if moving to storage
-		ArtworkResponseDto artwork = artworkService.moveArtworkToRoom(artworkID, roomID); 
+		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.moveArtworkToRoom(artworkID, roomID)); 
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
 	}
+
+	private List<ArtworkResponseDto> convListToDto(List<Artwork> artworks) {
+        List<ArtworkResponseDto> artworkResponses = new ArrayList<ArtworkResponseDto>();
+        for (Artwork artwork : artworks) {
+            artworkResponses.add(new ArtworkResponseDto(artwork));
+        }
+        return artworkResponses;
+    }
 
 }
