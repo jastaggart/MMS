@@ -3,8 +3,11 @@ package ca.mcgill.ecse321.mms.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Locale;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +43,7 @@ public class PassRepositoryTests {
     }
 
     @Test
-    public void testPersistandLoadPass() {
+    public void testPersistandLoadPass() throws ParseException {
 
         // Creating the MMS instance
         MMS museum = new MMS();
@@ -79,7 +82,9 @@ public class PassRepositoryTests {
         Pass pass = new Pass();
 
         // Creating date for Pass
-        Date passDate = new Date(2022, 4, 20);
+        final String date = "02-02-2002";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        Date passDate = formatter.parse(date);
 
         // Setting the fields for Pass
         pass.setPassDate(passDate);

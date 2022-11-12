@@ -34,57 +34,6 @@ public class PassService {
     @Autowired(required = true)
     VisitorRepository visitorRepository;
 
-
-    @Transactional
-    public PassResponseDto getPassById(int id) {
-        Pass pass = passRepository.findPassByPassID(id);
-        if (pass == null) {
-			throw new MMSException(HttpStatus.NOT_FOUND, "Pass with ID " + id + " not found.");
-		}
-        return new PassResponseDto(pass);
-    }
-
-    @Transactional
-    public List<PassResponseDto> getPassesByVisitorId(int visitorID) {
-        List<Pass> passes = passRepository.findPassByPassPurchaserVisitorID(visitorID);
-        if (passes == null) {
-			throw new MMSException(HttpStatus.NOT_FOUND, "No passes owned by visitor with visitorID " + visitorID + ".");
-		}
-        List<PassResponseDto> passResponses = new ArrayList<PassResponseDto>();
-        for (Pass pass : passes) {
-            passResponses.add(new PassResponseDto(pass));
-        }
-        return passResponses;
-    }
-
-    @Transactional
-	public List<PassResponseDto> getAllPasses() {
-		List<Pass> passes = passRepository.findAll();
-
-        if (passes == null) {
-            throw new MMSException(HttpStatus.NOT_FOUND, "No passes found.");
-        }
-
-        List<PassResponseDto> passResponses = new ArrayList<PassResponseDto>();
-        for (Pass pass : passes) {
-            passResponses.add(new PassResponseDto(pass));
-        }
-        return passResponses;
-	}
-
-
-    // @Transactional
-    // public PassResponseDto createPass(PassRequestDto passRequest) throws ParseException {
-    //     Pass pass = new Pass();
-    //     SimpleDateFormat formatter = new SimpleDateFormat("DD/MM/YY", Locale.ENGLISH);
-    //     Date date = formatter.parse(passRequest.getPassDate());
-    //     pass.setPassDate(date);
-    //     pass.setPassPurchaser(visitorRepository.findVisitorByVisitorID(passRequest.getPassPurchaserID()));
-
-    //     pass = passRepository.save(pass);
-    //     return new PassResponseDto(pass);
-    // }
-
     @Transactional
     public Pass createPass(Visitor visitor, String date) throws ParseException {
         Pass pass = new Pass();
@@ -95,5 +44,37 @@ public class PassService {
         pass = passRepository.save(pass);
         return pass;
     }
+
+    @Transactional
+	public Pass getPassById(int id) {
+		Pass pass = passRepository.findPassByPassID(id);
+		if (pass == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "Pass with ID " + id + " not found.");
+		}
+		return pass;
+	}
+
+    @Transactional
+    public List<Pass> getPassesByVisitorId(int visitorID) {
+        List<Pass> passes = passRepository.findPassByPassPurchaserVisitorID(visitorID);
+        if (passes == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "No passes owned by visitor with visitorID " + visitorID + ".");
+		}
+
+        return passes;
+    }
+
+    @Transactional
+	public List<Pass> getAllPasses() {
+		List<Pass> passes = passRepository.findAll();
+
+        if (passes == null) {
+            throw new MMSException(HttpStatus.NOT_FOUND, "No passes found.");
+        }
+
+        return passes;
+	}
+
+    
 
 }
