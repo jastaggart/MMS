@@ -27,18 +27,35 @@ public class LoanController {
     @Autowired
     LoanService loanService;
 
+	/**
+     * Gets a Loan by loanID after HTTP request and puts into the HTTP response
+     * 
+     * @param id - loanID of the Loan to get
+     * @return - The fetched Loan
+     */
     @GetMapping("/loan/{id}")
 	public ResponseEntity<LoanResponseDto> getLoanById(@PathVariable int id) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.getLoanById(id));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 
+	/**
+     * Gets a list of all Loans and puts into the HTTP response
+     * 
+     * @return - The fetched list of Artworks
+     */
     @GetMapping("/loans")
 	public ResponseEntity<List<LoanResponseDto>> getAllLoans() {
 		List<LoanResponseDto> loans = convListToDto(loanService.getAllLoans());
 		return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
 	}
 
+	/**
+     * Gets a Loan by visitorID after HTTP request and puts into the HTTP response
+     * 
+     * @param visitorID - visitorID of the Loan to get
+     * @return - The fetched Loan
+     */
 	@GetMapping("/loan/{visitorID}") 
 	public ResponseEntity<List<LoanResponseDto>> getLoansByVisitorID(@PathVariable int visitorID) {
 		List<LoanResponseDto> loans = convListToDto(loanService.getLoansByVisitorID(visitorID));
@@ -51,30 +68,61 @@ public class LoanController {
 	// 	return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
 	// }
 
+	/**
+     * Creates a Loan using Dto data after HTTP request and puts it into HTTP response
+     * 
+     * @param loanRequest - The LoanRequestDto data
+     * @return - The created Loan as Dto
+     */
 	@PostMapping("/loan")
 	public ResponseEntity<LoanResponseDto> createLoan(@Valid @RequestBody LoanRequestDto loanRequest) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.createLoan(loanRequest.toModel()));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.CREATED);
 	}
 
+	/**
+     * Approves a Loan by loanID after HTTP request and puts into the HTTP response
+     * 
+     * @param loanID - loanID of the Loan to approve
+     * @return - The updated Loan
+     */
 	@PutMapping("/loans/approve/{loanID}")
 	public ResponseEntity<LoanResponseDto> approveLoan(@PathVariable int loanID) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.approveLoan(loanID));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 
+	/**
+     * Rejects a Loan by loanID after HTTP request and puts into the HTTP response
+     * 
+     * @param loanID - loanID of the Loan to reject
+     * @return - The rejected Loan
+     */
 	@PutMapping("/loans/reject/{loanID}")
 	public ResponseEntity<LoanResponseDto> rejectLoan(@PathVariable int loanID) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.rejectLoan(loanID));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 
+	/**
+     * Updates the fee of a Loan by loanID after HTTP request and puts into the HTTP response
+     * 
+     * @param loanID - loanID of the Loan to update the fee of
+     * @return - The updated Loan
+     */
 	@PutMapping("/loans/updateLoanFee/{loanID}")
 	public ResponseEntity<LoanResponseDto> updateLoanFee(@PathVariable int loanID, @RequestParam int loanFee) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.updateLoanFee(loanID, loanFee));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 	
+	/**
+     * Converts a list of Loans to a list of LoanResponseDtos 
+     * Note: This is a private helper method
+	 *
+     * @param artworks - list of Loans
+     * @return - list of LoanResponseDtos
+     */
 	private List<LoanResponseDto> convListToDto(List<Loan> loans) {
         List<LoanResponseDto> loanResponses = new ArrayList<LoanResponseDto>();
         for (Loan loan : loans) {

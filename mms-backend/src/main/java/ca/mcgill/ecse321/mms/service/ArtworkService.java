@@ -30,6 +30,12 @@ public class ArtworkService {
     @Autowired(required = true)
     MMSRepository mmsRepository;
 
+    /**
+     * Gets an Artwork by its artworkID attribute
+     * 
+     * @param id - Artwork artworkID
+     * @return - The fetched Artwork
+     */
     @Transactional
 	public Artwork getArtworkById(int id) {
 		Artwork artwork = artworkRepository.findArtworkByArtworkID(id);
@@ -39,6 +45,12 @@ public class ArtworkService {
 		return artwork;
 	}
 
+    /**
+     * Gets an Artwork by its name attribute
+     * 
+     * @param name - Artwork name
+     * @return - The fetched Artwork
+     */
     @Transactional
 	public Artwork getArtworkByName(String name) {
 		Artwork artwork = artworkRepository.findArtworkByName(name);
@@ -48,6 +60,12 @@ public class ArtworkService {
 		return artwork;
 	}
 
+    /**
+     * Gets a list of Artworks by their artist attribute
+     * 
+     * @param artist - Artworks' artist
+     * @return - The fetched list of Artworks
+     */
     @Transactional
 	public List<Artwork> getArtworksByArtist(String artist) {
 		List<Artwork> artworks = artworkRepository.findAllByArtist(artist);
@@ -59,6 +77,12 @@ public class ArtworkService {
 		return artworks;
 	}
 
+    /**
+     * Gets a list of Artworks by their roomID attribute
+     * 
+     * @param roomID - Artworks' roomID
+     * @return - The fetched list of Artworks
+     */
     @Transactional
 	public List<Artwork> getArtworksByRoomID(int roomID) {
 		List<Artwork> artworks = artworkRepository.findAllByRoomRoomID(roomID);
@@ -70,6 +94,11 @@ public class ArtworkService {
 		return artworks;
 	}
 
+    /**
+     * Gets a list of all Artworks in the artworkRepository
+     * 
+     * @return - The fetched list of Artworks
+     */
     @Transactional
 	public List<Artwork> getAllArtworks() {
 		List<Artwork> artworks = artworkRepository.findAll();
@@ -81,6 +110,11 @@ public class ArtworkService {
         return artworks;
 	}
 
+    /**
+     * Creates an Artwork using specific Artwork data and saves it in the artworkRepository
+     * @param artwork - Artwork object to create and save in the artworkRepository
+     * @return - The created Artwork
+     */
     @Transactional
     public Artwork createArtwork(Artwork artwork) {
         artwork.setAvailableForLoan(true);
@@ -96,7 +130,14 @@ public class ArtworkService {
         return artwork;
     }
 
-     @Transactional
+    /**
+     * Moves an Artwork to a specified room
+     * 
+     * @param artworkID - artworkID of Artwork to move
+     * @param roomID - roomID of room to move the Artwork to
+     * @return - The updated Artwork
+     */
+    @Transactional
     public Artwork moveArtworkToRoom(int artworkID, int roomID) {
         Artwork artwork = artworkRepository.findArtworkByArtworkID(artworkID);
         if (artwork == null) {

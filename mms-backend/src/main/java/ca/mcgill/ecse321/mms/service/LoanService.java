@@ -36,6 +36,12 @@ public class LoanService {
     @Autowired(required = true)
     ArtworkRepository artworkRepository;
 
+    /**
+     * Gets a Loan by its loanID attribute
+     * 
+     * @param id - Loan loanID
+     * @return - The fetched Loan
+     */
     @Transactional
 	public Loan getLoanById(int id) {
 		Loan loan = loanRepository.findLoanByLoanID(id);
@@ -45,6 +51,11 @@ public class LoanService {
 		return loan;
 	}
 
+    /**
+     * Gets a list of all Loans in the loanRepository
+     * 
+     * @return - The fetched list of Loans
+     */
     @Transactional
 	public List<Loan> getAllLoans() {
 		List<Loan> loans = loanRepository.findAll();
@@ -56,6 +67,12 @@ public class LoanService {
         return loans;
 	}
 
+    /**
+     * Gets a Loan by its visitorID attribute
+     * 
+     * @param visitorID - Loan visitorID
+     * @return - The fetched Loan
+     */
     @Transactional
 	public List<Loan> getLoansByVisitorID(int visitorID) {
 		List<Loan> loans = loanRepository.findAllByLoanRequestorVisitorID(visitorID);
@@ -78,6 +95,11 @@ public class LoanService {
 	// 	return loans;
 	// }
 
+    /**
+     * Creates a Loan using specific Loan data and saves it in the loanRepository
+     * @param loan - Loan object to create and save in the loanRepository
+     * @return - The created Loan
+     */
     @Transactional
     public Loan createLoan(Loan loan) {
         final int initialLoanFee = 10;
@@ -92,6 +114,11 @@ public class LoanService {
         return loan;
     }
 
+    /**
+     * Approves a Loan by updating its isApproved field
+     * @param loanID - Loan loanID
+     * @return - The approved loan
+     */
     @Transactional
     public Loan approveLoan(int loanID) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);
@@ -104,6 +131,11 @@ public class LoanService {
         return loan;
     }
 
+    /**
+     * Rejects a Loan by updating its isApproved field
+     * @param loanID - Loan loanID
+     * @return - The rejected loan
+     */
     @Transactional
     public Loan rejectLoan(int loanID) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);
@@ -117,6 +149,11 @@ public class LoanService {
         return loan;
     }
 
+    /**
+     * Updates the fee of a Loan by updating its loanFee field
+     * @param loanID - Loan loanID
+     * @return - The updated loan
+     */
     @Transactional
     public Loan updateLoanFee(int loanID, int loanFee) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);
