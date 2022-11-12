@@ -27,26 +27,26 @@ public class ArtworkController {
     @Autowired
     ArtworkService artworkService;
 
-    @GetMapping("/artwork/{id}")
+    @GetMapping("/artwork/artworkID/{id}")
 	public ResponseEntity<ArtworkResponseDto> getArtworkById(@PathVariable int id) {
 		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.getArtworkById(id));
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
 	}
 
-	@GetMapping("/artwork/{name}")
+	@GetMapping("/artwork/name/{name}")
 	public ResponseEntity<ArtworkResponseDto> getArtworkByName(@PathVariable String name) {
 		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.getArtworkByName(name));
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
 	}
 
-	@GetMapping("/artwork/{artist}")
+	@GetMapping("/artwork/artist/{artist}")
 	public ResponseEntity<List<ArtworkResponseDto>> getArtworksByArtist(@PathVariable String artist) {
 		List<ArtworkResponseDto> artworks = convListToDto(artworkService.getArtworksByArtist(artist));
 		return new ResponseEntity<List<ArtworkResponseDto>>(artworks, HttpStatus.OK);
 	}
 
 
-	@GetMapping("/artwork/{roomID}") 
+	@GetMapping("/artwork/roomID/{roomID}") 
 	public ResponseEntity<List<ArtworkResponseDto>> getArtworksByRoomID(@PathVariable int roomID) {
 		List<ArtworkResponseDto> artworks = convListToDto(artworkService.getArtworksByRoomID(roomID));
 		return new ResponseEntity<List<ArtworkResponseDto>>(artworks, HttpStatus.OK);
@@ -64,8 +64,8 @@ public class ArtworkController {
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/artworks")
-	public ResponseEntity<ArtworkResponseDto> moveArtworkToRoom(@RequestParam int artworkID, @RequestParam int roomID) {
+	@PutMapping("/artworks/move/{artworkID}/{roomID}")
+	public ResponseEntity<ArtworkResponseDto> moveArtworkToRoom(@PathVariable int artworkID, @PathVariable int roomID) {
 		// Note: use roomID of storage if moving to storage
 		ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.moveArtworkToRoom(artworkID, roomID)); 
 		return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
@@ -78,5 +78,13 @@ public class ArtworkController {
         }
         return artworkResponses;
     }
+
+	// private List<ResponseEntity<ArtworkResponseDto>> convListToResponseEntity(List<ArtworkResponseDto> artworks) {
+    //     List<ResponseEntity<ArtworkResponseDto>> artworkREs = new ArrayList<ResponseEntity<ArtworkResponseDto>>();
+    //     for (ArtworkResponseDto artwork : artworks) {
+    //         artworkREs.add(new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK));
+    //     }
+    //     return artworkREs;
+    // }
 
 }
