@@ -95,6 +95,9 @@ public class LoanService {
     @Transactional
     public Loan approveLoan(int loanID) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);
+        if (loan == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "Loan with ID " + loanID + " not found.");
+		}
         loan.setIsApproved(true);
         loan.getArtwork().setStatus(DisplayStatus.OnLoan.name());
 
