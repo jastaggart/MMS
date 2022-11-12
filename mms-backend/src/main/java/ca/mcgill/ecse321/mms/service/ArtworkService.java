@@ -52,7 +52,7 @@ public class ArtworkService {
 	public List<Artwork> getArtworksByArtist(String artist) {
 		List<Artwork> artworks = artworkRepository.findAllByArtist(artist);
 
-		if (artworks == null) {
+		if (artworks.isEmpty()) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "No artworks by " + artist + " found.");
 		}
 
@@ -63,7 +63,7 @@ public class ArtworkService {
 	public List<Artwork> getArtworksByRoomID(int roomID) {
 		List<Artwork> artworks = artworkRepository.findAllByRoomRoomID(roomID);
 
-		if (artworks == null) {
+		if (artworks.isEmpty()) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "No artworks in room with roomID " + roomID + ".");
 		}
 
@@ -74,7 +74,7 @@ public class ArtworkService {
 	public List<Artwork> getAllArtworks() {
 		List<Artwork> artworks = artworkRepository.findAll();
 
-        if (artworks == null) {
+        if (artworks.isEmpty()) {
             throw new MMSException(HttpStatus.NOT_FOUND, "No artworks to display.");
         }
 

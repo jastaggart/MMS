@@ -141,7 +141,8 @@ public class ArtworkServiceTests {
 	public void testGetArtworkByInvalidArtist() {
 		final String invalidArtist = "Claude Monet";
 	
-		when(artworkRepository.findAllByArtist(invalidArtist)).thenAnswer((InvocationOnMock invocation) -> null);
+		ArrayList<Artwork> empty = new ArrayList<Artwork>();
+		when(artworkRepository.findAllByArtist(invalidArtist)).thenAnswer((InvocationOnMock invocation) -> empty);
 		
 		MMSException exception = assertThrows(MMSException.class, () -> artworkService.getArtworksByArtist(invalidArtist));
 
@@ -183,7 +184,8 @@ public class ArtworkServiceTests {
 	public void testGetArtworkByRoomIDEmptyRoom() {
 		final int emptyRoomID = 4;
 	
-		when(artworkRepository.findAllByRoomRoomID(emptyRoomID)).thenAnswer((InvocationOnMock invocation) -> null);
+		ArrayList<Artwork> empty = new ArrayList<Artwork>();
+		when(artworkRepository.findAllByRoomRoomID(emptyRoomID)).thenAnswer((InvocationOnMock invocation) -> empty);
 		
 		MMSException exception = assertThrows(MMSException.class, () -> artworkService.getArtworksByRoomID(emptyRoomID));
 
@@ -221,7 +223,8 @@ public class ArtworkServiceTests {
     
 	@Test
 	public void testGetAllArtworksNoArtworks() {
-		when(artworkRepository.findAll()).thenAnswer((InvocationOnMock invocation) -> null);
+		ArrayList<Artwork> empty = new ArrayList<Artwork>();
+		when(artworkRepository.findAll()).thenAnswer((InvocationOnMock invocation) -> empty);
 		
 		MMSException exception = assertThrows(MMSException.class, () -> artworkService.getAllArtworks());
 
