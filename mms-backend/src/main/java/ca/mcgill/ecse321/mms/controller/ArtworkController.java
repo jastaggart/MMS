@@ -78,13 +78,5 @@ public class ArtworkController {
         }
         return artworkResponses;
     }
-
-	// private List<ResponseEntity<ArtworkResponseDto>> convListToResponseEntity(List<ArtworkResponseDto> artworks) {
-    //     List<ResponseEntity<ArtworkResponseDto>> artworkREs = new ArrayList<ResponseEntity<ArtworkResponseDto>>();
-    //     for (ArtworkResponseDto artwork : artworks) {
-    //         artworkREs.add(new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK));
-    //     }
-    //     return artworkREs;
-    // }
-
+	
 }
