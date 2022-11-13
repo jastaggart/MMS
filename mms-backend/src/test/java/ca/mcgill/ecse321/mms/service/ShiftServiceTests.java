@@ -346,19 +346,7 @@ public class ShiftServiceTests {
   public void testGetShiftsByInvalidEmployeeID() {   //Employee id corresponds to the owner (not an employee)
     final int invalidShiftAssigneeID = 1; //owner id
     final Owner mrKrabs = new Owner(); 
-//    final Employee spongeBob = new Employee();
     mrKrabs.setStaffMemberID(1);
-//    spongeBob.setStaffMemberID(2);
-//
-//    final String date = "2022-10-10";
-//    final String startHour = "08:00:00";
-//    final String endHour = "12:00:00";
-//    final Shift shift = new Shift();
-//    shift.setDate(Date.valueOf(date));
-//    shift.setStartHour(Time.valueOf(startHour));
-//    shift.setEndHour(Time.valueOf(endHour));
-//    shift.setShiftAssigner(mrKrabs);
-//    shift.setShiftAssignee(spongeBob);
 
     when(staffMemberRepository.findStaffMemberByStaffMemberID(invalidShiftAssigneeID)).thenAnswer((InvocationOnMock invocation) -> mrKrabs);
     
@@ -372,21 +360,6 @@ public class ShiftServiceTests {
   public void testGetShiftsByEmployeeIDMissingEmployee() {   //Employee with employee id cannot be found 
     
     final int emptyShiftAssigneeID = 99; 
-    
-//    final Owner mrKrabs = new Owner(); 
-//    final Employee spongeBob = new Employee();
-//    mrKrabs.setStaffMemberID(1);
-//    spongeBob.setStaffMemberID(2);
-//
-//    final String date = "2022-10-10";
-//    final String startHour = "08:00:00";
-//    final String endHour = "12:00:00";
-//    final Shift shift = new Shift();
-//    shift.setDate(Date.valueOf(date));
-//    shift.setStartHour(Time.valueOf(startHour));
-//    shift.setEndHour(Time.valueOf(endHour));
-//    shift.setShiftAssigner(mrKrabs);
-//    shift.setShiftAssignee(spongeBob);
     
     when(staffMemberRepository.findStaffMemberByStaffMemberID(emptyShiftAssigneeID)).thenAnswer((InvocationOnMock invocation) -> null);
 
