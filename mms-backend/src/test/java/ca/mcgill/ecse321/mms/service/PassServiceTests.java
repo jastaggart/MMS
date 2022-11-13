@@ -86,7 +86,7 @@ public class PassServiceTests {
     }
 
     @Test
-    public void testGetArtworkByInvalidId() {
+    public void testGetPassByInvalidId() {
         final int invalidId = -1;
 
         when(passRepository.findPassByPassID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
@@ -151,11 +151,12 @@ public class PassServiceTests {
         firstPass.setPassDate(firstDate);
         firstPass.setPassPurchaser(visitor);
 
+        final Visitor secondVisitor = new Visitor();
         final Date secondDate = new Date();
 
         Pass secondPass = new Pass();
         secondPass.setPassDate(secondDate);
-        secondPass.setPassPurchaser(visitor);
+        secondPass.setPassPurchaser(secondVisitor);
 
         final ArrayList<Pass> passes = new ArrayList<Pass>();
         passes.add(firstPass);
