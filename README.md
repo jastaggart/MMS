@@ -26,7 +26,7 @@ The goal of this project is to design an application for the museum of a small t
 | Jasmine Taggart       |     10                 |                      |                      |                      |
 | Sarah Zhang           | 11                   |                      |                      |                      |
 | Jean Kaznji          | 11                     |                      |                      |                      |
-| Minji Chang           | 12                   |                      |                      |                      |
+| Minji Chang           | 12                   |    30                  |                      |                      |
 
 
 # Project Reports
