@@ -55,6 +55,7 @@ public class LoanServiceTests {
         when (loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
 
         final Artwork artwork = new Artwork();
+        artwork.setAvailableForLoan(true);
         final Date startDate = new Date(2000, 1, 1);
         final Date endDate = new Date(2000, 1, 10);
         final Boolean isApproved = false;
@@ -269,7 +270,7 @@ public class LoanServiceTests {
 
         when(loanRepository.findLoanByLoanID(loanId)).thenAnswer((InvocationOnMock invocation) -> loan);
 
-        loanService.approveLoan(loanId);
+        loanService.approveLoan(loanId, staffMember.getStaffMemberID());
 
         Loan returnedLoan = loanService.getLoanById(loanId);
 
@@ -279,11 +280,12 @@ public class LoanServiceTests {
 
     @Test
     public void testApproveLoanInvalidId() {
+        final StaffMember staffMember = new Employee();
         final int invalidId = -1;
 
         when(loanRepository.findLoanByLoanID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
 
-        MMSException exception = assertThrows(MMSException.class, () -> loanService.approveLoan(invalidId));
+        MMSException exception = assertThrows(MMSException.class, () -> loanService.approveLoan(invalidId, staffMember.getStaffMemberID()));
 
         assertEquals("Loan with ID " + invalidId + " not found.", exception.getMessage());
 		assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
@@ -312,7 +314,7 @@ public class LoanServiceTests {
 
         when(loanRepository.findLoanByLoanID(loanId)).thenAnswer((InvocationOnMock invocation) -> loan);
 
-        loanService.rejectLoan(loanId);
+        loanService.rejectLoan(loanId, staffMember.getStaffMemberID());
 
         Loan returnedLoan = loanService.getLoanById(loanId);
 
@@ -322,11 +324,12 @@ public class LoanServiceTests {
     
     @Test
     public void testRejectLoanInvalidId() {
+        final StaffMember staffMember = new Employee();
         final int invalidId = -1;
 
         when(loanRepository.findLoanByLoanID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
 
-        MMSException exception = assertThrows(MMSException.class, () -> loanService.rejectLoan(invalidId));
+        MMSException exception = assertThrows(MMSException.class, () -> loanService.rejectLoan(invalidId, staffMember.getStaffMemberID()));
 
         assertEquals("Loan with ID " + invalidId + " not found.", exception.getMessage());
 		assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());

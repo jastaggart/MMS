@@ -13,4 +13,5 @@ public interface ArtworkRepository extends CrudRepository<Artwork, String> {
 	public List<Artwork> findAllByArtist(String artist);
 	public List<Artwork> findAllByRoomRoomID(int roomID);
 	public List<Artwork> findAll();
+	public void deleteArtworkByArtworkID(int id);
 }

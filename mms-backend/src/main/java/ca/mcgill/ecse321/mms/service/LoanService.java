@@ -106,6 +106,10 @@ public class LoanService {
 
         loan.setLoanFee(initialLoanFee);
         loan.setIsApproved(false); // not approved yet
+
+        if (!loan.getArtwork().getAvailableForLoan()) {
+            throw new MMSException(HttpStatus.BAD_REQUEST, "Specified artwork not available for loan.");
+        }
         
         // Note: Before loan is approved, artwork status remains the same 
         // i.e. it stays in storage or its current display room
@@ -117,16 +121,22 @@ public class LoanService {
     /**
      * Approves a Loan by updating its isApproved field
      * @param loanID - Loan loanID
+     * @param staffMemberID - StaffMember staffMemberID
      * @return - The approved loan
      */
     @Transactional
-    public Loan approveLoan(int loanID) {
+    public Loan approveLoan(int loanID, int staffMemberID) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);
+        StaffMember loanApprover = staffMemberRepository.findStaffMemberByStaffMemberID(staffMemberID); // currently logged in staff member, must exist
+
         if (loan == null) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "Loan with ID " + loanID + " not found.");
 		}
+
         loan.setIsApproved(true);
         loan.getArtwork().setStatus(DisplayStatus.OnLoan.name());
+        loan.getArtwork().setAvailableForLoan(false);
+        loan.setLoanApprover(loanApprover);
 
         return loan;
     }
@@ -134,15 +144,20 @@ public class LoanService {
     /**
      * Rejects a Loan by updating its isApproved field
      * @param loanID - Loan loanID
+     * @param staffMemberID - StaffMember staffMemberID
      * @return - The rejected loan
      */
     @Transactional
-    public Loan rejectLoan(int loanID) {
+    public Loan rejectLoan(int loanID, int staffMemberID) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);
+        StaffMember loanApprover = staffMemberRepository.findStaffMemberByStaffMemberID(staffMemberID); // currently logged in staff member, must exist
+
         if (loan == null) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "Loan with ID " + loanID + " not found.");
 		}
+
         loan.setIsApproved(false);
+        loan.setLoanApprover(loanApprover);
         // Note: If loan is rejected, artwork status remains the same
         // i.e. it stays in storage or its current display room
 

@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.mms.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -341,6 +342,37 @@ public class ArtworkServiceTests {
 
 		assertEquals("Display room is full.", exception.getMessage());
 		assertEquals(HttpStatus.CONFLICT, exception.getStatus());
+	}
+
+	@Test
+	public void testDeleteArtworkByArtworkID() {
+		final int id = 5;
+		final String name = "Starry Night";
+        final String artist = "Vincent van Gogh";
+        final Storage storage = new Storage();
+		final int roomId = 1;
+		storage.setRoomID(roomId);
+
+        final Artwork starryNight = new Artwork();
+        starryNight.setName(name);
+        starryNight.setArtist(artist);
+		starryNight.setRoom(storage);
+
+		when(artworkRepository.findArtworkByArtworkID(id)).thenAnswer((InvocationOnMock invocation) -> starryNight);
+		
+		artworkService.deleteArtworkByArtworkID(id);
+		
+		assertFalse(storage.getArtworks().contains(starryNight));
+	}
+
+    @Test
+	public void testDeleteArtworkByArtworkIDInvalid() {
+		final int invalidID = 99;
+		
+		MMSException exception = assertThrows(MMSException.class, () -> artworkService.deleteArtworkByArtworkID(invalidID));
+
+		assertEquals("Artwork with ID " + invalidID + " not found.", exception.getMessage());
+		assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
 	}
 }
 

@@ -13,6 +13,7 @@ import ca.mcgill.ecse321.mms.model.DisplayStatus;
 import ca.mcgill.ecse321.mms.model.Room;
 import ca.mcgill.ecse321.mms.model.DisplayRoom;
 import ca.mcgill.ecse321.mms.model.Storage;
+import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
@@ -164,6 +165,31 @@ public class ArtworkService {
 
         artwork.setRoom(destRoom);
         return artwork;
+    }
+
+    /**
+     * Deletes an Artwork
+     * 
+     * @param artworkID - artworkID of Artwork to delete
+     * @return - deleted Artwork
+     */
+    @Transactional
+    public void deleteArtworkByArtworkID(int artworkID) {
+        Artwork artwork = artworkRepository.findArtworkByArtworkID(artworkID);
+        if (artwork == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "Artwork with ID " + artworkID + " not found.");
+		}
+        
+        // Remove artwork to delete from its room
+        Room room = artwork.getRoom();
+        room.removeArtwork(artwork);
+
+        // Set loans of artwork to delete to placeholder artwork
+        for (Loan loan : artwork.getLoans()) {
+            loan.setArtwork(artworkRepository.findArtworkByArtworkID(1));
+        }
+
+        artworkRepository.deleteArtworkByArtworkID(artworkID);
     }
 
 }

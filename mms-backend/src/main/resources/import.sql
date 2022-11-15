@@ -11,4 +11,7 @@ On CONFLICT(roomid) DO NOTHING;
 insert into visitor(visitorid, email, password, username, museum_management_system_museumid) values (1, 'theo@email.com', 'soccer123', 'theosoccer', 1)
 On CONFLICT(visitorid) DO NOTHING;
 
+insert into artwork(artworkid, artist, is_available_for_loan, artwork_name, display_status, museum_management_system_museumid, room_roomid) values (1, 'Museum', false, 'Placeholder Artwork', 'InStorage', 1, 1)
+On CONFLICT(artworkid) DO NOTHING;
+
 

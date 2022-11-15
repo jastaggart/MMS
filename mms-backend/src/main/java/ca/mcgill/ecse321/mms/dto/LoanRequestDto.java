@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import ca.mcgill.ecse321.mms.model.Loan;
-import ca.mcgill.ecse321.mms.dto.VisitorRequestDto; // TODO uncomment when VisitorRequestDto done
+import ca.mcgill.ecse321.mms.dto.VisitorRequestDto; 
 import ca.mcgill.ecse321.mms.dto.ArtworkRequestDto;
 
 import java.sql.Date;

@@ -84,11 +84,12 @@ public class LoanController {
      * Approves a Loan by loanID after HTTP request and puts into the HTTP response
      * 
      * @param loanID - loanID of the Loan to approve
+     * @param staffMemberID - staffMemberID of staff member who's approving the loan
      * @return - The updated Loan
      */
-	@PutMapping("/loans/approve/{loanID}")
-	public ResponseEntity<LoanResponseDto> approveLoan(@PathVariable int loanID) {
-		LoanResponseDto loan = new LoanResponseDto(loanService.approveLoan(loanID));
+	@PutMapping("/loans/approve/{loanID}/{staffMemberID}")
+	public ResponseEntity<LoanResponseDto> approveLoan(@PathVariable int loanID, @PathVariable int staffMemberID)  {
+		LoanResponseDto loan = new LoanResponseDto(loanService.approveLoan(loanID, staffMemberID));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 
@@ -96,11 +97,12 @@ public class LoanController {
      * Rejects a Loan by loanID after HTTP request and puts into the HTTP response
      * 
      * @param loanID - loanID of the Loan to reject
+     * @param staffMemberID - staffMemberID of staff member who's rejecting the loan
      * @return - The rejected Loan
      */
-	@PutMapping("/loans/reject/{loanID}")
-	public ResponseEntity<LoanResponseDto> rejectLoan(@PathVariable int loanID) {
-		LoanResponseDto loan = new LoanResponseDto(loanService.rejectLoan(loanID));
+	@PutMapping("/loans/reject/{loanID}/{staffMemberID}")
+	public ResponseEntity<LoanResponseDto> rejectLoan(@PathVariable int loanID, @PathVariable int staffMemberID) {
+		LoanResponseDto loan = new LoanResponseDto(loanService.rejectLoan(loanID, staffMemberID));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 

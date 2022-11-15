@@ -2,7 +2,7 @@ package ca.mcgill.ecse321.mms.dto;
 
 import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.dto.VisitorResponseDto;
-//import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
+import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
 import ca.mcgill.ecse321.mms.dto.ArtworkResponseDto;
 
 import java.sql.Date;
@@ -14,7 +14,7 @@ public class LoanResponseDto {
     private String endDate;
     private boolean isApproved;
     private VisitorResponseDto loanRequestor;
-    // private StaffMemberResponseDto loanApprover;
+    private StaffMemberResponseDto loanApprover;
     private ArtworkResponseDto artwork;
 
     public LoanResponseDto(Loan loan) {
@@ -24,7 +24,9 @@ public class LoanResponseDto {
         this.endDate = loan.getEndDate().toString();
         this.isApproved = loan.getIsApproved();
         this.loanRequestor = new VisitorResponseDto(loan.getLoanRequestor());
-        // this.loanApprover = new StaffMemberResponseDto(loan.getLoanApprover());
+        if (loan.getLoanApprover() != null) {
+            this.loanApprover = new StaffMemberResponseDto(loan.getLoanApprover());
+        }
         this.artwork = new ArtworkResponseDto(loan.getArtwork());
     }
 
@@ -57,9 +59,9 @@ public class LoanResponseDto {
         return loanRequestor;
     }
     
-    // public StaffMemberResponseDto getLoanApprover() {
-    //     return loanApprover;
-    // }
+    public StaffMemberResponseDto getLoanApprover() {
+        return loanApprover;
+    }
 
     public ArtworkResponseDto getArtwork() {
         return artwork;

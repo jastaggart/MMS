@@ -37,7 +37,7 @@ public class ArtworkIntegrationTests {
 	}
 	
 	@Test
-	public void testCreateAndGetArtworkSingle() {
+	public void testCreateAndGetArtwork() {
 		ArtworkDto response = testCreateArtwork();
 		testGetArtworkByArtworkID(response.getArtworkID());
 		testGetArtworkByName(response.getName());
