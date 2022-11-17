@@ -10,4 +10,5 @@ public interface ShiftRepository extends CrudRepository<Shift, String> {
   public List<Shift> findShiftByShiftAssigneeStaffMemberID(int employeeID);
   public List<Shift> findShiftByDate(String date);
   public List<Shift> findAll();
+  public void deleteShiftByShiftID(int id);
 }

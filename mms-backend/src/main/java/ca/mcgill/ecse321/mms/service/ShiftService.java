@@ -220,7 +220,7 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
     //Check if shift exists
     getShiftByShiftID(shiftID);
     
-    //default value for missing fields
+    //default value for missing fields (take original values)
     if (date == null) date = shift.getDate().toString();
     if (startHour == null) startHour = shift.getStartHour().toString();
     if (endHour == null) endHour = shift.getEndHour().toString();
@@ -235,4 +235,32 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
     return new ShiftResponseDto(shift);
   }
 
+  
+  /**
+   * 
+   * Delete shift
+   * 
+   * @param shiftID - id of the shift to be deleted
+   * @return - shift dto of the deleted shift 
+   */
+  @Transactional
+  public ShiftResponseDto deleteShift(int shiftID) {
+    Shift shift = shiftRepository.findShiftByShiftID(shiftID);
+    
+    //Check if shift exists
+    getShiftByShiftID(shiftID);
+    
+    //remove link to shift assigner and assignee
+    Owner owner = shift.getShiftAssigner();
+    Employee employee = shift.getShiftAssignee();
+    owner.removeShift(shift);
+    owner.removeShift(shift);
+    
+    //remove shift from repository
+    shiftRepository.deleteShiftByShiftID(shiftID);
+    
+    return new ShiftResponseDto(shift);
+  }
+
+  
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -106,7 +107,7 @@ public class ShiftController {
 
   
   /**
-   *  * Creates a shift using Dto data after HTTP request and puts it into HTTP response
+   * Creates a shift using Dto data after HTTP request and puts it into HTTP response
    * 
    * @param shiftRequest - The ShiftRequestDto data
    * @return - The created shift as Dto
@@ -118,4 +119,17 @@ public class ShiftController {
     return new ResponseEntity<ShiftResponseDto>(shiftDto, HttpStatus.CREATED);
   }
   
+
+  /**
+   * Deletes a shift after HTTP request and puts it into HTTP response
+   * 
+   * @param shiftID - id of the shift to be deleted
+   * @return - deleted shift as dto
+   */
+  @DeleteMapping({"/shift/delete/{shiftID}","/shift/delete/{shiftID}/"})
+  public ResponseEntity<ShiftResponseDto> deleteShift(@PathVariable int shiftID) {
+    ShiftResponseDto shiftDto = shiftService.deleteShift(shiftID);
+    return new ResponseEntity<ShiftResponseDto>(shiftDto, HttpStatus.OK);
+  }
+
 }

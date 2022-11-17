@@ -721,5 +721,50 @@ public class ShiftServiceTests {
     assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
     
   }
+  
+  @Test
+  public void testDeleteShift() {
+    final int shiftAssignerID = 1;
+    final int shiftAssigneeID = 2;
+    final Owner mrKrabs = new Owner();
+    final Employee spongeBob = new Employee();
+    mrKrabs.setStaffMemberID(shiftAssignerID);
+    spongeBob.setStaffMemberID(shiftAssigneeID);
+    
+    final int shiftID = 1;
+    final String date = "2022-10-10";
+    final String startHour = "08:00:00";
+    final String endHour = "12:00:00";
+    final Shift shift = new Shift();
+    shift.setShiftID(shiftID);
+    shift.setDate(Date.valueOf(date));
+    shift.setStartHour(Time.valueOf(startHour));
+    shift.setEndHour(Time.valueOf(endHour));
+    shift.setShiftAssigner(mrKrabs);
+    shift.setShiftAssignee(spongeBob);
+    
+    
+    when(shiftRepository.findShiftByShiftID(shiftID)).thenAnswer((InvocationOnMock invocation) -> shift);
+    
+    ShiftResponseDto returnedShiftDto = shiftService.deleteShift(shiftID);
+    
+    assertNotNull(returnedShiftDto);
+    
+    verify(shiftRepository, times(1)).deleteShiftByShiftID(shiftID);
+  }
+  
+  @Test
+  public void testDeleteShiftInvalidShiftID() {   // shift with shiftId not found
+    
+    final int invalidShiftID = 99;
+    
+    
+    when(shiftRepository.findShiftByShiftID(invalidShiftID)).thenAnswer((InvocationOnMock invocation) -> null);
+    
+    MMSException exception = assertThrows(MMSException.class, () -> shiftService.deleteShift(invalidShiftID));
+
+    assertEquals("Shift with id: 99 not found.", exception.getMessage());
+    assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
+  }
 
 }
