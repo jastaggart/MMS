@@ -89,7 +89,19 @@ public class PassServiceTests {
     public void testGetPassByInvalidId() {
         final int invalidId = -1;
 
-        when(passRepository.findPassByPassID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
+        //when(passRepository.findPassByPassID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
+
+        MMSException exception = assertThrows(MMSException.class, () -> passService.getPassById(invalidId));
+
+        assertEquals("Pass ID " + invalidId + " is invalid.", exception.getMessage());
+		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+    }
+
+    @Test
+    public void testGetPassByPassIDPassDoesNotExist() {
+        final int invalidId = 23;
+
+        //when(passRepository.findPassByPassID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
 
         MMSException exception = assertThrows(MMSException.class, () -> passService.getPassById(invalidId));
 
@@ -127,6 +139,19 @@ public class PassServiceTests {
 
 
     }
+
+    @Test
+    public void testGetPassByInvalidVisitorID() {
+        final int invalidId = -1;
+
+        //when(passRepository.findPassByPassID(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
+
+        MMSException exception = assertThrows(MMSException.class, () -> passService.getPassesByVisitorId(invalidId));
+
+        assertEquals("Visitor ID " + invalidId + " is invalid.", exception.getMessage());
+		assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+    }
+    
 
     @Test
     public void testGetPassesByVisitorIdWithNoPasses() {

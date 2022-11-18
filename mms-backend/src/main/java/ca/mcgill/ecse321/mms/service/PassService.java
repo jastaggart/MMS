@@ -47,6 +47,9 @@ public class PassService {
 
     @Transactional
 	public Pass getPassById(int id) {
+        if (id < 0) {
+            throw new MMSException(HttpStatus.BAD_REQUEST, "Pass ID " + id + " is invalid.");
+        }
 		Pass pass = passRepository.findPassByPassID(id);
 		if (pass == null) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "Pass with ID " + id + " not found.");
@@ -56,8 +59,14 @@ public class PassService {
 
     @Transactional
     public List<Pass> getPassesByVisitorId(int visitorID) {
+        if (visitorID < 0) {
+            throw new MMSException(HttpStatus.BAD_REQUEST, "Visitor ID " + visitorID + " is invalid.");
+        }
         List<Pass> passes = passRepository.findPassByPassPurchaserVisitorID(visitorID);
         if (passes == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "No passes owned by visitor with visitorID " + visitorID + ".");
+		}
+        if (passes.isEmpty()) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "No passes owned by visitor with visitorID " + visitorID + ".");
 		}
 

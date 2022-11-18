@@ -45,7 +45,7 @@ public class PassController {
 		return new ResponseEntity<PassResponseDto>(pass, HttpStatus.OK);
 	}
 
-    @GetMapping("/pass/{visitorID}") 
+    @GetMapping("/pass/visitor/{visitorID}") 
 	public ResponseEntity<List<PassResponseDto>> getPassesByVisitorId(@PathVariable int visitorID) {
 		List<PassResponseDto> passes = convListToDto(passService.getPassesByVisitorId(visitorID));
 		return new ResponseEntity<List<PassResponseDto>>(passes, HttpStatus.OK);
@@ -54,8 +54,6 @@ public class PassController {
 
 	@PostMapping("/pass")
     public ResponseEntity<PassResponseDto> createPass(@Valid @RequestBody PassRequestDto passRequest) throws ParseException {
-			System.out.println(passRequest.getPassDate());
-			System.out.println(passRequest.getVisitorID());
 			Visitor visitorRequestingPass = visitorRepository.findVisitorByVisitorID(passRequest.getVisitorID());		
             Pass createdPass = passService.createPass(visitorRequestingPass, passRequest.getPassDate());
             PassResponseDto response = new PassResponseDto(createdPass);  
