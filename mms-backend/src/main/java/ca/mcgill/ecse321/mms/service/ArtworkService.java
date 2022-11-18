@@ -17,6 +17,7 @@ import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
+import ca.mcgill.ecse321.mms.repository.LoanRepository;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 
 @Service
@@ -30,6 +31,9 @@ public class ArtworkService {
 
     @Autowired(required = true)
     MMSRepository mmsRepository;
+
+    @Autowired(required = true)
+    LoanRepository loanRepository;
 
     /**
      * Gets an Artwork by its artworkID attribute
@@ -124,7 +128,6 @@ public class ArtworkService {
         artwork.setRoom(roomRepository.findRoomByRoomID(1)); // Set to storage room
 
         artwork.setMuseumManagementSystem(mmsRepository.findMMSByMuseumID(1));
-
         // Note: Loans remains empty 
 
         artwork = artworkRepository.save(artwork);
@@ -174,7 +177,7 @@ public class ArtworkService {
      * @return - deleted Artwork
      */
     @Transactional
-    public void deleteArtworkByArtworkID(int artworkID) {
+    public Artwork deleteArtworkByArtworkID(int artworkID) {
         Artwork artwork = artworkRepository.findArtworkByArtworkID(artworkID);
         if (artwork == null) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "Artwork with ID " + artworkID + " not found.");
@@ -184,12 +187,13 @@ public class ArtworkService {
         Room room = artwork.getRoom();
         room.removeArtwork(artwork);
 
-        // Set loans of artwork to delete to placeholder artwork
-        for (Loan loan : artwork.getLoans()) {
-            loan.setArtwork(artworkRepository.findArtworkByArtworkID(1));
-        }
+        // for (Loan loan: loanRepository.findAllByArtworkArtworkID(artworkID)) {
+        //     loan.setArtwork(artworkRepository.findArtworkByArtworkID(1));
+        // }
 
         artworkRepository.deleteArtworkByArtworkID(artworkID);
+
+        return artwork;
     }
 
 }

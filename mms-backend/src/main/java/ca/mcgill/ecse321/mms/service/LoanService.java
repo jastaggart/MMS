@@ -101,11 +101,13 @@ public class LoanService {
      * @return - The created Loan
      */
     @Transactional
-    public Loan createLoan(Loan loan) {
+    public Loan createLoan(Loan loan, int loanRequestorID, int artworkID) {
         final int initialLoanFee = 10;
 
         loan.setLoanFee(initialLoanFee);
         loan.setIsApproved(false); // not approved yet
+        loan.setLoanRequestor(visitorRepository.findVisitorByVisitorID(loanRequestorID));
+        loan.setArtwork(artworkRepository.findArtworkByArtworkID(artworkID));
 
         if (!loan.getArtwork().getAvailableForLoan()) {
             throw new MMSException(HttpStatus.BAD_REQUEST, "Specified artwork not available for loan.");

@@ -54,25 +54,31 @@ public class LoanServiceTests {
     public void testCreateLoan() {
         when (loanRepository.save(any(Loan.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
 
+        int artworkID = 5;
         final Artwork artwork = new Artwork();
+        artwork.setArtworkID(5);
         artwork.setAvailableForLoan(true);
+
+        int visitorID = 6;
+        final Visitor visitor = new Visitor();
+        visitor.setVisitorID(6);
+
+        when(artworkRepository.findArtworkByArtworkID(artworkID)).thenAnswer((InvocationOnMock invocation) -> artwork);
+        when(visitorRepository.findVisitorByVisitorID(visitorID)).thenAnswer((InvocationOnMock invocation) -> visitor);
+
         final Date startDate = new Date(2000, 1, 1);
         final Date endDate = new Date(2000, 1, 10);
         final Boolean isApproved = false;
         final StaffMember staffMember = new Employee();
         final int loanFee = 10;
-        final Visitor visitor = new Visitor();
-
+        
         Loan loan = new Loan();
 
-        loan.setArtwork(artwork);
         loan.setStartDate(startDate);
         loan.setEndDate(endDate);
-        loan.setIsApproved(isApproved);
         loan.setLoanApprover(staffMember);
-        loan.setLoanRequestor(visitor);
-
-        Loan returnedLoan = loanService.createLoan(loan);
+        
+        Loan returnedLoan = loanService.createLoan(loan, visitorID, artworkID);
 
         assertNotNull(returnedLoan);
         assertEquals(artwork, returnedLoan.getArtwork());

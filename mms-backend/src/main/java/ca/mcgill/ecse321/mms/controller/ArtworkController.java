@@ -119,8 +119,9 @@ public class ArtworkController {
      * @return - deleted Artwork
      */
      @DeleteMapping("/artwork/delete/{artworkID}")
-     public void deleteArtworkByID(@PathVariable int artworkID) {
-          artworkService.deleteArtworkByArtworkID(artworkID);
+     public ResponseEntity<ArtworkResponseDto> deleteArtworkByID(@PathVariable int artworkID) {
+          ArtworkResponseDto artwork = new ArtworkResponseDto(artworkService.deleteArtworkByArtworkID(artworkID));
+          return new ResponseEntity<ArtworkResponseDto>(artwork, HttpStatus.OK);
      }
 
 	/**

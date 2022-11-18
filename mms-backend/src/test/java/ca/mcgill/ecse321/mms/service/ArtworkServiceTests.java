@@ -25,9 +25,11 @@ import ca.mcgill.ecse321.mms.model.DisplayStatus;
 import ca.mcgill.ecse321.mms.model.DisplayRoom;
 import ca.mcgill.ecse321.mms.model.Storage;
 import ca.mcgill.ecse321.mms.model.MMS;
+import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
+import ca.mcgill.ecse321.mms.repository.LoanRepository;
 import ca.mcgill.ecse321.mms.dto.ArtworkRequestDto;
 import ca.mcgill.ecse321.mms.dto.ArtworkResponseDto;
 
@@ -43,6 +45,9 @@ public class ArtworkServiceTests {
 
 	@Mock
 	MMSRepository mmsRepository;
+
+	@Mock
+	LoanRepository loanRepository;
 	
 	// Get a service that uses the mock repository
 	@InjectMocks
@@ -359,10 +364,14 @@ public class ArtworkServiceTests {
 		starryNight.setRoom(storage);
 
 		when(artworkRepository.findArtworkByArtworkID(id)).thenAnswer((InvocationOnMock invocation) -> starryNight);
+		//when(loanRepository.findAllByArtworkArtworkID(id)).thenAnswer((InvocationOnMock invocation) -> new ArrayList<Loan>());
+
+		Artwork artwork = artworkService.deleteArtworkByArtworkID(id);
 		
-		artworkService.deleteArtworkByArtworkID(id);
-		
-		assertFalse(storage.getArtworks().contains(starryNight));
+		assertNotNull(artwork);
+		assertEquals(name, artwork.getName());
+        assertEquals(artist, artwork.getArtist());
+		verify(artworkRepository, times(1)).deleteArtworkByArtworkID(id);
 	}
 
     @Test

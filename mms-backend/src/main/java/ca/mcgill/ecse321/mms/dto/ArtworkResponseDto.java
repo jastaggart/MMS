@@ -18,7 +18,10 @@ public class ArtworkResponseDto {
         this.status = artwork.getStatus();
         this.name = artwork.getName();
         this.artist = artwork.getArtist();
-        this.roomRoomID = artwork.getRoom().getRoomID();
+        if (artwork.getRoom() != null) { // artwork room could be null if artwork was deleted
+            this.roomRoomID = artwork.getRoom().getRoomID();
+        }
+        
         this.museumManagementSystem = new MMSResponseDto(artwork.getMuseumManagementSystem());
     }
 

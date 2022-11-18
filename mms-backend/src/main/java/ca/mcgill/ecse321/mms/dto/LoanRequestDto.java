@@ -18,13 +18,9 @@ public class LoanRequestDto {
 	@NotBlank
 	private String endDate;
 
-    @NotNull
-    @NotBlank
-    private VisitorRequestDto loanRequestor;
+    private int loanRequestorID;
 
-    @NotNull
-    @NotBlank
-    private ArtworkRequestDto artwork;
+    private int artworkID;
 	
     public String getStartDate()
     {
@@ -36,14 +32,14 @@ public class LoanRequestDto {
         return endDate;
     }
 
-    public VisitorRequestDto getLoanRequestor()
+    public int getLoanRequestorID()
     {
-        return loanRequestor;
+        return loanRequestorID;
     }
 
-    public ArtworkRequestDto getArtwork()
+    public int getArtworkID()
     {
-        return artwork;
+        return artworkID;
     }
 
     public void setStartDate(String aStartDate)
@@ -56,22 +52,20 @@ public class LoanRequestDto {
         endDate = aEndDate;
     }
 
-    public void setLoanRequestor(VisitorRequestDto aLoanRequestor)
+    public void setLoanRequestorID(int aLoanRequestorID)
     {
-        loanRequestor = aLoanRequestor;
+        loanRequestorID = aLoanRequestorID;
     }
 
-    public void setArtwork(ArtworkRequestDto aArtwork)
+    public void setArtworkID(int aArtworkID)
     {
-        artwork = aArtwork;
+        artworkID = aArtworkID;
     }
 
     public Loan toModel() {
 		Loan loan = new Loan();
         loan.setStartDate(Date.valueOf(this.startDate));
         loan.setEndDate(Date.valueOf(this.endDate));
-        loan.setLoanRequestor(this.loanRequestor.toModel());
-        loan.setArtwork(this.artwork.toModel());
 		return loan;
 	}
 	
