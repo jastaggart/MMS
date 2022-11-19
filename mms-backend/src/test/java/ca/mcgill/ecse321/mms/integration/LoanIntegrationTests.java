@@ -46,38 +46,6 @@ public class LoanIntegrationTests {
 		loanRepository.deleteAll();
 	}
 
-    @Test
-	public void testCreateAndGetLoan() throws ParseException {
-		LoanDto response = testCreateLoan();
-		testGetLoanByLoanID(response.getLoanID());
-		//testGetLoanByRequestor(response.getLoan());
-	}
-
-    private LoanDto testCreateLoan() throws ParseException {
-        final String startDate = "02-02-2002";
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-		Date parsedStartDate = formatter.parse(startDate);
-
-        final String endDate = "02-12-2002";
-		Date parsedEndDate = formatter.parse(endDate);
-
-        int loanRequestorID = 10;
-
-        ResponseEntity<ArtworkDto> createdArtwork = client.postForEntity("/artwork", new ArtworkDto("Starry Night", "Vincent van Gogh"), ArtworkDto.class);
-        int artworkID = createdArtwork.getBody().getArtworkID();
-        ResponseEntity<LoanDto> response = client.postForEntity("/loan", new LoanDto(loanRequestorID, artworkID), LoanDto.class);
-        
-        assertNotNull(response);
-		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
-		assertNotNull(response.getBody(), "Response has body");
-		assertEquals(loanRequestorID, response.getBody().getLoanRequestorID());
-        assertEquals(artworkID, response.getBody().getArtworkID());
-
-		assertTrue(response.getBody().getLoanID() > 0, "Response has valid ID");
-
-        return response.getBody();
-    }
-
     private LoanDto testGetLoanByLoanID(int id) throws ParseException {
         int loanRequestorID = 10;
 
@@ -121,18 +89,14 @@ public class LoanIntegrationTests {
 		assertEquals("No loans found.", response.getBody());
     }
 
-    // @Test
-    // public void testApproveLoan() {
-    //     ResponseEntity<LoanDto> response = client.getForEntity("/loan/loanID/" + id, LoanDto.class);
-    // }
 
 }
 
 class LoanDto {
     private int loanID;
     private int loanFee;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private boolean isApproved;
     private int loanRequestorID;
     private int loanApproverID;
@@ -140,9 +104,11 @@ class LoanDto {
 
     public LoanDto() {}
 
-    public LoanDto(int loanRequestorID, int artworkID) {
+    public LoanDto(int loanRequestorID, int artworkID, String startDate, String endDate) {
         this.loanRequestorID = loanRequestorID;
         this.artworkID = artworkID;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getLoanID() {
@@ -153,11 +119,11 @@ class LoanDto {
         return loanFee;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 

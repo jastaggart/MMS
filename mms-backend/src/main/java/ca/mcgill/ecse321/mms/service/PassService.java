@@ -100,6 +100,10 @@ public class PassService {
 	public List<Pass> getAllPasses() {
 		List<Pass> passes = passRepository.findAll();
 
+        if (passes.isEmpty()) {
+            throw new MMSException(HttpStatus.NOT_FOUND, "No passes found.");
+        }
+
         if (passes == null) {
             throw new MMSException(HttpStatus.NOT_FOUND, "No passes found.");
         }
