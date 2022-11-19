@@ -19,6 +19,7 @@ import ca.mcgill.ecse321.mms.dto.LoanResponseDto;
 import ca.mcgill.ecse321.mms.service.LoanService;
 
 import java.util.List;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 @RestController
@@ -33,7 +34,7 @@ public class LoanController {
      * @param id - loanID of the Loan to get
      * @return - The fetched Loan
      */
-    @GetMapping("/loan/{id}")
+    @GetMapping("/loan/loanID/{id}")
 	public ResponseEntity<LoanResponseDto> getLoanById(@PathVariable int id) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.getLoanById(id));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
@@ -56,7 +57,7 @@ public class LoanController {
      * @param visitorID - visitorID of the Loan to get
      * @return - The fetched Loan
      */
-	@GetMapping("/loan/{visitorID}") 
+	@GetMapping("/loan/visitorID/{visitorID}") 
 	public ResponseEntity<List<LoanResponseDto>> getLoansByVisitorID(@PathVariable int visitorID) {
 		List<LoanResponseDto> loans = convListToDto(loanService.getLoansByVisitorID(visitorID));
 		return new ResponseEntity<List<LoanResponseDto>>(loans, HttpStatus.OK);
@@ -73,9 +74,10 @@ public class LoanController {
      * 
      * @param loanRequest - The LoanRequestDto data
      * @return - The created Loan as Dto
+	 * @throws ParseException
      */
 	@PostMapping("/loan")
-	public ResponseEntity<LoanResponseDto> createLoan(@Valid @RequestBody LoanRequestDto loanRequest) {
+	public ResponseEntity<LoanResponseDto> createLoan(@Valid @RequestBody LoanRequestDto loanRequest) throws ParseException {
 		LoanResponseDto loan = new LoanResponseDto(loanService.createLoan(loanRequest.toModel(), loanRequest.getLoanRequestorID(), loanRequest.getArtworkID()));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.CREATED);
 	}

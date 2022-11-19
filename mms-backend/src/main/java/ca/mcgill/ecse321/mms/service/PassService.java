@@ -34,6 +34,12 @@ public class PassService {
     @Autowired(required = true)
     VisitorRepository visitorRepository;
 
+    /**
+     * Creates a Pass using specific Pass data and saves it in the passRepository
+     * @param pass - Pass object to create and save in the passRepository
+     * @return - The created Pass
+     * @throws ParseException
+     */
     @Transactional
     public Pass createPass(Visitor visitor, String date) throws ParseException {
         Pass pass = new Pass();
@@ -45,6 +51,12 @@ public class PassService {
         return pass;
     }
 
+    /**
+     * Gets a Pass by its passID attribute
+     * 
+     * @param id - Pass passID
+     * @return - The fetched Pass
+     */
     @Transactional
 	public Pass getPassById(int id) {
         if (id < 0) {
@@ -57,6 +69,12 @@ public class PassService {
 		return pass;
 	}
 
+    /**
+     * Gets a Pass by its visitorID attribute
+     * 
+     * @param visitorID - Pass visitorID
+     * @return - The fetched Pass
+     */
     @Transactional
     public List<Pass> getPassesByVisitorId(int visitorID) {
         if (visitorID < 0) {
@@ -73,6 +91,11 @@ public class PassService {
         return passes;
     }
 
+    /**
+     * Gets a list of all Passes in the passRepository
+     * 
+     * @return - The fetched list of Passes
+     */
     @Transactional
 	public List<Pass> getAllPasses() {
 		List<Pass> passes = passRepository.findAll();

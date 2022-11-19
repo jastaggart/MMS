@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse321.mms.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,18 +93,18 @@ public class Loan
     return wasSet;
   }
 
-  public boolean setStartDate(Date aStartDate)
+  public boolean setStartDate(java.util.Date parsedStartDate)
   {
     boolean wasSet = false;
-    startDate = aStartDate;
+    startDate = parsedStartDate;
     wasSet = true;
     return wasSet;
   }
 
-  public boolean setEndDate(Date aEndDate)
+  public boolean setEndDate(java.util.Date parsedEndDate)
   {
     boolean wasSet = false;
-    endDate = aEndDate;
+    endDate = parsedEndDate;
     wasSet = true;
     return wasSet;
   }

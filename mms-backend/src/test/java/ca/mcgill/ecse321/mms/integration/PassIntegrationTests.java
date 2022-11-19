@@ -57,8 +57,6 @@ public class PassIntegrationTests {
 		assertNotNull(response);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		// assertEquals(parsedDate, response.getBody().getPassDate(), "Response has
-		// correct date");
 		assertEquals(1, response.getBody().getVisitorID(), "Response has correct visitorID");
 		assertTrue(response.getBody().getPassID() > 0, "Response has valid ID");
 
@@ -75,8 +73,6 @@ public class PassIntegrationTests {
 		assertNotNull(response);
 		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		// assertEquals(parsedDate, response.getBody().getPassDate(), "Response has
-		// correct date");
 		assertEquals(1, response.getBody().getVisitorID(), "Response has correct visitorID");
 		assertTrue(response.getBody().getPassID() == id, "Response has valid ID");
 	}

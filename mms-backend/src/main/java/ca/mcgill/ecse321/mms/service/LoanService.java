@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.mms.service;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.transaction.Transactional;
 
@@ -19,7 +20,9 @@ import ca.mcgill.ecse321.mms.repository.StaffMemberRepository;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 @Service
 public class LoanService {
@@ -64,6 +67,10 @@ public class LoanService {
             throw new MMSException(HttpStatus.NOT_FOUND, "No loans found.");
         }
 
+        if (loans.isEmpty()) {
+            throw new MMSException(HttpStatus.NOT_FOUND, "No loans found.");
+        }
+
         return loans;
 	}
 
@@ -76,10 +83,14 @@ public class LoanService {
     @Transactional
 	public List<Loan> getLoansByVisitorID(int visitorID) {
 		List<Loan> loans = loanRepository.findAllByLoanRequestorVisitorID(visitorID);
-
+        
 		if (loans == null) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "No loans made by visitor with visitorID " + visitorID + ".");
 		}
+
+        if (loans.isEmpty()) {
+            throw new MMSException(HttpStatus.NOT_FOUND, "No loans made by visitor with visitorID " + visitorID + ".");
+        }
 
 		return loans;
 	}
@@ -99,11 +110,11 @@ public class LoanService {
      * Creates a Loan using specific Loan data and saves it in the loanRepository
      * @param loan - Loan object to create and save in the loanRepository
      * @return - The created Loan
+     * @throws ParseException
      */
     @Transactional
-    public Loan createLoan(Loan loan, int loanRequestorID, int artworkID) {
+    public Loan createLoan(Loan loan, int loanRequestorID, int artworkID) throws ParseException {
         final int initialLoanFee = 10;
-
         loan.setLoanFee(initialLoanFee);
         loan.setIsApproved(false); // not approved yet
         loan.setLoanRequestor(visitorRepository.findVisitorByVisitorID(loanRequestorID));

@@ -33,25 +33,47 @@ public class PassController {
 	@Autowired
 	VisitorRepository visitorRepository;
 
+    /**
+     * Gets a list of all Passes and puts into the HTTP response
+     * 
+     * @return - The fetched list of Passes
+     */
     @GetMapping("/passes")
     public ResponseEntity<List<PassResponseDto>> getAllPasses() {
 		List<PassResponseDto> passes = convListToDto(passService.getAllPasses());
 		return new ResponseEntity<List<PassResponseDto>>(passes, HttpStatus.OK);
 	}
 
+    /**
+     * Gets a Pass by passID after HTTP request and puts into the HTTP response
+     * 
+     * @param id - passID of the pass to get
+     * @return - The fetched Pass
+     */
     @GetMapping("/pass/{id}")
     public ResponseEntity<PassResponseDto> getPassById(@PathVariable int id) {
 		PassResponseDto pass = new PassResponseDto(passService.getPassById(id));
 		return new ResponseEntity<PassResponseDto>(pass, HttpStatus.OK);
 	}
 
+    /**
+     * Gets a Pass by passID after HTTP request and puts into the HTTP response
+     * 
+     * @param id - passID of the Pass to get
+     * @return - The fetched Pass
+     */
     @GetMapping("/pass/visitor/{visitorID}") 
 	public ResponseEntity<List<PassResponseDto>> getPassesByVisitorId(@PathVariable int visitorID) {
 		List<PassResponseDto> passes = convListToDto(passService.getPassesByVisitorId(visitorID));
 		return new ResponseEntity<List<PassResponseDto>>(passes, HttpStatus.OK);
 	}
 
-
+    /**
+     * Creates a Pass using Dto data after HTTP request and puts it into HTTP response
+     * 
+     * @param passRequest - The PassRequestDto data
+     * @return - The created Pass as Dto
+     */
 	@PostMapping("/pass")
     public ResponseEntity<PassResponseDto> createPass(@Valid @RequestBody PassRequestDto passRequest) throws ParseException {
 			Visitor visitorRequestingPass = visitorRepository.findVisitorByVisitorID(passRequest.getVisitorID());		
@@ -60,6 +82,13 @@ public class PassController {
             return new ResponseEntity<PassResponseDto>(response, HttpStatus.CREATED);       
     }
 
+    /**
+     * Converts a list of Passes to a list of PassResponseDto 
+     * Note: This is a private helper method
+	 *
+     * @param passes - list of Passes
+     * @return - list of PassResponseDtos
+     */
 	private List<PassResponseDto> convListToDto(List<Pass> passes) {
         List<PassResponseDto> passResponses = new ArrayList<PassResponseDto>();
         for (Pass pass : passes) {
