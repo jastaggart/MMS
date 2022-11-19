@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.mms.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 import ca.mcgill.ecse321.mms.model.StaffMember;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
@@ -23,49 +21,66 @@ public class StaffMemberService {
     MMSRepository mmsRepository;
     
     @Transactional
-    public StaffMemberResponseDto findStaffMemberById(int id) {
+    public StaffMember getStaffMemberById(int id) {
     	StaffMember staffMember = staffMemberRepository.findStaffMemberByStaffMemberID(id);
     	if(staffMember == null) {
     		throw new MMSException(HttpStatus.NOT_FOUND, "No staff member with the id " + id + " was found.");
     	}
     	
-    	return new StaffMemberResponseDto(staffMember);
+    	return staffMember;
     }
     
     @Transactional
-    public StaffMemberResponseDto findStaffMemberByName(String name) {
+    public StaffMember getStaffMemberByName(String name) {
     	StaffMember staffMember = staffMemberRepository.findStaffMemberByUsername(name);
     	if(staffMember == null) {
     		throw new MMSException(HttpStatus.NOT_FOUND, "No staffmember with the name " +name + " was found.");
     	}
     	
-    	return new StaffMemberResponseDto(staffMember);
+    	return staffMember;
     }
     
     @Transactional
-    public StaffMemberResponseDto createStaffMember(StaffMember staffMember) {
-    	StaffMember currentStaffMember = staffMemberRepository.findStaffMemberByStaffMemberID(staffMember.getStaffMemberID());
+    public StaffMember createStaffMember(StaffMember staffMember) {
+    	StaffMember currentStaffMember =staffMemberRepository.findStaffMemberByStaffMemberID(staffMember.getStaffMemberID());
     	
     	if(currentStaffMember!=null) {
-
             throw new MMSException(HttpStatus.CONFLICT, "Staff member already exists.");
     	}
-    	staffMemberRepository.save(currentStaffMember);
-    	return new StaffMemberResponseDto(currentStaffMember);
+    	staffMember = staffMemberRepository.save(staffMember);
+    	staffMember.setMuseumManagementSystem(mmsRepository.findMMSByMuseumID(1));
+    	return staffMember;
     }
     
     @Transactional
-    public List<StaffMemberResponseDto> findAll(){
-    	List<StaffMember> staffMemberList = (List<StaffMember>) staffMemberRepository.findAll();
-    	List<StaffMemberResponseDto> staffMemberResponseDtoList = new ArrayList<StaffMemberResponseDto>();
-    	if(staffMemberList==null) {
+    public StaffMember deleteStaffMember(int staffMemberId) {
+    	StaffMember staffMember =staffMemberRepository.findStaffMemberByStaffMemberID(staffMemberId);
+    	
+    	if(staffMember==null) {
+    		throw new MMSException(HttpStatus.NOT_FOUND, "Staff member not found.");
+        }
+    	staffMemberRepository.delete(staffMember);
+    	return staffMember;
+    }
+    
+    @Transactional
+    public List<StaffMember> getAllStaffMembers(){
+    	List<StaffMember> staffMemberList = staffMemberRepository.findAll();
+    	if(staffMemberList.size()==0) {
             throw new MMSException(HttpStatus.NOT_FOUND, "No staff members found.");
     	}
-    	
-    	for(StaffMember staffMember: staffMemberList) {
-    		staffMemberResponseDtoList.add(new StaffMemberResponseDto(staffMember));
+    	return staffMemberList;
+    }
+    
+    @Transactional
+    public StaffMember modifyStaffMember(int staffMemberId, String username, String email, String password) {
+    	StaffMember staffMember = staffMemberRepository.findStaffMemberByStaffMemberID(staffMemberId);
+    	if(staffMember == null) {
+    		throw new MMSException(HttpStatus.NOT_FOUND, "No staffmember with the id " +staffMemberId + " was found.");
     	}
-    	
-    	return staffMemberResponseDtoList;
+    	staffMember.setUsername(username);
+    	staffMember.setEmail(email);
+    	staffMember.setPassword(password);
+    	return staffMember;
     }
 }

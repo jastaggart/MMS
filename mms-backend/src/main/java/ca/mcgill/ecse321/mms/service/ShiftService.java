@@ -59,7 +59,7 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
   if (shiftAssigneeID == 1) throw new MMSException(HttpStatus.BAD_REQUEST, "Cannot assign shift to the owner.");
   
   //If the employee cannot be found, staffMemberService will throw exception
-  staffMemberService.findStaffMemberById(shiftAssigneeID);
+  staffMemberService.getStaffMemberById(shiftAssigneeID);
 
   
   shift.setShiftAssigner((Owner) staffMemberRepository.findStaffMemberByStaffMemberID(shiftAssignerID));
@@ -102,7 +102,7 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
   public List<ShiftResponseDto> getShiftsByEmployeeID(int employeeID) {
     
     //Check if employee exists and if the id corresponds to an employee (not the owner)
-    staffMemberService.findStaffMemberById(employeeID);
+    staffMemberService.getStaffMemberById(employeeID);
     if (employeeID == 1) {
       throw new MMSException(HttpStatus.BAD_REQUEST, "No shift for the owner.");
     }
@@ -187,7 +187,7 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
   public ShiftResponseDto reassignShift(int shiftID, int employeeID) {
     
     //Check if employee exists and if the id corresponds to an employee (not the owner)
-    staffMemberService.findStaffMemberById(employeeID);
+    staffMemberService.getStaffMemberById(employeeID);
     if (employeeID == 1) {
       throw new MMSException(HttpStatus.BAD_REQUEST, "Cannot assign shift to the owner.");
     }
