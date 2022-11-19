@@ -135,8 +135,8 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
   public List<ShiftResponseDto> getShiftsByDate(String date) {
     
     //Check if there is at least one shift on this date
-    List<Shift> shifts = shiftRepository.findShiftByDate(date);
-    if (shifts == null) {
+    List<Shift> shifts = shiftRepository.findShiftByDate(Date.valueOf(date));
+    if (shifts == null || shifts.isEmpty()) {
         throw new MMSException(HttpStatus.NOT_FOUND, "No shift on date: " + date + ".");
     }
     
@@ -162,7 +162,7 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
     
     //Check if there is at least one shift
     List<Shift> shifts = shiftRepository.findAll();
-    if (shifts == null) {
+    if (shifts == null || shifts.isEmpty()) {
         throw new MMSException(HttpStatus.NOT_FOUND, "No shift to display.");
     }
 

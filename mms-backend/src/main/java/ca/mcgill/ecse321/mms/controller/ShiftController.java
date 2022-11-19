@@ -13,18 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import ca.mcgill.ecse321.mms.dto.ShiftRequestDto;
 import ca.mcgill.ecse321.mms.dto.ShiftResponseDto;
 import ca.mcgill.ecse321.mms.model.Shift;
+import ca.mcgill.ecse321.mms.service.LoanService;
 import ca.mcgill.ecse321.mms.service.ShiftService;
 
 @RestController
 public class ShiftController {
   @Autowired
   ShiftService shiftService;
+  
+  @Autowired
+  LoanService loanService;
 
   /**
    * Get all shifts after HTTP request and puts into a list of HTTP response
@@ -70,7 +72,7 @@ public class ShiftController {
    * @param date - date to get shifts from
    * @return - The fetched shifts as Dto
    */
-  @GetMapping(value={"/shift/date/{date}","/shift/employee/{date}/"}) 
+  @GetMapping(value={"/shift/date/{date}","/shift/date/{date}/"}) 
   public ResponseEntity<List<ShiftResponseDto>> getShiftsByDate(@PathVariable String date) {
     List<ShiftResponseDto> shiftsDto = shiftService.getShiftsByDate(date);
     return new ResponseEntity<List<ShiftResponseDto>>(shiftsDto, HttpStatus.OK);
@@ -84,8 +86,8 @@ public class ShiftController {
    * @param employeeID - id of the employee to reassign the shift to
    * @return - The modified shift as Dto
    */
-  @PutMapping(value={"/shift/reassign/{shiftID}","/shift/reassign/{shiftID}/"})
-  public ResponseEntity<ShiftResponseDto> reassignShift(@PathVariable int shiftID, int employeeID) {
+  @PutMapping(value={"/shift/reassign/{shiftID}/{employeeID}","/shift/reassign/{shiftID}/{employeeID}/"})
+  public ResponseEntity<ShiftResponseDto> reassignShift(@PathVariable int shiftID, @PathVariable int employeeID) {
     ShiftResponseDto shiftDto = shiftService.reassignShift(shiftID, employeeID);
       return new ResponseEntity<ShiftResponseDto>(shiftDto, HttpStatus.OK);
   }
@@ -112,7 +114,7 @@ public class ShiftController {
    * @param shiftRequest - The ShiftRequestDto data
    * @return - The created shift as Dto
    */
-  @PostMapping(value={"/shift","/shift/"})
+  @PostMapping({"/shift","/shift/"})
   public ResponseEntity<ShiftResponseDto> createShift(@Valid @RequestBody ShiftRequestDto shiftRequest) {
     Shift shift = shiftRequest.toModel();
     ShiftResponseDto shiftDto = shiftService.createShift(shift, shiftRequest.getShiftAssignerID(), shiftRequest.getShiftAssigneeID());

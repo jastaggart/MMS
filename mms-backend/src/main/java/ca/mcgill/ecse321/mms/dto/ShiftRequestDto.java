@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.mms.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,10 @@ public class ShiftRequestDto {
   @NotNull
   private String endHour;
 
-  @NotNull
-  @NotBlank
+  @Min(1)
   private int shiftAssignerID; 
 
-  @NotNull
-  @NotBlank
+  @Min(1)
   private int shiftAssigneeID;
 
   public String getDate() {
@@ -70,17 +69,12 @@ public class ShiftRequestDto {
   }
 
   public Shift toModel() {
-//    @Autowired
-//    StaffMemberRepository staffMemberRepository;
-    
     Shift shift = new Shift();
     shift.setDate(Date.valueOf(this.date));
     shift.setStartHour(Time.valueOf(this.startHour));
     shift.setEndHour(Time.valueOf(this.endHour));
-//    shift.setShiftAssigner((Owner) staffMemberRepository.findStaffMemberByStaffMemberID(this.shiftAssignerID));
-//    shift.setShiftAssignee((Employee) staffMemberRepository.findStaffMemberByStaffMemberID(this.shiftAssigneeID));
 
-    //assigning owner and employee to shift in service (cant be done here)
+    //assigning owner and employee to shift in service (cannot be done here)
     return shift;
   }
 }

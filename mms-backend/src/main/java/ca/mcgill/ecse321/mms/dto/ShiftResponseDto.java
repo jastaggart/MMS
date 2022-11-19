@@ -3,20 +3,21 @@ package ca.mcgill.ecse321.mms.dto;
 import ca.mcgill.ecse321.mms.model.Shift;
 
 public class ShiftResponseDto {
+  
   private int shiftID;
   private String date;
   private String startHour;
   private String endHour;
-  private StaffMemberResponseDto shiftAssigner;
-  private StaffMemberResponseDto shiftAssignee;
+  private int shiftAssignerID;
+  private int shiftAssigneeID;
 
   public ShiftResponseDto(Shift shift) {
     this.shiftID = shift.getShiftID();
     this.date = shift.getDate().toString();
     this.startHour = shift.getStartHour().toString();
     this.endHour = shift.getEndHour().toString();
-    this.shiftAssigner = new StaffMemberResponseDto(shift.getShiftAssigner());
-    this.shiftAssignee = new StaffMemberResponseDto(shift.getShiftAssignee());
+    this.shiftAssignerID = shift.getShiftAssigner().getStaffMemberID();
+    this.shiftAssigneeID = shift.getShiftAssignee().getStaffMemberID();
   }
 
   public int getShiftID() {
@@ -35,11 +36,11 @@ public class ShiftResponseDto {
     return this.endHour;
   }
 
-  public StaffMemberResponseDto getShiftAssigner() {
-    return this.shiftAssigner;
+  public int getShiftAssignerID() {
+    return this.shiftAssignerID;
   }
   
-  public StaffMemberResponseDto getShiftAssignee() {
-    return this.shiftAssignee;
+  public int getShiftAssigneeID() {
+    return this.shiftAssigneeID;
   }
 }

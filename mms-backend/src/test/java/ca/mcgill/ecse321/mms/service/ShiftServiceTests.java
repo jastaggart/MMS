@@ -82,8 +82,8 @@ public class ShiftServiceTests {
       assertEquals(date, returnedShiftDto.getDate());
       assertEquals(startHour, returnedShiftDto.getStartHour());
       assertEquals(endHour, returnedShiftDto.getEndHour());
-      assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssigner().getStaffMemberID());
-      assertEquals(shiftAssigneeID, returnedShiftDto.getShiftAssignee().getStaffMemberID());
+      assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssignerID());
+      assertEquals(shiftAssigneeID, returnedShiftDto.getShiftAssigneeID());
       verify(shiftRepository, times(1)).save(shift);
   }
   
@@ -115,8 +115,8 @@ public class ShiftServiceTests {
     assertEquals(defaultDate, returnedShiftDto.getDate());
     assertEquals(defaultStartHour, returnedShiftDto.getStartHour());
     assertEquals(defaultEndHour, returnedShiftDto.getEndHour());
-    assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssigner().getStaffMemberID());
-    assertEquals(shiftAssigneeID, returnedShiftDto.getShiftAssignee().getStaffMemberID());
+    assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssignerID());
+    assertEquals(shiftAssigneeID, returnedShiftDto.getShiftAssigneeID());
     verify(shiftRepository, times(1)).save(shift);
   }
   
@@ -250,8 +250,8 @@ public class ShiftServiceTests {
     assertEquals(date, returnedShiftDto.getDate());
     assertEquals(startHour, returnedShiftDto.getStartHour());
     assertEquals(endHour, returnedShiftDto.getEndHour());
-    assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssigner().getStaffMemberID());
-    assertEquals(shiftAssigneeID, returnedShiftDto.getShiftAssignee().getStaffMemberID());
+    assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssignerID());
+    assertEquals(shiftAssigneeID, returnedShiftDto.getShiftAssigneeID());
   }
   
   @Test
@@ -432,7 +432,7 @@ public class ShiftServiceTests {
       shiftsDto.add(new ShiftResponseDto(shift));
     }
 
-    when(shiftRepository.findShiftByDate(date)).thenAnswer((InvocationOnMock invocation) -> shifts);
+    when(shiftRepository.findShiftByDate(Date.valueOf(date))).thenAnswer((InvocationOnMock invocation) -> shifts);
     
     List<ShiftResponseDto> returnedShiftsDto = shiftService.getShiftsByDate(date);
     
@@ -444,7 +444,7 @@ public class ShiftServiceTests {
   public void testGetShiftsByDateMissingShift() {   //No shift on the given date
     final String emptyDate = "2022-01-01";
     
-    when(shiftRepository.findShiftByDate(emptyDate)).thenAnswer((InvocationOnMock invocation) -> null);
+    when(shiftRepository.findShiftByDate(Date.valueOf(emptyDate))).thenAnswer((InvocationOnMock invocation) -> null);
     
     MMSException exception = assertThrows(MMSException.class, () -> shiftService.getShiftsByDate(emptyDate));
 
@@ -552,8 +552,8 @@ public class ShiftServiceTests {
     assertEquals(date, returnedShiftDto.getDate());
     assertEquals(startHour, returnedShiftDto.getStartHour());
     assertEquals(endHour, returnedShiftDto.getEndHour());
-    assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssigner().getStaffMemberID());
-    assertEquals(newShiftAssigneeID, returnedShiftDto.getShiftAssignee().getStaffMemberID());
+    assertEquals(shiftAssignerID, returnedShiftDto.getShiftAssignerID());
+    assertEquals(newShiftAssigneeID, returnedShiftDto.getShiftAssigneeID());
       
   }
   
