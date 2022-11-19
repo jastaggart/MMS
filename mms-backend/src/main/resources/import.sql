@@ -11,6 +11,7 @@ On CONFLICT(roomid) DO NOTHING;
 insert into visitor(visitorid, email, password, username, museum_management_system_museumid) values (1, 'theo@email.com', 'soccer123', 'theosoccer', 1)
 On CONFLICT(visitorid) DO NOTHING;
 
-
+insert into staff_member(employee_type, staff_memberid, email, password, username, museum_management_system_museumid) values ('Employee', 2, 'Bob@gmail.com', 'pAsSwOrD', 'Bob', 1)
+On CONFLICT(staff_memberid) DO NOTHING;
 
 
