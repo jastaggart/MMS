@@ -19,14 +19,14 @@ The goal of this project is to design an application for the museum of a small t
 | Minji Chang| Software Engineering |   U2 | Software Developer | [mmmccccc](https://github.com/mmmccccc) |
 
 # Hours Spent
-|    Name               | Deliverable 1   | Deliverable 2   | Deliverable 3   | Deliverable 4   |
-| -------------         | :------------------------:| :-------------------: | :--------------------: | :---------------------:| 
-| Chrisovalantis Vatos  | 12                   |    35                  |                      |                      |
-| Sadek Mahmood         |    10                  |     38                 |                      |                      |
-| Jasmine Taggart       |     10                 |     40                 |                      |                      |
-| Sarah Zhang           | 11                   |      33              |                      |                      |
-| Jean Kaznji          | 11                     |                      |                      |                      |
-| Minji Chang           | 12                   |    30                  |                      |                      |
+|    Name               | Deliverable 1   | Deliverable 2   | Deliverable 3   
+| -------------         | :------------------------:| :-------------------: | :--------------------: | 
+| Chrisovalantis Vatos  | 12                   |    35                  |                      |                      
+| Sadek Mahmood         |    10                  |     38                 |                      |                      
+| Jasmine Taggart       |     10                 |     40                 |                      |                      
+| Sarah Zhang           | 11                   |      33              |                      |                      
+| Jean Kaznji          | 11                     |                      |                      |                     
+| Minji Chang           | 12                   |    30                  |                      |                    
 
 
 # Project Reports
