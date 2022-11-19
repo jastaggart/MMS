@@ -101,7 +101,7 @@ public class ShiftController {
    * @param endHour - the new end hour value
    * @return - The modified shift as Dto
    */
-  @PutMapping(value={"/shift/modify/{shiftID}","/shift/modify/{shiftID}/"})
+  @PutMapping(value={"/shift/modify/{shiftID}","/shift/modify/{shiftID}/{date}/{startHour}/{endHour}"})
   public ResponseEntity<ShiftResponseDto> modifyShift(@PathVariable int shiftID, @PathVariable String date, @PathVariable String startHour, @PathVariable String endHour) {
     ShiftResponseDto shiftDto = shiftService.modifyShift(shiftID, date, startHour, endHour);
     return new ResponseEntity<ShiftResponseDto>(shiftDto, HttpStatus.OK);
