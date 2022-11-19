@@ -12,7 +12,6 @@ import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.model.DisplayStatus;
 import ca.mcgill.ecse321.mms.model.Room;
 import ca.mcgill.ecse321.mms.model.DisplayRoom;
-import ca.mcgill.ecse321.mms.model.Storage;
 import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.repository.RoomRepository;
@@ -186,10 +185,6 @@ public class ArtworkService {
         // Remove artwork to delete from its room
         Room room = artwork.getRoom();
         room.removeArtwork(artwork);
-
-        // for (Loan loan: loanRepository.findAllByArtworkArtworkID(artworkID)) {
-        //     loan.setArtwork(artworkRepository.findArtworkByArtworkID(1));
-        // }
 
         artworkRepository.deleteArtworkByArtworkID(artworkID);
 

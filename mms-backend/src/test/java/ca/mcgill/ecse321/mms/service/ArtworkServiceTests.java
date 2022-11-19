@@ -364,7 +364,6 @@ public class ArtworkServiceTests {
 		starryNight.setRoom(storage);
 
 		when(artworkRepository.findArtworkByArtworkID(id)).thenAnswer((InvocationOnMock invocation) -> starryNight);
-		//when(loanRepository.findAllByArtworkArtworkID(id)).thenAnswer((InvocationOnMock invocation) -> new ArrayList<Loan>());
 
 		Artwork artwork = artworkService.deleteArtworkByArtworkID(id);
 		
