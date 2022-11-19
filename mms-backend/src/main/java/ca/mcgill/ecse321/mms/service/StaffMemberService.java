@@ -42,7 +42,7 @@ public class StaffMemberService {
     
     @Transactional
     public StaffMember createStaffMember(StaffMember staffMember) {
-    	StaffMember currentStaffMember =staffMemberRepository.findStaffMemberByStaffMemberID(staffMember.getStaffMemberID());
+    	StaffMember currentStaffMember =staffMemberRepository.findStaffMemberByUsername(staffMember.getUsername());
     	
     	if(currentStaffMember!=null) {
             throw new MMSException(HttpStatus.CONFLICT, "Staff member already exists.");
@@ -55,7 +55,6 @@ public class StaffMemberService {
     @Transactional
     public StaffMember deleteStaffMember(int staffMemberId) {
     	StaffMember staffMember =staffMemberRepository.findStaffMemberByStaffMemberID(staffMemberId);
-    	
     	if(staffMember==null) {
     		throw new MMSException(HttpStatus.NOT_FOUND, "Staff member not found.");
         }

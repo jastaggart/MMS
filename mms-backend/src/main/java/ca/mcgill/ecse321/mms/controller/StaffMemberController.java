@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.mms.dto.StaffMemberRequestDto;
 import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
 import ca.mcgill.ecse321.mms.dto.VisitorResponseDto;
+import ca.mcgill.ecse321.mms.exception.MMSException;
 import ca.mcgill.ecse321.mms.model.StaffMember;
+import ca.mcgill.ecse321.mms.model.Visitor;
 import ca.mcgill.ecse321.mms.service.StaffMemberService;
+import ca.mcgill.ecse321.mms.service.VisitorService;
 
 @RestController
 public class StaffMemberController {
@@ -72,14 +75,25 @@ public class StaffMemberController {
 	 * @return - The created staffMember as a response Dto
 	 */
 	@PostMapping("/staffMember")
-	public ResponseEntity<StaffMemberResponseDto> createStaffMember(
-			@Valid @RequestBody StaffMemberRequestDto staffMemberRequestDtoRequest) {
+	public ResponseEntity<StaffMemberResponseDto> createStaffMember(@Valid @RequestBody StaffMemberRequestDto staffMemberRequestDtoRequest) {
 		StaffMember staffMember = staffMemberRequestDtoRequest.toModel();
 		StaffMember createdStaffMember = staffMemberService.createStaffMember(staffMember);
 		StaffMemberResponseDto response = new StaffMemberResponseDto(createdStaffMember);
 		return new ResponseEntity<StaffMemberResponseDto>(response, HttpStatus.CREATED);
 	}
 
+	/**
+	 * Gets a staff member by staffMemberID then delete them from the persistence
+	 * layer
+	 * 
+	 * @param id - staffMemberID of the StaffMember
+	 * @return - The deleted staff member
+	 */
+	@DeleteMapping("/staffMember/delete/{id}")
+    public ResponseEntity<StaffMemberResponseDto> deleteStaffMember(@PathVariable int id) {
+        StaffMember deletedStaffMember = staffMemberService.deleteStaffMember(id); 	
+        return new ResponseEntity<StaffMemberResponseDto>(new StaffMemberResponseDto(deletedStaffMember), HttpStatus.OK);
+    }
 	/**
 	 * modify a staff member data in the persistence layer
 	 * 
@@ -89,23 +103,12 @@ public class StaffMemberController {
 	 * @param password      - The password of the employee (modified or new)
 	 * @return - The modified version of staffMember as a response Dto
 	 */
-	@PutMapping("/staffMember/modify/{staffMemberID}")
-	public ResponseEntity<StaffMemberResponseDto> modifyStaffMember(@PathVariable int staffMemberId, String username,String email, String password) {
+	@PutMapping("/staffMember/modify/{id}")
+	public ResponseEntity<StaffMemberResponseDto> modifyStaffMember(@PathVariable int staffMemberId, String username,
+			String email, String password) {
 		StaffMember staffMember = staffMemberService.modifyStaffMember(staffMemberId, username, email, password);
 		StaffMemberResponseDto response = new StaffMemberResponseDto(staffMember);
 		return new ResponseEntity<StaffMemberResponseDto>(response, HttpStatus.OK);
-	}
-
-	/**
-	 * Gets a staff member by staffMemberID then delete them from the persistence layer
-	 * 
-	 * @param id - staffMemberID of the StaffMember
-	 * @return - The deleted staff member
-	 */
-	@DeleteMapping("/staffMember/delete/{id}")
-	public ResponseEntity<StaffMemberResponseDto> deleteStaffMember(@PathVariable int staffMemberId) {
-		StaffMember deletedStaffMember = staffMemberService.deleteStaffMember(staffMemberId);
-		return new ResponseEntity<StaffMemberResponseDto>(new StaffMemberResponseDto(deletedStaffMember), HttpStatus.OK);
 	}
 
 	private List<StaffMemberResponseDto> convListToDto(List<StaffMember> staffMembers) {
