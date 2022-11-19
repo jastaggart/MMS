@@ -24,7 +24,7 @@ The goal of this project is to design an application for the museum of a small t
 | Chrisovalantis Vatos  | 12                   |    35                  |                      |                      |
 | Sadek Mahmood         |    10                  |     38                 |                      |                      |
 | Jasmine Taggart       |     10                 |     40                 |                      |                      |
-| Sarah Zhang           | 11                   |                      |                      |                      |
+| Sarah Zhang           | 11                   |      33              |                      |                      |
 | Jean Kaznji          | 11                     |                      |                      |                      |
 | Minji Chang           | 12                   |    30                  |                      |                      |
 
