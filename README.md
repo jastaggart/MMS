@@ -25,7 +25,7 @@ The goal of this project is to design an application for the museum of a small t
 | Sadek Mahmood         |    10                  |     38                 |                      |                      
 | Jasmine Taggart       |     10                 |     40                 |                      |                      
 | Sarah Zhang           | 11                   |      33              |                      |                      
-| Jean Kaznji          | 11                     |                      |                      |                     
+| Jean Kaznji          | 11                     |  34                    |                      |                     
 | Minji Chang           | 12                   |    30                  |                      |                    
 
 
