@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.mms.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.mms.exception.MMSException;
-import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.model.Visitor;
 import ca.mcgill.ecse321.mms.repository.LoanRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
@@ -127,115 +125,7 @@ public class VisitorService {
         if (visitor == null) {
             throw new MMSException(HttpStatus.NOT_FOUND, "Visitor account not found.");  
         }
-        if ((loanRepo != null) && (getActiveVisitorLoans(visitor) != null)) {
-            throw new MMSException(HttpStatus.NOT_FOUND, "Cannot delete an account with active loans."); 
-        }
         visitorRepo.delete(visitor);
-        return visitor;
-    }
-
-    /**
-     * Gets a list of all the loans associated with the specified Visitor
-     * @param visitor - Visitor to find associated loans for
-     * @return - List of all of the Visitor's loans
-     */
-    public List<Loan> getVisitorLoans(Visitor visitor) {
-        List<Loan> visitorLoans = loanRepo.findAllByLoanRequestorVisitorID(visitor.getVisitorID());
-        // Iterable<Loan> loans = loanRepo.findAll();
-
-        // for(Loan loan : loans) {
-        //     if (loan.getLoanRequestor() == visitor) {
-        //         visitorLoans.add(loan);
-        //     }
-        // }
-        if (visitorLoans.isEmpty()) {
-            throw new MMSException(HttpStatus.NOT_FOUND, "No loans found for this visitor.");  
-        }
-        return visitorLoans;
-    }
-
-    /**
-     * Gets a list of all currently active loans associated with the specified Visitor
-     * @param visitor - Visitor to find active loans for
-     * @return - List of Visitor's active loans
-     */
-    public List<Loan> getActiveVisitorLoans(Visitor visitor) {
-        List<Loan> activeVisitorLoans = new ArrayList<Loan>();
-        List<Loan> visitorLoans = getVisitorLoans(visitor);
-        Date currentDate = new Date();
-
-        if (visitorLoans.isEmpty()) {
-            throw new MMSException(HttpStatus.NOT_FOUND, "No loans found for this visitor.");  
-        }
-
-        for(Loan loan : visitorLoans) {
-            if (loan.getIsApproved() && (currentDate.compareTo(loan.getEndDate()) != 1) && (currentDate.compareTo(loan.getStartDate()) != -1)) {
-                activeVisitorLoans.add(loan);
-            }
-        }
-
-        if (activeVisitorLoans.isEmpty()) {
-            throw new MMSException(HttpStatus.NOT_FOUND, "No active loans found for this visitor.");  
-        }
-        return activeVisitorLoans;
-    }
-
-    /**
-     * Replaces the Visitor's current username with the new username entered
-     * @param visitor - Visitor to edit
-     * @param newUsername - Username to replace Visitor's current username with
-     * @return - The edited Visitor 
-     */
-    @Transactional
-    public Visitor editVisitorUsername (Visitor visitor, String newUsername) {
-        if (newUsername.isEmpty()) {
-            throw new MMSException(HttpStatus.BAD_REQUEST, "Username cannot be blank");
-        }
-
-        Visitor existingVisitor = visitorRepo.findVisitorByUsername(newUsername);
-        if (existingVisitor != null) {
-            throw new MMSException(HttpStatus.BAD_REQUEST, "This username is not available.");  
-        }
-        visitor.setUsername(newUsername);
-        visitorRepo.save(visitor);
-        return visitor;
-    }
-
-    /**
-     * Replaces the Visitor's current email with the specified email
-     * @param visitor - Visitor to edit
-     * @param email - Email address to replace Visitor's current email address with
-     * @return - The edited Visitor
-     */
-    @Transactional
-    public Visitor editVisitorEmail (Visitor visitor, String email) {
-        if (!isValidEmail(email) || email.isEmpty()) {
-            throw new MMSException(HttpStatus.BAD_REQUEST, "Invalid email.");
-        }
-        Visitor existingVisitor = visitorRepo.findVisitorByEmail(email);
-        if (existingVisitor != null) {
-            throw new MMSException(HttpStatus.BAD_REQUEST, "A visitor with this email is already registered.");  
-        }
-        visitor.setEmail(email);
-        visitorRepo.save(visitor);
-        return visitor;
-    }
-
-    /**
-     * Replaces the Visitor's current password with the password specified once Visitor is authenticated
-     * @param visitor - Visitor to edit
-     * @param currentPassword - Visitor's current password
-     * @param newPassword - Password to replace Visitor's current password with
-     * @return
-     */
-    @Transactional
-    public Visitor editVisitorPassword (Visitor visitor, String currentPassword, String newPassword) {
-        authenticateVisitor(visitor.getUsername(), currentPassword);
-        if (newPassword.isEmpty()) {
-            throw new MMSException(HttpStatus.BAD_REQUEST, "Password cannot be blank.");
-        }
-        visitor.setPassword(newPassword);
-        visitorRepo.save(visitor);
         return visitor;
     }
 
@@ -246,6 +136,7 @@ public class VisitorService {
      * @param password - Password for the Visitor with the specified username
      * @return - The Visitor with specified username and password 
      */
+    //to be used for logging in
     public Visitor authenticateVisitor (String username, String password) {
         if (username.isEmpty() || (visitorRepo.findVisitorByUsername(username) == null)) {
             throw new MMSException(HttpStatus.BAD_REQUEST, "Invalid username input.");

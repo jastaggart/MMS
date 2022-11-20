@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.mms.dto.VisitorRequestDto;
 import ca.mcgill.ecse321.mms.dto.VisitorResponseDto;
@@ -24,6 +22,11 @@ public class VisitorController {
     @Autowired
     VisitorService visitorService;
 
+    /**
+     * Creates a visitor using Dto data after HTTP request and puts it into HTTP response
+     * @param request - The VisitorRequestDto data
+     * @return - the VisitorResponseDto for the created visitor
+     */
     @PostMapping ("/visitor") 
     public ResponseEntity<VisitorResponseDto> createVisitor(@Valid @RequestBody VisitorRequestDto request) {
         Visitor visitorToCreate = request.toModel();
@@ -32,24 +35,43 @@ public class VisitorController {
         return new ResponseEntity<VisitorResponseDto>(response, HttpStatus.CREATED);
     }
     
+    /**
+     * Gets a visitor by its id after HTTP request and puts it into HTTP response
+     * @param id - Id of Visitor to be retrieved
+     * @return - the VisitorResponseDto for the fetched visitor
+     */
     @GetMapping("/visitor/id/{id}")
     public ResponseEntity<VisitorResponseDto> getVisitorById(@PathVariable int id) {
         Visitor visitor = visitorService.getVisitorById(id);
 		return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(visitor), HttpStatus.OK);
     }
 
+    /**
+     * Gets a visitor by its username after HTTP request and puts it into HTTP response
+     * @param username - Username of Visitor to be retrieved
+     * @return - the VisitorResponseDto for the fetched visitor
+     */
     @GetMapping("/visitor/username/{username}")
     public ResponseEntity<VisitorResponseDto> getVisitorByUsername(@PathVariable String username) {
         Visitor visitor = visitorService.getVisitorByUsername(username);
 		return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(visitor), HttpStatus.OK);
     }
 
+    /**
+     * Gets a visitor by its email after HTTP request and puts it into HTTP response
+     * @param email - Email of Visitor to be retrieved
+     * @return - the VisitorResponseDto for the fetched visitor
+     */
     @GetMapping("/visitor/email/{email}")
     public ResponseEntity<VisitorResponseDto> getVisitorByEmail(@PathVariable String email ) {
         Visitor visitor = visitorService.getVisitorByEmail(email);
 		return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(visitor), HttpStatus.OK);
     }
 
+    /**
+     * Gets all existing visitors after HTTP request and puts it into HTTP response
+     * @return - The list of visitors as VisitorResponseDtos
+     */
     @GetMapping("/visitors")
     public List<ResponseEntity<VisitorResponseDto>> getAllVisitors() {
         List<Visitor> visitors = visitorService.getAllVisitors();
@@ -60,31 +82,15 @@ public class VisitorController {
 		return visitorsDTO;
     }
 
+    /**
+     * Deletes an existing visitor by its id after HTTP request and puts it into HTTP response
+     * @param id - Id of the visitor to delete
+     * @return - The deleted visitor as a VisitorResponseDto
+     */
     @DeleteMapping("/visitor/delete/{id}")
     public ResponseEntity<VisitorResponseDto> deleteVisitor(@PathVariable int id) {
         Visitor deletedVisitor = visitorService.deleteVisitorById(id);
 		return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(deletedVisitor), HttpStatus.OK);
-    }
-
-    @PutMapping ("/visitor/edit-username/{username}")
-    public ResponseEntity<VisitorResponseDto> editUsername(@Valid @RequestBody VisitorRequestDto request, @PathVariable String username) {
-        Visitor visitor = request.toModel();
-        Visitor editedVisitor = visitorService.editVisitorUsername(visitor, username);
-        return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(editedVisitor), HttpStatus.OK);
-    }
-
-    @PutMapping ("/visitor/edit-password")
-    public ResponseEntity<VisitorResponseDto> editPassword(@Valid @RequestBody VisitorRequestDto request, @RequestParam String oldPassword, @RequestParam String newPassword) {
-        Visitor visitor = request.toModel();
-        Visitor editedVisitor = visitorService.editVisitorPassword(visitor, oldPassword, newPassword);
-        return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(editedVisitor), HttpStatus.OK);
-    }
-
-    @PutMapping ("/visitor/edit-email/{email}")
-    public ResponseEntity<VisitorResponseDto> editEmail(@Valid @RequestBody VisitorRequestDto request, @PathVariable String email) {
-        Visitor visitor = request.toModel();
-        Visitor editedVisitor = visitorService.editVisitorEmail(visitor, email);
-        return new ResponseEntity<VisitorResponseDto>(new VisitorResponseDto(editedVisitor), HttpStatus.OK);
     }
     
 }

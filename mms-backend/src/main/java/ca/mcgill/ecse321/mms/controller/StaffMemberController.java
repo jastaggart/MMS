@@ -18,13 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.mms.dto.StaffMemberRequestDto;
 import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
-import ca.mcgill.ecse321.mms.dto.VisitorRequestDto;
-import ca.mcgill.ecse321.mms.dto.VisitorResponseDto;
-import ca.mcgill.ecse321.mms.exception.MMSException;
 import ca.mcgill.ecse321.mms.model.StaffMember;
-import ca.mcgill.ecse321.mms.model.Visitor;
 import ca.mcgill.ecse321.mms.service.StaffMemberService;
-import ca.mcgill.ecse321.mms.service.VisitorService;
 
 @RestController
 public class StaffMemberController {

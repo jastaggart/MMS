@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import ca.mcgill.ecse321.mms.model.Visitor;
 import ca.mcgill.ecse321.mms.repository.VisitorRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -67,11 +65,7 @@ public class VisitorIntegrationTests {
 
     @Test
     public void testCreateVisitorByTakenEmail() {
-        // Visitor visitor = new Visitor();
-        // visitor.setUsername("bugsB");
-        // visitor.setEmail("whatsupdoc@mail.com");
-        // visitor.setPassword("carrots");
-        // visitorRepo.save(visitor);
+        
         client.postForEntity("/visitor",
                 new VisitorDto("bugsB", "carrots", "whatsupdoc@mail.com"), VisitorDto.class);
         
@@ -157,33 +151,6 @@ public class VisitorIntegrationTests {
         assertEquals("Visitor account with this email was not found.", response.getBody());
     }
 
-    @Test
-    public void testEditUsername() {
-        ResponseEntity<VisitorDto> visitor = client.postForEntity("/visitor",
-                new VisitorDto("bugsB", "carrots", "carrots1@mail.com"), VisitorDto.class);
-        ResponseEntity<VisitorDto> response = client.exchange("/visitor/edit-username/" + "bugsbunny", HttpMethod.PUT, visitor, VisitorDto.class);
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("bugsbunny", response.getBody().getUsername());
-        assertEquals("carrots1@mail.com", response.getBody().getEmail());
-        assertEquals(visitor.getBody().getVisitorId(), response.getBody().getVisitorId());
-    }
-
-    @Test
-    public void testEditUsernameWithTakenUsername() {
-        ResponseEntity<VisitorDto> visitorToEdit = client.postForEntity("/visitor",
-                new VisitorDto("bugsB", "carrots", "carrots1@mail.com"), VisitorDto.class);
-
-        client.postForEntity("/visitor",
-                new VisitorDto("bugsbunny", "carrots", "carrots@mail.com"), VisitorDto.class);
-        
-        ResponseEntity<String> response = client.exchange("/visitor/edit-username/" + "bugsbunny", HttpMethod.PUT, visitorToEdit, String.class);
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("This username is not available.", response.getBody());
-    }
 }
 
 class VisitorDto {
