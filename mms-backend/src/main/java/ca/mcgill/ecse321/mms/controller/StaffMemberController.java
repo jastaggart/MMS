@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.mms.dto.StaffMemberRequestDto;
 import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
+import ca.mcgill.ecse321.mms.dto.VisitorRequestDto;
 import ca.mcgill.ecse321.mms.dto.VisitorResponseDto;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 import ca.mcgill.ecse321.mms.model.StaffMember;
@@ -104,10 +105,10 @@ public class StaffMemberController {
 	 * @return - The modified version of staffMember as a response Dto
 	 */
 	@PutMapping("/staffMember/modify/{id}")
-	public ResponseEntity<StaffMemberResponseDto> modifyStaffMember(@PathVariable int staffMemberId, String username,
-			String email, String password) {
-		StaffMember staffMember = staffMemberService.modifyStaffMember(staffMemberId, username, email, password);
-		StaffMemberResponseDto response = new StaffMemberResponseDto(staffMember);
+	public ResponseEntity<StaffMemberResponseDto> modifyStaffMember(@Valid @RequestBody StaffMemberRequestDto request, @PathVariable int id){
+		StaffMember staffMember = request.toModel();
+		StaffMember modifiedStaffMember = staffMemberService.modifyStaffMember(id, staffMember.getUsername(),staffMember.getEmail(), staffMember.getPassword());
+		StaffMemberResponseDto response = new StaffMemberResponseDto(modifiedStaffMember);
 		return new ResponseEntity<StaffMemberResponseDto>(response, HttpStatus.OK);
 	}
 
