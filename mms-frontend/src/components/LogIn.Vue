@@ -96,7 +96,7 @@ export default {
               this.password = "";
               this.userType = "";
               this.failiureMessage = "";
-              // this.$router.push('VisitorArtworks');
+              this.$router.push('ManageArtworks');
               window.location.reload();
             }
           })
@@ -124,7 +124,7 @@ export default {
               this.password = "";
               this.userType = "";
               this.failiureMessage = "";
-              // this.$router.push('VisitorArtworks');
+              this.$router.push('ManageArtworks');
               window.location.reload();
             }
           })

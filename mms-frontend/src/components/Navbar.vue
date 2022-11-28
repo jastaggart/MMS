@@ -76,8 +76,13 @@
                 <a class="nav-link">Manage Employees</a>
             </li>
         </router-link>
-    
-         
+
+        <div v-if="userType == 'employee' || userType == 'owner' || userType == 'visitor'" class="navigation">
+          <a  @click.preventDefault="logout()" class="button" href="">
+            <img src="https://www.citypng.com/public/uploads/preview/png-login-logout-white-icon-11641484341czkekai5wp.png">
+            <div class="logout">LOGOUT</div>
+          </a>
+        </div>
 
       </ul>
     </div>
@@ -96,6 +101,19 @@ export default {
       visitorID: sessionStorage.getItem('visitorID'),
       employeeID: sessionStorage.getItem('employeeID'),
     };
+  },
+
+  methods: {
+    logout: function() {
+      window.sessionStorage.removeItem('userType');
+      window.sessionStorage.removeItem('username');
+      window.sessionStorage.removeItem('email');
+      window.sessionStorage.removeItem('password');
+      window.sessionStorage.removeItem('visitorID');
+      window.sessionStorage.removeItem('employeeID');
+      this.$router.push('/');
+      window.location.reload();
+    }
   }
 }
 </script>
@@ -109,4 +127,59 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+
+.navigation {
+  position: absolute;
+  right: 0;
+  background-color: black;
+  margin-right: 11px;
+  border-radius: 10px;
+}
+
+img {
+  width: 25px;
+  border-radius: 50px;
+  float: left;
+}
+
+.logout {
+  font-size: .8em;
+  font-family: 'Oswald', sans-serif;
+	position: relative;
+  right: -18px;
+  bottom: -4px;
+  overflow: hidden;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity .45s;
+  -webkit-transition: opacity .35s;
+  
+}
+
+.button {
+	text-decoration: none;
+	float: right;
+  padding: 4px;
+  margin: 4px;
+  color: white;
+  width: 26px;
+  background-color: black;
+  transition: width .35s;
+  -webkit-transition: width .35s;
+  overflow: hidden
+}
+
+.button:hover {
+  width: 120px;
+}
+
+a:hover .logout{
+  opacity: .9;
+}
+
+a {
+  text-decoration: none;
+}
+
 </style>
