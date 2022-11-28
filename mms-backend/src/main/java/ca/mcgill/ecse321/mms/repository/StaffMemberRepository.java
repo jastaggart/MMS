@@ -9,5 +9,6 @@ import ca.mcgill.ecse321.mms.model.StaffMember;
 public interface StaffMemberRepository extends CrudRepository<StaffMember, String> {
 	public StaffMember findStaffMemberByStaffMemberID(int id);
 	public StaffMember findStaffMemberByUsername(String name);
+	public StaffMember findStaffMemberByEmail(String email);
 	public List<StaffMember> findAll();
 }

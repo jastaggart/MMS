@@ -82,4 +82,12 @@ public class StaffMemberService {
     	staffMember.setPassword(password);
     	return staffMember;
     }
+
+    public StaffMember getStaffMemberByEmail(String email) {
+        StaffMember staffMember = staffMemberRepository.findStaffMemberByEmail(email);
+        if (staffMember == null) {
+            throw new MMSException(HttpStatus.NOT_FOUND, "Staff member account with this email was not found.");  
+        }
+        return staffMember;
+    }
 }

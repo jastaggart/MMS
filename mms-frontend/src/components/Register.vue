@@ -44,8 +44,7 @@ import axios from "axios";
 const config = require("../../config");
 
 var frontendUrl = "http://" + config.dev.host + ":" + config.dev.port;
-var backendUrl =
-  "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
+var backendUrl ="http://" + config.dev.backendHost + ":" + config.dev.backendPort;
 
 var AXIOS = axios.create({
   baseURL: backendUrl,
@@ -60,7 +59,6 @@ export default {
       username: "",
       email: "",
       password: "",
-      successfulMessage: "",
       failiureMessage: ""
     };
   },

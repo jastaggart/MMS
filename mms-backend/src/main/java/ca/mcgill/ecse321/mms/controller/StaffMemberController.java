@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,9 @@ import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
 import ca.mcgill.ecse321.mms.model.StaffMember;
 import ca.mcgill.ecse321.mms.service.StaffMemberService;
 
+
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:8087")
 public class StaffMemberController {
 	@Autowired
 	StaffMemberService staffMemberService;
@@ -60,6 +63,12 @@ public class StaffMemberController {
 	@GetMapping("/staffMember/staffMemberName/{name}")
 	public ResponseEntity<StaffMemberResponseDto> getStaffMemberByName(@PathVariable String name) {
 		StaffMemberResponseDto staffMember = new StaffMemberResponseDto(staffMemberService.getStaffMemberByName(name));
+		return new ResponseEntity<StaffMemberResponseDto>(staffMember, HttpStatus.OK);
+	}
+
+	@GetMapping("/staffMember/staffMemberEmail/{email}")
+	public ResponseEntity<StaffMemberResponseDto> getStaffMemberByEmail(@PathVariable String email) {
+		StaffMemberResponseDto staffMember = new StaffMemberResponseDto(staffMemberService.getStaffMemberByEmail(email));
 		return new ResponseEntity<StaffMemberResponseDto>(staffMember, HttpStatus.OK);
 	}
 

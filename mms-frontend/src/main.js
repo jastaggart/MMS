@@ -10,13 +10,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
-var storeSessionInfo = {
-  username:null,
-  email: null,
-  password: null,
-  userType: null,
-  token: null
-}
 
 /* eslint-disable no-new */
 new Vue({

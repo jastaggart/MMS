@@ -20,6 +20,10 @@
         <option value="employee">Employee</option>
       </select>
 
+      <p v-if="this.failiureMessage" style="color: red">
+        {{ this.failiureMessage }}
+      </p>
+
       <div class="submit">
         <button>Log In</button>
       </div>
@@ -28,18 +32,109 @@
 </template>
 
 <script>
+import axios from "axios";
+const config = require("../../config");
+var frontendUrl = "http://" + config.dev.host + ":" + config.dev.port;
+var backendUrl =
+  "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { "Access-Control-Allow-Origin": frontendUrl }
+});
+
 export default {
+  name: "Login",
   data() {
     return {
       email: "",
       password: "",
-      userType: ""
+      userType: "",
+      failiureMessage: ""
     };
   },
 
   methods: {
     handleSubmit() {
-      // call axios methods for get for owner, employee and visitor
+      if (this.userType == "visitor") {
+        AXIOS.get("/visitor/email/" + this.email, {})
+          .then(response => {
+            console.log(response);
+            if (response.data.password != this.password) {
+              this.failiureMessage = "Invalid Password for " + this.email;
+            } else {
+              window.sessionStorage.setItem('userType', 'visitor');
+              window.sessionStorage.setItem('password', this.password);
+              window.sessionStorage.setItem('email', this.email);
+              window.sessionStorage.setItem('visitorID', response.data.visitorId);
+              this.email = "";
+              this.password = "";
+              this.userType = "";
+              this.failiureMessage = "";
+              this.$router.push('VisitorArtworks');
+              window.location.reload();
+            }
+          })
+          .catch(e => {
+            if (e.response.status == 404) {
+              this.failiureMessage = e.response.data;
+            }
+          });
+      } 
+
+      if (this.userType == "employee") {
+        AXIOS.get("/staffMember/staffMemberEmail/" + this.email, {})
+          .then(response => {
+            console.log(response);
+            if (response.data.password != this.password) {
+              this.failiureMessage = "Invalid Password for " + this.email;
+            } else {
+              window.sessionStorage.setItem('userType', 'employee');
+              window.sessionStorage.setItem('password', this.password);
+              window.sessionStorage.setItem('email', this.email);
+              window.sessionStorage.setItem('employeeID', response.data.staffMemberID);
+              this.email = "";
+              this.password = "";
+              this.userType = "";
+              this.failiureMessage = "";
+              // this.$router.push('VisitorArtworks');
+              window.location.reload();
+            }
+          })
+          .catch(e => {
+            if (e.response.status == 404) {
+              this.failiureMessage = e.response.data;
+            }
+          });
+      } 
+
+      if (this.userType == "owner") {
+        AXIOS.get("/staffMember/staffMemberEmail/" + this.email, {})
+          .then(response => {
+            console.log(response);
+            if (response.data.password != this.password) {
+              this.failiureMessage = "Invalid Password for " + this.email;
+            } else if(this.email != "mmsOwner@gmail.com") {
+              this.failiureMessage = "Invalid owner email."
+            } else {
+              window.sessionStorage.setItem('userType', 'owner');
+              window.sessionStorage.setItem('password', this.password);
+              window.sessionStorage.setItem('email', this.email);
+              window.sessionStorage.setItem('employeeID', response.data.staffMemberID);
+              this.email = "";
+              this.password = "";
+              this.userType = "";
+              this.failiureMessage = "";
+              // this.$router.push('VisitorArtworks');
+              window.location.reload();
+            }
+          })
+          .catch(e => {
+            if (e.response.status == 404) {
+              this.failiureMessage = e.response.data;
+            }
+          });
+      } 
+
     }
   }
 };

@@ -16,29 +16,89 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <router-link to="LogIn">
+
+        <router-link v-if="userType != 'visitor' && userType != 'owner' && userType != 'employee'" to="LogIn">
             <li class="nav-item">
                 <a class="nav-link">Log In</a>
             </li>
         </router-link>
 
-        <router-link to="Register">
+        <router-link v-if="userType != 'visitor' && userType != 'owner' && userType != 'employee'" to="Register">
             <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <a class="nav-link" >Register</a>
             </li>
         </router-link>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Museum Info</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">View Artworks</a>
-        </li>          
+
+        <router-link v-if="userType != 'visitor' && userType != 'owner' && userType != 'employee'" to="Artworks">
+          <li class="nav-item">
+            <a class="nav-link">View Artworks</a>
+          </li>     
+        </router-link>
+
+        <router-link v-if="userType == 'visitor'" to="VisitorLoans">
+            <li class="nav-item">
+                <a class="nav-link" >My Loans</a>
+            </li>
+        </router-link>
+
+        <router-link v-if="userType == 'visitor'" to="VisitorArtworks">
+            <li class="nav-item">
+                <a class="nav-link">Browse Artworks</a>
+            </li>
+        </router-link>
+
+        <router-link v-if="userType == 'visitor'" to="VisitorPasses">
+            <li class="nav-item">
+                <a class="nav-link">Buy Passes</a>
+            </li>
+        </router-link>
+
+        <router-link v-if="userType == 'employee' || userType == 'owner'" to="ManageArtworks">
+            <li class="nav-item">
+                <a class="nav-link">Manage Artworks</a>
+            </li>
+        </router-link>
+
+        <router-link v-if="userType == 'employee' || userType == 'owner'" to="ManageLoans">
+            <li class="nav-item">
+                <a class="nav-link">Manage Loans</a>
+            </li>
+        </router-link>
+
+        <router-link v-if="userType == 'owner'" to="ManageShifts">
+            <li class="nav-item">
+                <a class="nav-link">Manage Shifts</a>
+            </li>
+        </router-link>
+
+        <router-link v-if="userType == 'owner'" to="ManageEmployees">
+            <li class="nav-item">
+                <a class="nav-link">Manage Employees</a>
+            </li>
+        </router-link>
+    
+         
+
       </ul>
     </div>
   </nav>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: "Navbar",
+  data() {
+    return {
+      userType: sessionStorage.getItem('userType'),
+      username: sessionStorage.getItem('username'),
+      email: sessionStorage.getItem('email'),
+      password: sessionStorage.getItem('password'),
+      visitorID: sessionStorage.getItem('visitorID'),
+      employeeID: sessionStorage.getItem('employeeID'),
+    };
+  }
+}
+</script>
 
 <style>
 a {
