@@ -140,7 +140,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .greeting {
   padding-top: 20px;
   text-align: center;

@@ -11,7 +11,7 @@
 <script></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .background {
   background-image: url("../assets/m6.png");
   background-size: cover;
