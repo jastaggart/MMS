@@ -53,12 +53,14 @@ public class PassServiceTests {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         Date parsedDate = formatter.parse(date);
         final Visitor visitor = new Visitor();
+        
+        when(visitorRepository.findVisitorByVisitorID(visitor.getVisitorID())).thenAnswer((InvocationOnMock invocation) -> visitor);
 
         final Pass pass = new Pass();
         pass.setPassDate(parsedDate);
         pass.setPassPurchaser(visitor);
 
-        Pass returnedPass = passService.createPass(visitor, date);
+        Pass returnedPass = passService.createPass(visitor.getVisitorID(), date);
 
         assertNotNull(returnedPass);
         assertEquals(parsedDate, returnedPass.getPassDate());

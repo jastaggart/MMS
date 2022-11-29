@@ -77,7 +77,7 @@ public class PassController {
 	@PostMapping("/pass")
     public ResponseEntity<PassResponseDto> createPass(@Valid @RequestBody PassRequestDto passRequest) throws ParseException {
 			Visitor visitorRequestingPass = visitorRepository.findVisitorByVisitorID(passRequest.getVisitorID());		
-            Pass createdPass = passService.createPass(visitorRequestingPass, passRequest.getPassDate());
+            Pass createdPass = passService.createPass(visitorRequestingPass.getVisitorID(), passRequest.getPassDate());
             PassResponseDto response = new PassResponseDto(createdPass);  
             return new ResponseEntity<PassResponseDto>(response, HttpStatus.CREATED);       
     }

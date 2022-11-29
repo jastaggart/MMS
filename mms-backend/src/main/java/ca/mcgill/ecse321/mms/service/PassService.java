@@ -41,12 +41,12 @@ public class PassService {
      * @throws ParseException
      */
     @Transactional
-    public Pass createPass(Visitor visitor, String date) throws ParseException {
+    public Pass createPass(int visitorID, String date) throws ParseException {
         Pass pass = new Pass();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         Date parsedDate = formatter.parse(date);
         pass.setPassDate(parsedDate);
-        pass.setPassPurchaser(visitor);
+        pass.setPassPurchaser(visitorRepository.findVisitorByVisitorID(visitorID));
         pass = passRepository.save(pass);
         return pass;
     }
