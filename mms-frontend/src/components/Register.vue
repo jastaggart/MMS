@@ -19,8 +19,8 @@
 
       <!-- <p class = "registration-confirmation">Account created for {{username}} with email {{email}}. Proceed to login.</p> -->
 
-      <p v-if="this.successfulMessage" style="color: green">
-          {{ this.successfulMessage }}
+      <p v-if="this.successfullMessage" style="color: green">
+          {{ this.successfullMessage }}
         </p>
         <p v-if="this.failiureMessage" style="color: red">
           {{ this.failiureMessage }}
@@ -59,7 +59,8 @@ export default {
       username: "",
       email: "",
       password: "",
-      failiureMessage: ""
+      failiureMessage: "",
+      successfullMessage: ""
     };
   },
   created: function() {
@@ -82,7 +83,7 @@ export default {
       })
         .then(response => {
           this.visitors.push(response.data);
-          this.successfulMessage = "Account created for " + this.username  + " with email " + this.email + ". Proceed to login.";
+          this.successfullMessage = "Account created for " + this.username  + " with email " + this.email + ". Proceed to login.";
           this.username = "";
           this.email = "";
           this.password = "";
@@ -91,7 +92,7 @@ export default {
         .catch(e => {
           if (e.response.status == 400) {
             this.failiureMessage = e.response.data;
-            this.successfulMessage = "";
+            this.successfullMessage = "";
           }
         });
     }
