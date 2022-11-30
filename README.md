@@ -31,4 +31,6 @@ The goal of this project is to design an application for the museum of a small t
 
 # Project Reports
 [Deliverable 1 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-07/wiki/Deliverable-1-Project-Report) <br>
-[Deliverable 2 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-07/wiki/Deliverable-2-Project-Report)
+[Deliverable 2 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-07/wiki/Deliverable-2-Project-Report) <br>
+[Deliverable 3 Project Report](https://github.com/McGill-ECSE321-Fall2022/project-group-07/wiki/Deliverable-3-Project-Report) <br>
+
