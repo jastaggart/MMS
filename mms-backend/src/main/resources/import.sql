@@ -137,6 +137,26 @@ insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_
 (22, 'Rembrandt', 'True', 'The Conspiracy of Claudius Civilis', 'OnDisplay', 1, 7)
 On CONFLICT(artworkid) DO NOTHING;
 
+insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
+(23, 'Pierre-Auguste Renoir', 'True', 'Luncheon of the Boating Party', 'InStorage', 1, 1)
+On CONFLICT(artworkid) DO NOTHING;
+
+insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
+(24, 'Pierre-Auguste Renoir', 'True', 'La Grenouillere', 'InStorage', 1, 1)
+On CONFLICT(artworkid) DO NOTHING;
+
+insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
+(25, 'Pierre-Auguste Renoir', 'True', 'The Skiff', 'InStorage', 1, 1)
+On CONFLICT(artworkid) DO NOTHING;
+
+insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
+(26, 'Pierre-Auguste Renoir', 'True', 'Le Pont-Neuf', 'InStorage', 1, 1)
+On CONFLICT(artworkid) DO NOTHING;
+
+insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
+(27, 'Pierre-Auguste Renoir', 'True', 'Girl Reading', 'InStorage', 1, 1)
+On CONFLICT(artworkid) DO NOTHING;
+
 
 
 
