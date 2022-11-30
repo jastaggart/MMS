@@ -70,7 +70,7 @@ insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_
 On CONFLICT(artworkid) DO NOTHING;
 
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
-(6, 'Claude Monet', 'True', 'Bain à la Grenouillère', 'OnDisplay', 1, 3)
+(6, 'Claude Monet', 'True', 'Bain a la Grenouillere', 'OnDisplay', 1, 3)
 On CONFLICT(artworkid) DO NOTHING;
 
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
@@ -78,15 +78,15 @@ insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_
 On CONFLICT(artworkid) DO NOTHING;
 
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
-(8, 'Paul Cézanne', 'True', 'The Basket of Apples', 'OnDisplay', 1, 3)
+(8, 'Paul Cezanne', 'True', 'The Basket of Apples', 'OnDisplay', 1, 3)
 On CONFLICT(artworkid) DO NOTHING;
 
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
-(9, 'Paul Cézanne', 'True', 'The Card Players', 'OnDisplay', 1, 3)
+(9, 'Paul Cezanne', 'True', 'The Card Players', 'OnDisplay', 1, 3)
 On CONFLICT(artworkid) DO NOTHING;
 
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
-(10, 'Paul Cézanne', 'True', 'Apples and Oranges', 'OnDisplay', 1, 3)
+(10, 'Paul Cezanne', 'True', 'Apples and Oranges', 'OnDisplay', 1, 3)
 On CONFLICT(artworkid) DO NOTHING;
 
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
