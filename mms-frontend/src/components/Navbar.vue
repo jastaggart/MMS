@@ -70,6 +70,12 @@
           </li>
         </router-link>
 
+        <router-link v-if="userType == 'owner'" to="ManagePasses">
+          <li class="nav-item">
+            <a class="nav-link">Manage Passes</a>
+          </li>
+        </router-link>
+
         <div v-if="userType == 'employee' || userType == 'owner' || userType == 'visitor'" class="navigation">
           <a @click.preventDefault="logout()" class="button" href="">
             <img

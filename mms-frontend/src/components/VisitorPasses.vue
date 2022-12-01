@@ -51,7 +51,7 @@ var AXIOS = axios.create({
 });
 
 export default {
-  name: "Pass",
+  name: "VisitorPass",
   data() {
     return {
       Passes: [],
@@ -117,26 +117,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-
-      // AXIOS.post("/pass", {
-      //   visitorID: window.sessionStorage.getItem("visitorID"),
-      //   passDate: passDate
-      // })
-      //   .then(response => {
-      //     this.Passes.push(response.data);
-      //     this.successfullMessage = "Pass created";
-      //     this.passDate = passDate;
-      //     this.failiureMessage = "";
-      //     this.visitorID = window.sessionStorage.getItem("visitorID");
-      //     this.passDate = "";
-      //   })
-      //   .catch(e => {
-      //     if (e.response.status == 400 || e.response.status == 500) {
-      //       this.failiureMessage = "Please enter a valid date";
-      //       this.successfullMessage = "";
-      //       this.passDate = "";
-      //     }
-      //   });
     },
     showPasses: function() {
       // Initializing pass from backend
@@ -174,7 +154,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .main {
   display: flex;
   flex-direction: column;
@@ -194,6 +174,7 @@ export default {
   background-color: grey;
   padding: 10px;
   border-radius: 25px;
+  opacity: 0.75;
 }
 
 .purchasePassTitle {
@@ -261,12 +242,13 @@ export default {
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: white;
-  max-width: 75%;
+  max-width: 100%;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   background-color: grey;
   padding: 10px;
   border-radius: 25px;
+  opacity: 0.75;
 }
 </style>

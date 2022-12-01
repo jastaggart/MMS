@@ -83,7 +83,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #Manage-Employee-body {
     display: flex;
     flex-direction: column;

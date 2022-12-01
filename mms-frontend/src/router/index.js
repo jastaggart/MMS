@@ -11,6 +11,7 @@ import ManageArtworks from '@/components/ManageArtworks'
 import ManageLoans from '@/components/ManageLoans'
 import ManageShifts from '@/components/ManageShifts'
 import ManageEmployees from '@/components/ManageEmployees'
+import ManagePasses from '@/components/ManagePasses'
 
 Vue.use(Router)
 
@@ -60,7 +61,11 @@ export default new Router({
       path: '/manageEmployees',
       name: 'ManageEmployees',
       component:  ManageEmployees
-    },
+    }, {
+      path: '/managePasses',
+      name: 'ManagePasses',
+      component:  ManagePasses
+    }
   ]
 })
 

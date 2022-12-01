@@ -70,6 +70,20 @@ public class PassController {
 		return new ResponseEntity<List<PassResponseDto>>(passes, HttpStatus.OK);
 	}
 
+     /**
+     * Gets a Pass by passDate after HTTP request and puts into the HTTP response
+     * 
+     * @param date - passDate of the Pass to get
+     * @return - The fetched Pass
+     * @throws ParseException
+     */
+    @GetMapping("/pass/date/{passDate}") 
+	public ResponseEntity<List<PassResponseDto>> getPassesByDate(@PathVariable String passDate) throws ParseException {
+		List<PassResponseDto> passes = convListToDto(passService.getPassesByDate(passDate));
+		return new ResponseEntity<List<PassResponseDto>>(passes, HttpStatus.OK);
+	}
+
+
     /**
      * Creates a Pass using Dto data after HTTP request and puts it into HTTP response
      * 

@@ -73,7 +73,7 @@ public class PassService {
      * Gets a Pass by its visitorID attribute
      * 
      * @param visitorID - Pass visitorID
-     * @return - The fetched Pass
+     * @return - The fetched Passes
      */
     @Transactional
     public List<Pass> getPassesByVisitorId(int visitorID) {
@@ -86,6 +86,28 @@ public class PassService {
 		}
         if (passes.isEmpty()) {
 			throw new MMSException(HttpStatus.NOT_FOUND, "No passes owned by visitor with visitorID " + visitorID + ".");
+		}
+
+        return passes;
+    }
+
+    /**
+     * Gets a Pass by its passDate attribute
+     * 
+     * @param passDate - Pass date
+     * @return - The fetched Passes
+     * @throws ParseException
+     */
+    @Transactional
+    public List<Pass> getPassesByDate(String passDate) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date parsedDate = formatter.parse(passDate);
+        List<Pass> passes = passRepository.findPassByPassDate(parsedDate);
+        if (passes == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "No passes on " + passDate + ".");
+		}
+        if (passes.isEmpty()) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "No passes on " + passDate + ".");
 		}
 
         return passes;
