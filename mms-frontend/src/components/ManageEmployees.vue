@@ -1,6 +1,19 @@
 <template>
     <div id="Manage-Employee-body">
         <h2 id="employee-header">Employee List</h2>
+
+        <div id="filter-employee-layout">
+            <div id="filter-by-id">
+                <label>Filter by Id:</label>
+                <input required v-model="Employee" />
+            </div>
+
+            <div id="filter-by-username">
+                <label>Filter by Username:</label>
+                <input required v-model="Employee" />
+            </div>
+        </div>
+
         <table id="employee-table">
             <tr class="top-row">
                 <th>Id</th>
@@ -77,6 +90,24 @@ export default {
 
 }
 
+#employee-header {
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+#filter-employee-layout {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    padding: 20px;
+}
+
+#filter-by-id,
+#filter-by-username {
+    padding: 0px 10px;
+}
+
 table,
 th,
 td {
@@ -86,13 +117,6 @@ td {
     text-align: center;
     margin: auto;
     padding: 20px;
-}
-
-#employee-header {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    text-align: center;
-    margin: auto;
 }
 
 .top-row {
@@ -113,13 +137,13 @@ td {
 }
 
 #save-employee-changes-button {
-    background-color: green;
+    background-color: #54B4D3;
     color: white;
     margin: 25px;
 }
 
 #save-employee-changes-button:hover {
-    background-color: rgb(0, 87, 0);
+    background-color: #3d7f95;
 }
 
 #cancel-employee-changes-button {
