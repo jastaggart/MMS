@@ -290,14 +290,14 @@ img {
   text-align: center;
 }
 
-.artist, .status, .loan-availability, .room-id {
+.artist, .status, .loan-availability, .room-id, .artwork-ID {
     display: flex;
     justify-content:flex-start;
     margin: 0;
     padding: 0;
 }
 
-.artist p, .status p, .loan-availability p, .room-id  p {
+.artist p, .status p, .loan-availability p, .room-id  p, .artwork-ID p {
     margin-right: 5px;
 } 
 

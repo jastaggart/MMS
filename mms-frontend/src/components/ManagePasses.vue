@@ -110,6 +110,7 @@ export default {
           this.Passes = response.data;
           this.failureMessage1 = "";
           this.failureMessage2 = "";
+          this.passDate = '';
         })
         .catch(e => {
           if (e.response.status == 404) {

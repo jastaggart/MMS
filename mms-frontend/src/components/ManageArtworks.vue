@@ -208,6 +208,7 @@ export default {
         console.log(response)
         this.switchErrorMsg = ''
         this.switchSuccessMsg = "Room was successfully switched."
+        window.location.reload;
       })
       .catch(e => {
         if(e.response.status == 409) {
@@ -278,7 +279,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .greeting {
   padding-top: 20px;
   text-align: center;
@@ -343,6 +344,7 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .filters select{
@@ -371,6 +373,7 @@ button {
 
 .filter-by-artist {
   margin-left: 3rem;
+  padding-bottom: 2rem;
   font-family: Baskerville;
   font-size: 20px;
 
