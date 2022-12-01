@@ -1,5 +1,8 @@
 <template>
   <div class="main">
+    <div class="banner">
+      <h4>The artworks on display at Marwan's Museum are best enjoyed in person! Purchase a pass below and come visit on a day of your choosing.</h4>
+    </div>
     <div class="purchasePassBox">
       <h2 class="purchasePassTitle">Purchase a Pass</h2>
       <div class="purchasePass">
@@ -179,6 +182,20 @@ export default {
   align-items: center;
 }
 
+.banner {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: Baskerville;
+  color: white;
+  max-width: 75%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: grey;
+  padding: 10px;
+  border-radius: 25px;
+}
+
 .purchasePassTitle {
   font-family: Baskerville;
   font-size: 48px;
@@ -241,5 +258,15 @@ export default {
 .emptyMessage {
   font-family: Baskerville;
   font-size: 20px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+  max-width: 75%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: grey;
+  padding: 10px;
+  border-radius: 25px;
 }
 </style>
