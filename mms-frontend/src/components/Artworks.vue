@@ -48,6 +48,7 @@
         <img class = "image-img" :src="require(`../assets/${artwork.name}.png`)" alt = "artwork"/>
         <div class ="image-overlay">
           <div class = "image-title"> {{ artwork.name }}</div>
+          <div id = "artwork-id" class="artwork-ID"><p><b>Artwork ID:</b></p>{{ artwork.artworkID}}</div>
           <div class = "artist"><p><b>Artist:</b></p>{{ artwork.artist }}</div>
           <div class = "status"><p><b>Display Status:</b></p>{{ artwork.status }}</div>
           <div class = "loan-availability"><p><b>Available For Loan:</b></p> {{ artwork.availableForLoan }}</div>
@@ -83,7 +84,7 @@ export default {
       roomID: '',
       artist: '',
       failiureMessage1: '',
-      failiureMessage2: ''
+      failiureMessage2: '',
     };
   },
   created: function() {
@@ -232,14 +233,14 @@ img {
   text-align: center;
 }
 
-.artist, .status, .loan-availability, .room-id {
+.artist, .status, .loan-availability, .room-id, .artwork-ID {
     display: flex;
     justify-content:flex-start;
     margin: 0;
     padding: 0;
 }
 
-.artist p, .status p, .loan-availability p, .room-id  p {
+.artist p, .status p, .loan-availability p, .room-id  p, .artwork-ID p {
     margin-right: 5px;
 } 
 
