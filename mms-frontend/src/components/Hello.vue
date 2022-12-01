@@ -43,18 +43,17 @@
 }
 
 .museum-info {
-  margin-top: 5rem;
-  padding: 10px 20px;
+  padding: 10px 3px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   color: black;
-  background-color: rgb(128, 128, 128, 0.7);
 }
 
 .museum-info p {
   margin-right: 10px;
   font-weight: bold;
 }
-</style>
+
+</style> 

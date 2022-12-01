@@ -13,6 +13,18 @@ insert into staff_member(employee_type, staff_memberid, email, password, usernam
 ('Employee', 2, 'Bob@gmail.com', 'pAsSwOrD', 'Bob', 1)
 On CONFLICT(staff_memberid) DO NOTHING;
 
+insert into staff_member(employee_type,staff_memberid,email,password,username,museum_management_system_museumid) values 
+('Employee', 3, 'sadekmahm@gmail.com', 'hello123', 'smahm',1)
+On CONFLICT(staff_memberid) DO NOTHING;
+
+insert into staff_member(employee_type,staff_memberid,email,password,username,museum_management_system_museumid) values 
+('Employee', 4, 'cvatos@gmail.com', 'valdo123', 'cvatos',1)
+On CONFLICT(staff_memberid) DO NOTHING;
+
+insert into staff_member(employee_type,staff_memberid,email,password,username,museum_management_system_museumid) values 
+('Employee', 5, 'jeankazanji@gmail.com', 'jeanka123', 'jeank',1)
+On CONFLICT(staff_memberid) DO NOTHING;
+
 -- Instantiating rooms (storage + display rooms)
 insert into room(room_type, roomid, display_room_number, room_maximum_capacity, room_size, museum_management_system_museumid) values
  ('StorageRoom', 1, NULL, NULL, NULL, 1)
@@ -156,6 +168,28 @@ On CONFLICT(artworkid) DO NOTHING;
 insert into artwork(artworkid,artist,is_available_for_loan,artwork_name,display_status,museum_management_system_museumid,room_roomid) values 
 (27, 'Pierre-Auguste Renoir', 'True', 'Girl Reading', 'InStorage', 1, 1)
 On CONFLICT(artworkid) DO NOTHING;
+
+
+-- Passes for visitor already in Databse
+insert into pass(passid,pass_valid_date, pass_purchaser_visitorid) values (1,'2022-12-23',1)
+On CONFLICT(passid) DO NOTHING;
+
+insert into pass(passid,pass_valid_date, pass_purchaser_visitorid) values (2,'2022-12-23',1)
+On CONFLICT(passid) DO NOTHING;
+
+insert into pass(passid,pass_valid_date, pass_purchaser_visitorid) values (3,'2022-12-23',1)
+On CONFLICT(passid) DO NOTHING;
+
+insert into pass(passid,pass_valid_date, pass_purchaser_visitorid) values (4,'2022-12-23',1)
+On CONFLICT(passid) DO NOTHING;
+
+insert into pass(passid,pass_valid_date, pass_purchaser_visitorid) values (5,'2022-12-30',1)
+On CONFLICT(passid) DO NOTHING;
+
+insert into pass(passid,pass_valid_date, pass_purchaser_visitorid) values (6,'2022-12-30',1)
+On CONFLICT(passid) DO NOTHING;
+
+
 
 
 
