@@ -1,91 +1,116 @@
 <template>
     <div>
-        <h2 class="manageShiftHeader">Manage Shifts</h2>
+        <div v-if="currentUserType == 'employee'">
+            <h2 class=" viewShiftHeader">View Shifts</h2>
 
-        <div class="filters">
-            <!-- <div class="filter-by-shiftID">
+            <div id="View-Shift-body">
+
+                <table id="shift-table">
+                    <tr class="topRow">
+                        <th>Shift ID</th>
+                        <th>Employee ID</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    <tr v-for="shift in EmployeeShifts" :key="shift.shiftID">
+                        <td>{{ shift.shiftID }}</td>
+                        <td>{{ shift.shiftAssigneeID }}</td>
+                        <td>{{ shift.date }}</td>
+                        <td>{{ shift.startHour }}</td>
+                        <td>{{ shift.endHour }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div v-if="currentUserType == 'owner'">
+            <h2 class=" manageShiftHeader">Manage Shifts</h2>
+
+            <div class="filters">
+                <!-- <div class="filter-by-shiftID">
                 <label>Filter by Shift ID:</label>
                 <input @change="filterShiftByShiftID(shiftID)" v-model="shiftID" />
                 <p style="color: red">
                     {{ this.failureMessage1 }}
                 </p>
             </div> -->
-            <div class="filter-by-employeeID">
-                <label>Employee ID:</label>
-                <input list="employees" @change="filterShiftsByEmployeeID(employeeID)" v-model="employeeID">
-                <datalist id="employees">
-                    <option v-for="employee in Employees" :key="employee.staffMemberID" :value="employee.staffMemberID">
-                        {{ employee.username }}</option>
-                </datalist>
-                <p v-if="this.failureMessage2" style="color: red">
-                    {{ this.failureMessage2 }}
-                </p>
+                <div class="filter-by-employeeID">
+                    <label>Employee ID:</label>
+                    <input list="employees" @change="filterShiftsByEmployeeID(employeeID)" v-model="employeeID">
+                    <datalist id="employees">
+                        <option v-for="employee in Employees" :key="employee.staffMemberID"
+                            :value="employee.staffMemberID">
+                            {{ employee.username }}</option>
+                    </datalist>
+                    <p v-if="this.failureMessage2" style="color: red">
+                        {{ this.failureMessage2 }}
+                    </p>
+                </div>
+
+                <div class="filter-by-date">
+                    <label>Date:</label>
+                    <input type="date" @change="filterShiftsByDate(date)" v-model="date">
+                    <p v-if="this.failureMessage3" style="color: red">
+                        {{ this.failureMessage3 }}
+                    </p>
+                </div>
+
+                <div class="all-shifts">
+                    <button @click.preventDefault="getAllShifts()">Reset</button>
+                </div>
             </div>
 
-            <div class="filter-by-date">
-                <label>Date:</label>
-                <input type="date" @change="filterShiftsByDate(date)" v-model="date">
-                <p v-if="this.failureMessage3" style="color: red">
-                    {{ this.failureMessage3 }}
-                </p>
+
+            <div id="Manage-Shift-body">
+
+                <table id="shift-table">
+                    <tr class="topRow">
+                        <th>Shift ID</th>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    <tr v-for="shift in Shifts" :key="shift.shiftID">
+                        <td>{{ shift.shiftID }}</td>
+                        <td>{{ shift.shiftAssigneeID }}</td>
+                        <td>{{ getUsername(shift.shiftAssigneeID) }}</td>
+                        <td>{{ shift.date }}</td>
+                        <td>{{ shift.startHour }}</td>
+                        <td>{{ shift.endHour }}</td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="all-shifts">
-                <button @click.preventDefault="getAllShifts()">Reset</button>
+
+            <hr>
+
+            <div class="create">
+                <h2> Add New Shift </h2>
+                <p style="color:red;"> {{ this.failureMessage5 }} </p>
+                <p style="color:green;"> {{ this.successMessage5 }} </p>
+                <table>
+                    <tr>
+                        <td>
+                            <input placeholder="Employee ID" list="employees" v-model="shiftAssigneeID">
+                            <datalist id="employees">
+                                <option v-for="employee in Employees" :key="employee.staffMemberID"
+                                    :value="employee.staffMemberID">
+                                    {{ employee.username }}
+                                </option>
+                            </datalist>
+                        </td>
+                        <td><input type="date" placeholder="Date" v-model="shiftDate"></td>
+                        <td><input type="time" step="1" placeholder="Start Time" v-model="shiftStartHour"></td>
+                        <td><input type="time" step="1" placeholder="End Time" v-model="shiftEndHour"></td>
+                        <td><button
+                                @click.preventDefault="createShift(shiftAssigneeID, shiftDate, shiftStartHour, shiftEndHour)">Create</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
-
-
-        <div id="Manage-Shift-body">
-
-            <table id="shift-table">
-                <tr class="topRow">
-                    <th>Shift ID</th>
-                    <th>Employee ID</th>
-                    <th>Employee Name</th>
-                    <th>Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-                <tr v-for="shift in Shifts" :key="shift.shiftID">
-                    <td>{{ shift.shiftID }}</td>
-                    <td>{{ shift.shiftAssigneeID }}</td>
-                    <td>{{ getUsername(shift.shiftAssigneeID) }}</td>
-                    <td>{{ shift.date }}</td>
-                    <td>{{ shift.startHour }}</td>
-                    <td>{{ shift.endHour }}</td>
-                </tr>
-            </table>
-        </div>
-
-
-        <hr>
-
-        <div class="create">
-            <h2> Add New Shift </h2>
-            <p style="color:red;"> {{ this.failureMessage5 }} </p>
-            <p style="color:green;"> {{ this.successMessage5 }} </p>
-            <table>
-                <tr>
-                    <td>
-                        <input placeholder="Employee ID" list="employees" v-model="shiftAssigneeID">
-                        <datalist id="employees">
-                            <option v-for="employee in Employees" :key="employee.staffMemberID"
-                                :value="employee.staffMemberID">
-                                {{ employee.username }}
-                            </option>
-                        </datalist>
-                    </td>
-                    <td><input type="date" placeholder="Date" v-model="shiftDate"></td>
-                    <td><input type="time" step="1" placeholder="Start Time" v-model="shiftStartHour"></td>
-                    <td><input type="time" step="1" placeholder="End Time" v-model="shiftEndHour"></td>
-                    <td><button
-                            @click.preventDefault="createShift(shiftAssigneeID, shiftDate, shiftStartHour, shiftEndHour)">Create</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
     </div>
 </template>
 
@@ -104,8 +129,12 @@ export default {
     name: "ManageShift",
     data() {
         return {
+            currentUserType: window.sessionStorage.getItem('userType'),
+            currentEmployeeID: window.sessionStorage.getItem('employeeID'),
+
             //variables for display
             Shifts: [],
+            EmployeeShifts: [],
             Employees: [],
 
             //variables for filter methods
@@ -142,6 +171,14 @@ export default {
             })
             .catch(e => {
                 console.log("Error in GET /shifts:");
+                console.log(e);
+            });
+        AXIOS.get("/shift/employee/" + this.currentEmployeeID)
+            .then(response => {
+                this.EmployeeShifts = response.data;
+            })
+            .catch(e => {
+                console.log("Error in GET /shift/employee");
                 console.log(e);
             });
         AXIOS.get('/staffMembers')
@@ -222,20 +259,20 @@ export default {
                 });
         },
         getAllShifts: function () {
-                // this.shiftID = "",
-                this.employeeID = "",
+            // this.shiftID = "",
+            this.employeeID = "",
                 this.date = "",
                 this.failureMessage2 = "";
-                this.failureMessage3 = "";
+            this.failureMessage3 = "";
 
-                AXIOS.get("/shifts")
-                    .then(response => {
-                        this.Shifts = response.data;
-                    })
-                    .catch(e => {
-                        if (e.response.status == 404) {
-                        }
-                    });
+            AXIOS.get("/shifts")
+                .then(response => {
+                    this.Shifts = response.data;
+                })
+                .catch(e => {
+                    if (e.response.status == 404) {
+                    }
+                });
         },
         createShift: function (shiftAssignee, shiftDate, shiftStartHour, shiftEndHour) {
             this.failureMessage5 = "";
@@ -265,7 +302,6 @@ export default {
 </script>
 
 <style scoped>
-
 table,
 td {
     width: 800px;
@@ -284,13 +320,15 @@ td {
     border: 1px solid black;
 }
 
-tr:first-child{
+tr:first-child {
     background-color: #eaf2f8;
 }
+
 tr:hover {
     background-color: #eaf2f8;
 }
-tr:first-child:hover{
+
+tr:first-child:hover {
     background-color: #eaf2f8;
 }
 
@@ -392,33 +430,6 @@ label {
     width: 140px;
     font-size: 20px;
 }
-
-
-
-
-/* .filters {
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 2px;
-  margin-right: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-} */
-/* .filters {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-.filters input {
-  width: 25%;
-  border: none;
-  box-sizing: border-box;
-  color: #555;
-  border: 1px solid black;
-} */
 </style>
 
 // <!-- @PutMapping(value={"/shift/modify/{shiftID}","/shift/modify/{shiftID}/"})

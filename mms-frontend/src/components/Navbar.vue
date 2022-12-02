@@ -58,7 +58,7 @@
           </li>
         </router-link>
 
-        <router-link v-if="userType == 'owner'" to="ManageShifts">
+        <router-link v-if="userType == 'employee' || userType == 'owner'" to="ManageShifts">
           <li class="nav-item">
             <a class="nav-link">Manage Shifts</a>
           </li>
