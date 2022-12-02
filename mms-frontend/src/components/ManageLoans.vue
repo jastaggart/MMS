@@ -7,9 +7,8 @@
         <div class="layout" v-else>
 
             <select id="loanTitles" class="loanTitles" @change="displayInfo()">
-                <option value="requests" selected>Loan Requests</option>
+                <option value="requests" >Loan Requests</option>
                 <option value="actives">Active Loans</option>
-                <!-- <option value="history">Loan History</option> -->
                 <option value="history">All Loans</option>
             </select>
 
@@ -196,23 +195,23 @@ export default {
         accept: function (loanRequest) {
             AXIOS.put("/loans/approve/" + loanRequest.loanID + "/" + window.sessionStorage.getItem("employeeID"));
             const acceptButton = document.getElementById("Accept");
-            // acceptButton.textContent = "Accepted";
+            setTimeout(() => {
+                window.location.reload()
+            }, "350")
         },
         reject: function (loan) {
             AXIOS.put("/loans/reject/" + loan.loanID + "/" + window.sessionStorage.getItem("employeeID"));
             const rejectButton = document.getElementById("Reject");
-            //rejectButton.textContent = "Rejected";
+            setTimeout(() => {
+                window.location.reload()
+            }, "350")
         },
         complete: function (activeLoan) {
             activeLoan.loanStatus = "Completed";
             AXIOS.put("/loans/close/" + activeLoan.loanID)
-            // var loan = "";
-            // for (let i = 0; i < this.ActiveLoans.length; i++) {
-            //     loan = this.ActiveLoans[i];
-            //     if (activeLoan == loan) {
-            //         this.ActiveLoans.splice(i, i + 1);
-            //     }
-            // }
+            setTimeout(() => {
+                window.location.reload()
+            }, "350")
         },
         displayInfo: function () {
             var selectedItem = document.getElementById("loanTitles").value;
@@ -328,3 +327,5 @@ p {
     display: none;
 }
 </style>
+
+
