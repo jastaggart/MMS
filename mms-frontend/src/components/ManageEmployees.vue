@@ -6,11 +6,17 @@
             <div id="filter-by-id">
                 <label>Find Employee by Id:</label>
                 <input @change="filterEmployeeById(employeeID)" v-model="employeeID" />
+                <p v-if="this.failureMessage1" style="color: red">
+                    {{ this.failureMessage1 }}
+                </p>
             </div>
 
             <div id="filter-by-username">
                 <label>Find Employee by Username:</label>
                 <input @change="filterEmployeeByUsername(employeeUsername)" v-model="employeeUsername" />
+                <p v-if="this.failureMessage2" style="color: red">
+                    {{ this.failureMessage2 }}
+                </p>
             </div>
         </div>
 
@@ -46,6 +52,9 @@
                     </td>
                 </tr>
             </table>
+            <p v-if="this.failureMessage3" style="color: red">
+                {{ this.failureMessage3 }}
+            </p>
         </div>
     </div>
 
@@ -74,7 +83,9 @@ export default {
             email: "",
             password: "",
             successfulMessage: "",
-            failiureMessage: ""
+            failureMessage1: "",
+            failureMessage2: "",
+            failureMessage3: ""
         };
     },
     created() {
@@ -93,11 +104,11 @@ export default {
             AXIOS.get("/staffMember/staffMemberId/" + staffMemberID)
                 .then(response => {
                     this.employees = [response.data]
-                    this.failureMessage = "";
+                    this.failureMessage1 = "";
                 })
                 .catch(e => {
                     if (e.response.status == 404) {
-                        this.failureMessage = "No StaffMember found for this id.";
+                        this.failureMessage1 = "No StaffMember found for this id.";
                     }
                 });
         },
@@ -105,11 +116,11 @@ export default {
             AXIOS.get("/staffMember/staffMemberName/" + staffMemberUsername)
                 .then(response => {
                     this.employees = [response.data]
-                    this.failureMessage = "";
+                    this.failureMessage2 = "";
                 })
                 .catch(e => {
                     if (e.response.status == 404) {
-                        this.failureMessage = "No StaffMember found with this username.";
+                        this.failureMessage2 = "No StaffMember found with this username.";
                     }
                 });
         },
@@ -125,9 +136,10 @@ export default {
                     this.newEmail = ''
                     this.newUsername = ''
                     this.newPassword = ''
+                    this.failureMessage3 = ''
                 })
                 .catch(error => {
-                    console.log(error)
+                    this.failureMessage3 = "StaffMember already exists.";
                 })
         }
     },
@@ -203,7 +215,7 @@ button:hover {
 }
 
 .create-employee-layout {
-    margin: 30 px auto;
+    margin: auto;
 }
 
 #enter-data-text {
