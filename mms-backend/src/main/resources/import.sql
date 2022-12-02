@@ -21,10 +21,6 @@ insert into staff_member(employee_type,staff_memberid,email,password,username,mu
 ('Employee', 4, 'cvatos@gmail.com', 'valdo123', 'cvatos',1)
 On CONFLICT(staff_memberid) DO NOTHING;
 
-insert into staff_member(employee_type,staff_memberid,email,password,username,museum_management_system_museumid) values 
-('Employee', 5, 'jeankazanji@gmail.com', 'jeanka123', 'jeank',1)
-On CONFLICT(staff_memberid) DO NOTHING;
-
 -- Instantiating rooms (storage + display rooms)
 insert into room(room_type, roomid, display_room_number, room_maximum_capacity, room_size, museum_management_system_museumid) values
  ('StorageRoom', 1, NULL, NULL, NULL, 1)
