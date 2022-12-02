@@ -38,8 +38,7 @@
       <button @click.preventDefault="getAllArtworks" class = "all-artworks">All artworks</button>
     </div>
 
-    
-    
+
     <vs-table
       v-model="selected"
       @selected="handleSelected"
@@ -111,16 +110,13 @@
                     {{ switchSuccessMsg }}
                   </p>
                 
-          
                 </vs-popup>
             </div>
-
           </vs-td>
-
-          
 
         </vs-tr>
       </template>
+
     </vs-table>
     
 
@@ -187,7 +183,6 @@ export default {
         console.log(e)
       });
   },
-
   methods: {
     getRoomName: function(roomRoomID) {
       if (roomRoomID == 1) {
@@ -274,24 +269,19 @@ export default {
   
   }
 
-  
-   
 };
 </script>
 
 <style scoped>
+
 .greeting {
   padding-top: 20px;
   text-align: center;
   margin: auto;
 }
 
-.greeting p {
-  font-style: italic;
-}
-
 .create {
-  margin: 30 px auto;
+  padding-top: 2rem;
 }
 
 h2, p {
@@ -379,66 +369,10 @@ button {
 
 }
 
-.page-description {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  font-family: Baskerville;
-  max-width: 75%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .container {
   display: flex;
   margin-top: 20px;
 
-}
-
-.image {
-  position: relative;
-  width: 350px;
-  height: 300px;
-  border-radius: 0;
-  object-fit: cover;
-  vertical-align: bottom;
-  float: left;
-  object-fit:scale-down;
-  margin: 30px;
-  box-shadow: 6px 8px 4px rgb(26, 26, 26);
-
-}
-
-img {
-  border-radius: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.image-overlay {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height:100%;
-   background: rgba(0, 0, 0, 0.6);
-   color: #ffffff;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   opacity: 0;
-}
-
-.image-overlay:hover {
-  opacity: 1;
-}
-
-.image-title {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 0.25em;
-  text-align: center;
 }
 
 .artist, .status, .loan-availability, .room-id {
@@ -510,6 +444,5 @@ img {
 .all-artworks:disabled {
   cursor: auto;
 }
-
 
 </style>

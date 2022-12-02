@@ -123,8 +123,10 @@ public class LoanService {
         if (!loan.getArtwork().getAvailableForLoan()) {
             throw new MMSException(HttpStatus.BAD_REQUEST, "Specified artwork not available for loan.");
         }
+
+        loan.getArtwork().setAvailableForLoan(false);
         
-        // Note: Before loan is approved, artwork status remains the same 
+        // Note: Before loan is approved, artwork status and room remains the same 
         // i.e. it stays in storage or its current display room
        
         loan = loanRepository.save(loan);
@@ -171,7 +173,8 @@ public class LoanService {
 
         loan.setIsApproved(false);
         loan.setLoanApprover(loanApprover);
-        // Note: If loan is rejected, artwork status remains the same
+
+        // Note: If loan is rejected, artwork status and room remains the same
         // i.e. it stays in storage or its current display room
 
         return loan;
