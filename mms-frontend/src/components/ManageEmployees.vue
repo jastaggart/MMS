@@ -1,7 +1,6 @@
 <template>
     <div id="Manage-Employee-body">
         <h2 id="employee-header">Employee List</h2>
-
         <div id="filter-employee-layout">
             <div id="filter-by-id">
                 <label>Find Employee by Id:</label>
@@ -19,7 +18,7 @@
                 </p>
             </div>
         </div>
-
+        <button id="get-all-employees-button" onClick="window.location.reload();">Get All Employees</button>
         <table id="employee-table">
             <tr class="top-row">
                 <th>Id</th>
@@ -105,14 +104,10 @@ export default {
                 .then(response => {
                     this.employees = [response.data]
                     this.failureMessage1 = "";
-                    this.failureMessage2 = "";
-                    this.failureMessage3 = "";
                 })
                 .catch(e => {
                     if (e.response.status == 404) {
                         this.failureMessage1 = "No StaffMember found for this id.";
-                        this.failureMessage2 = "";
-                        this.failureMessage3 = "";
                     }
                 });
         },
@@ -120,15 +115,11 @@ export default {
             AXIOS.get("/staffMember/staffMemberName/" + staffMemberUsername)
                 .then(response => {
                     this.employees = [response.data]
-                    this.failureMessage1 = "";
                     this.failureMessage2 = "";
-                    this.failureMessage3 = "";
                 })
                 .catch(e => {
                     if (e.response.status == 404) {
-                        this.failureMessage1 = "";
                         this.failureMessage2 = "No StaffMember found with this username.";
-                        this.failureMessage3 = "";
                     }
                 });
         },
@@ -144,13 +135,9 @@ export default {
                     this.newEmail = ''
                     this.newUsername = ''
                     this.newPassword = ''
-                    this.failureMessage1 = "";
-                    this.failureMessage2 = "";
-                    this.failureMessage3 = "";
+                    this.failureMessage3 = ''
                 })
                 .catch(error => {
-                    this.failureMessage1 = "";
-                    this.failureMessage2 = "";
                     this.failureMessage3 = "StaffMember already exists.";
                 })
         }
@@ -224,6 +211,11 @@ button {
 
 button:hover {
     background: #38788e;
+}
+
+#get-all-employees-button {
+    max-width: 200px;
+    margin: auto;
 }
 
 .create-employee-layout {
