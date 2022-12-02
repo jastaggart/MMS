@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import ca.mcgill.ecse321.mms.service.LoanService;
 import ca.mcgill.ecse321.mms.service.ShiftService;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:8087")
 public class ShiftController {
   @Autowired
   ShiftService shiftService;
@@ -101,9 +103,9 @@ public class ShiftController {
    * @param endHour - the new end hour value
    * @return - The modified shift as Dto
    */
-  @PutMapping(value={"/shift/modify/{shiftID}","/shift/modify/{shiftID}/{date}/{startHour}/{endHour}"})
-  public ResponseEntity<ShiftResponseDto> modifyShift(@PathVariable int shiftID, @PathVariable String date, @PathVariable String startHour, @PathVariable String endHour) {
-    ShiftResponseDto shiftDto = shiftService.modifyShift(shiftID, date, startHour, endHour);
+  @PutMapping(value={"/shift/modify/{shiftID}","/shift/modify/{shiftID}/"})
+  public ResponseEntity<ShiftResponseDto> modifyShift(@PathVariable int shiftID, @Valid @RequestBody ShiftRequestDto shiftRequest) {
+    ShiftResponseDto shiftDto = shiftService.modifyShift(shiftID, shiftRequest.getDate(), shiftRequest.getStartHour(), shiftRequest.getEndHour());
     return new ResponseEntity<ShiftResponseDto>(shiftDto, HttpStatus.OK);
   }
 
