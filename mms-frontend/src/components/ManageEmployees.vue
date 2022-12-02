@@ -4,13 +4,13 @@
 
         <div id="filter-employee-layout">
             <div id="filter-by-id">
-                <label>Filter by Id:</label>
-                <input required v-model="Employee" />
+                <label>Find Employee by Id:</label>
+                <input @change="filterEmployeeById(employeeID)" v-model="employeeID" />
             </div>
 
             <div id="filter-by-username">
-                <label>Filter by Username:</label>
-                <input required v-model="Employee" />
+                <label>Find Employee by Username:</label>
+                <input @change="filterEmployeeByUsername(employeeUsername)" v-model="employeeUsername" />
             </div>
         </div>
 
@@ -20,28 +20,36 @@
                 <th>Email</th>
                 <th>Username</th>
                 <th>Password</th>
-                <th>Add/Delete</th>
+                <th>Delete</th>
             </tr>
             <tr v-for="e in employees" :key="e.staffMemberId">
                 <td>{{ e.staffMemberID }}</td>
-                <td contenteditable="true">{{ e.email }}</td>
-                <td contenteditable="true">{{ e.username }}</td>
-                <td contenteditable="true">{{ e.password }}</td>
-                <td><button class="add-delete-employee-button">Delete</button></td>
-            </tr>
-            <tr id="last-row">
-                <td></td>
-                <td><input type="text" placeholder="Email" v-model="newEventDate"></td>
-                <td><input type="text" placeholder="Username" v-model="newEventStartTime"></td>
-                <td><input type="text" placeholder="Password" v-model="newEventEndTime"></td>
-                <td><button class="add-delete-employee-button">Add</button></td>
+                <td>{{ e.email }}</td>
+                <td>{{ e.username }}</td>
+                <td>{{ e.password }}</td>
+                <td><button v-bind:disabled="employeeBtnDisabled" @click="deleteEmployee(e.staffMemberID)"
+                        class="add-delete-employee-button">Delete</button>
+                </td>
             </tr>
         </table>
-        <div id="save-discard-layout">
-            <button id="save-employee-changes-button">Save Changes</button>
-            <button id="cancel-employee-changes-button">Cancel</button>
+
+        <div class="create-employee-layout">
+            <h2> Add New Employee </h2>
+            <p id="enter-data-text"> Enter the email, username and password of the employee to add. </p>
+            <table>
+                <tr>
+                    <td><input type="text" placeholder="email" v-model="newEmail"></td>
+                    <td><input type="text" placeholder="username" v-model="newUsername"></td>
+                    <td><input type="text" placeholder="password" v-model="newPassword"></td>
+                    <td><button v-bind:disabled="employeeBtnDisabled"
+                            @click="createEmployee(newEmail, newUsername, newPassword)">Create</button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+
+
 </template>
 
 <script>
@@ -73,14 +81,70 @@ export default {
         AXIOS.get('/staffMembers')
             .then(response => {
                 console.log(response)
-                this.employees = response.data
+                this.employees = response.data;
             })
             .catch(e => {
                 console.log('Error in GET /StaffMembers:')
                 console.log(e)
             })
+    },
+    methods: {
+        filterEmployeeById: function (staffMemberID) {
+            AXIOS.get("/staffMember/staffMemberId/" + staffMemberID)
+                .then(response => {
+                    this.employees = [response.data]
+                    this.failureMessage = "";
+                })
+                .catch(e => {
+                    if (e.response.status == 404) {
+                        this.failureMessage = "No StaffMember found for this id.";
+                    }
+                });
+        },
+        filterEmployeeByUsername: function (staffMemberUsername) {
+            AXIOS.get("/staffMember/staffMemberName/" + staffMemberUsername)
+                .then(response => {
+                    this.employees = [response.data]
+                    this.failureMessage = "";
+                })
+                .catch(e => {
+                    if (e.response.status == 404) {
+                        this.failureMessage = "No StaffMember found with this username.";
+                    }
+                });
+        },
+        createEmployee: function (newEmail, newUsername, newPassword) {
+            AXIOS.post('/staffMember', {
+                email: newEmail,
+                username: newUsername,
+                password: newPassword
+            })
+                .then(response => {
+                    console.log(response)
+                    this.employees.push(response.data)
+                    this.newEmail = ''
+                    this.newUsername = ''
+                    this.newPassword = ''
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    },
+    deleteEmployee: function (staffMemberID) {
+        AXIOS.delete('/staffMember/delete/' + staffMemberID)
+            .then(response => {
+                this.employees = [response.data]
+                this.failureMessage = "";
+            })
+            .catch(e => {
+                if (e.response.status == 404) {
+                    this.failureMessage = "No StaffMember found with this id.";
+                }
+            });
     }
-}
+
+};
 </script>
 
 <style scoped>
@@ -90,7 +154,8 @@ export default {
 
 }
 
-#employee-header {
+#employee-header,
+h2 {
     padding: 20px;
     text-align: center;
     margin: auto;
@@ -111,44 +176,39 @@ export default {
 table,
 th,
 td {
-    border: 2px solid black;
-    align-items: center;
     justify-content: center;
     text-align: center;
     margin: auto;
-    padding: 20px;
+    padding: 8px;
+
+    max-width: 800px;
+    margin: 30px auto;
+    background: #eaf2f8;
+    text-align: left;
+    border: 1px solid black;
 }
 
-.top-row {
-    background-color: gray;
-}
-
-.add-delete-employee-button:hover,
-#cancel-employee-changes-button:hover {
-    background-color: lightgray;
-}
-
-#save-discard-layout {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    margin: auto;
-    padding-top: 20px;
-}
-
-#save-employee-changes-button {
-    background-color: #54B4D3;
+button {
+    background: #54B4D3;
+    border: 0;
+    padding: 10px 10px;
+    margin-top: 5px;
     color: white;
-    margin: 25px;
+    border-radius: 20px;
+    min-width: 100px;
 }
 
-#save-employee-changes-button:hover {
-    background-color: #3d7f95;
+button:hover {
+    background: #38788e;
 }
 
-#cancel-employee-changes-button {
-    background-color: white;
-    color: red;
-    margin: 25px;
+.create-employee-layout {
+    margin: 30 px auto;
+}
+
+#enter-data-text {
+    padding: 10px;
+    text-align: center;
+    margin: auto;
 }
 </style>
