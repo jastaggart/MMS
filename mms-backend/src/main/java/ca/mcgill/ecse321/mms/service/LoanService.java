@@ -180,6 +180,21 @@ public class LoanService {
         return loan;
     }
 
+    @Transactional
+    public Loan closeLoan(int loanID) {
+        Loan loan = loanRepository.findLoanByLoanID(loanID);
+        Date currentDate = new Date();
+
+        if (loan == null) {
+			throw new MMSException(HttpStatus.NOT_FOUND, "Loan with ID " + loanID + " not found.");
+		}
+        loan.setEndDate(currentDate);
+        loan.getArtwork().setStatus(DisplayStatus.InStorage.name());
+        loan.getArtwork().setAvailableForLoan(true);
+
+        return loan;
+    }
+    
     /**
      * Updates the fee of a Loan by updating its loanFee field
      * @param loanID - Loan loanID

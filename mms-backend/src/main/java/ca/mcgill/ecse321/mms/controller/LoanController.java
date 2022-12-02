@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.dto.LoanRequestDto;
@@ -108,6 +107,12 @@ public class LoanController {
 	@PutMapping("/loans/reject/{loanID}/{staffMemberID}")
 	public ResponseEntity<LoanResponseDto> rejectLoan(@PathVariable int loanID, @PathVariable int staffMemberID) {
 		LoanResponseDto loan = new LoanResponseDto(loanService.rejectLoan(loanID, staffMemberID));
+		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
+	}
+
+     @PutMapping("/loans/close/{loanID}")
+	public ResponseEntity<LoanResponseDto> closeLoan(@PathVariable int loanID)  {
+		LoanResponseDto loan = new LoanResponseDto(loanService.closeLoan(loanID));
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 

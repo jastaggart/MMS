@@ -21,7 +21,6 @@ public class StaffMemberResponseDto {
 		this.username = staffMember.getUsername();
 		this.email =  staffMember.getEmail();
 		this.password = staffMember.getPassword();
-		this.loan = staffMember.getLoans();
 	}
 
 	public int getStaffMemberID() {

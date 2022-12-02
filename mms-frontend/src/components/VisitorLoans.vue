@@ -22,6 +22,10 @@
                     <td>{{ getStatus(loan) }}</td>
                 </tr>
             </table>
+            <p>
+                Thank you for your interest in loaning our museum's artworks! <br>
+                To submit another loan request, navigate to our Artworks page <a href = "http://127.0.0.1:8087/?#/VisitorArtworks" >here</a>. 
+            </p>
         </div>
     </div>
 </template>
@@ -66,11 +70,10 @@ export default {
     methods: {
         getStatus: function(loan) {
             if (loan.isApproved) {
-                //OR put mark as completed button in employee page and when this occurs, change status
-                // if (currentDate.compareTo(loan.getEndDate()) != 1 && (currentDate.compareTo(loan.getStartDate()) != -1)) {
-                //     loan.loanStatus = "Completed"
-                // }
-                loan.loanStatus = "Accepted"
+                if (currentDate > loanEndDate) {
+                    loan.loanStatus = "Completed";
+                }
+                else loan.loanStatus = "Accepted";
             }
             else if (loan.loanApprover == null) {
                 loan.loanStatus = "Pending"
@@ -88,18 +91,41 @@ export default {
 
 h1 {
     text-align: center;
-    padding: 20px;
+    padding: 2rem;
 }
-
+a{
+    color: hsl(189, 53%, 44%);
+}
+p {
+    text-align:center; 
+    padding-top: 40px;
+    font-size: 1.1rem;
+}
 table {
     width: 50%;
     position: relative;
     margin: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    padding-top: 2rem;
 }
-
+th {
+    background-color: hsl(189, 53%, 47%);
+    color: white;
+}
 td,th {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 15px;
+    font-size: 1rem;
+}
+tr {
+    border-bottom: 1px solid #dddddd;
+}
+tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tr:last-of-type {
+    border-bottom: 2px solid hsl(189, 53%, 47%);
 }
 </style>
