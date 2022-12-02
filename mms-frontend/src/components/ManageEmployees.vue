@@ -105,10 +105,14 @@ export default {
                 .then(response => {
                     this.employees = [response.data]
                     this.failureMessage1 = "";
+                    this.failureMessage2 = "";
+                    this.failureMessage3 = "";
                 })
                 .catch(e => {
                     if (e.response.status == 404) {
                         this.failureMessage1 = "No StaffMember found for this id.";
+                        this.failureMessage2 = "";
+                        this.failureMessage3 = "";
                     }
                 });
         },
@@ -116,11 +120,15 @@ export default {
             AXIOS.get("/staffMember/staffMemberName/" + staffMemberUsername)
                 .then(response => {
                     this.employees = [response.data]
+                    this.failureMessage1 = "";
                     this.failureMessage2 = "";
+                    this.failureMessage3 = "";
                 })
                 .catch(e => {
                     if (e.response.status == 404) {
+                        this.failureMessage1 = "";
                         this.failureMessage2 = "No StaffMember found with this username.";
+                        this.failureMessage3 = "";
                     }
                 });
         },
@@ -136,9 +144,13 @@ export default {
                     this.newEmail = ''
                     this.newUsername = ''
                     this.newPassword = ''
-                    this.failureMessage3 = ''
+                    this.failureMessage1 = "";
+                    this.failureMessage2 = "";
+                    this.failureMessage3 = "";
                 })
                 .catch(error => {
+                    this.failureMessage1 = "";
+                    this.failureMessage2 = "";
                     this.failureMessage3 = "StaffMember already exists.";
                 })
         }
