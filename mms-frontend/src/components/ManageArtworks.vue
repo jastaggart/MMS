@@ -203,7 +203,9 @@ export default {
         console.log(response)
         this.switchErrorMsg = ''
         this.switchSuccessMsg = "Room was successfully switched."
-        window.location.reload;
+        setTimeout(() => {
+                window.location.reload()
+        }, "400")
       })
       .catch(e => {
         if(e.response.status == 409) {
