@@ -221,9 +221,9 @@ public ShiftResponseDto createShift(Shift shift, int shiftAssignerID, int shiftA
     getShiftByShiftID(shiftID);
     
     //default value for missing fields (take original values)
-    if (date == null) date = shift.getDate().toString();
-    if (startHour == null) startHour = shift.getStartHour().toString();
-    if (endHour == null) endHour = shift.getEndHour().toString();
+    if (date == "") date = shift.getDate().toString();
+    if (startHour == "") startHour = shift.getStartHour().toString();
+    if (endHour == "") endHour = shift.getEndHour().toString();
     
     //check if starthour is before endHour 
     if (!Time.valueOf(startHour).before(Time.valueOf(endHour))) throw new MMSException(HttpStatus.BAD_REQUEST, "Start time: " + startHour + " is not before End time: " + endHour + ".");
