@@ -18,7 +18,7 @@
                 </p>
             </div>
         </div>
-        <button id="get-all-employees-button" onClick="window.location.reload();">Get All Employees</button>
+        <button id="get-all-employees-button" @click="getAllStaffMembers">All Employees</button>
         <table id="employee-table">
             <tr class="top-row">
                 <th>Id</th>
@@ -32,7 +32,7 @@
                 <td>{{ e.email }}</td>
                 <td>{{ e.username }}</td>
                 <td>{{ e.password }}</td>
-                <td><button v-bind:disabled="employeeBtnDisabled" @click="deleteEmployee(e.staffMemberID)"
+                <td><button v-on:click="deleteEmployee(e.staffMemberID)" v-if="(e.staffMemberID != 1)"
                         class="add-delete-employee-button">Delete</button>
                 </td>
             </tr>
@@ -90,15 +90,16 @@ export default {
     created() {
         AXIOS.get('/staffMembers')
             .then(response => {
-                console.log(response)
                 this.employees = response.data;
-            })
-            .catch(e => {
-                console.log('Error in GET /StaffMembers:')
-                console.log(e)
-            })
+            });
     },
     methods: {
+        getAllStaffMembers: function () {
+            AXIOS.get('/staffMembers')
+                .then(response => {
+                    this.employees = response.data;
+                });
+        },
         filterEmployeeById: function (staffMemberID) {
             AXIOS.get("/staffMember/staffMemberId/" + staffMemberID)
                 .then(response => {
@@ -130,7 +131,6 @@ export default {
                 password: newPassword
             })
                 .then(response => {
-                    console.log(response)
                     this.employees.push(response.data)
                     this.newEmail = ''
                     this.newUsername = ''
@@ -140,21 +140,11 @@ export default {
                 .catch(error => {
                     this.failureMessage3 = "StaffMember already exists.";
                 })
+        }, deleteEmployee: function (staffMemberID) {
+            AXIOS.delete('/staffMember/delete/' + staffMemberID);
+            window.location.reload();
         }
-    },
-    deleteEmployee: function (staffMemberID) {
-        AXIOS.delete('/staffMember/delete/' + staffMemberID)
-            .then(response => {
-                this.employees = [response.data]
-                this.failureMessage = "";
-            })
-            .catch(e => {
-                if (e.response.status == 404) {
-                    this.failureMessage = "No StaffMember found with this id.";
-                }
-            });
     }
-
 };
 </script>
 
@@ -211,6 +201,7 @@ button {
 
 button:hover {
     background: #38788e;
+    cursor: pointer;
 }
 
 #get-all-employees-button {
