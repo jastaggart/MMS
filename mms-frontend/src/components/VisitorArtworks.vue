@@ -166,14 +166,20 @@ export default {
         this.newArtworkID = ''
         this.createErrorMsg = ""
         this.createSuccessMsg = "Request created."
+        setTimeout(() => {
+                window.location.reload()
+        }, "400")
       })
       .catch(error => {
         console.log(error)
         this.newStartDate = ''
         this.newEndDate = ''
         this.newArtworkID = ''
-        this.createErrorMsg = "Specified artwork not available for loan.";
+        this.createErrorMsg = "Error with creating request.";
         this.createSuccessMsg = ""
+        setTimeout(() => {
+                window.location.reload()
+        }, "700")
       })      
     },
     computed: { // conditions for disabling button
