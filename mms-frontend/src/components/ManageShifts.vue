@@ -251,10 +251,10 @@ export default {
             }
         },
         modifyShift: function (shiftID, modifyShiftDate, modifyShiftStartHour, modifyShiftEndHour) {
-            if (modifyShiftDate == undefined) modifyShiftDate="";
-            if (modifyShiftStartHour == undefined) modifyShiftStartHour="";
-            if (modifyShiftEndHour == undefined) modifyShiftEndHour="";
-            
+            if (modifyShiftDate == undefined) modifyShiftDate = "";
+            if (modifyShiftStartHour == undefined) modifyShiftStartHour = "";
+            if (modifyShiftEndHour == undefined) modifyShiftEndHour = "";
+
             AXIOS.put("/shift/modify/" + shiftID, {
                 date: modifyShiftDate,
                 startHour: modifyShiftStartHour,
@@ -297,10 +297,10 @@ export default {
                 });
         },
         filterShiftsByDateEmployee: function (date) {
+            this.failureMessageEmployee = '';
             if (date != '') {
                 AXIOS.get("/shift/date/" + date)
                     .then(response => {
-                        this.failureMessageEmployee = '';
                         this.EmployeeShiftsDateFilter = response.data;
                         this.EmployeeShifts = this.EmployeeShiftsDateFilter.filter(a => this.EmployeeShifts_Constant.some(b => a.shiftID === b.shiftID));
                         if (this.EmployeeShifts.length == 0) {
@@ -391,42 +391,11 @@ export default {
 
             }
         },
-        // filterShiftsByEmployeeID: function (employeeID) {
-        //     this.failureMessage2 = '';
-        //     if (employeeID == "") return;
-        //     AXIOS.get("/shift/employee/" + employeeID)
-        //         .then(response => {
-        //             this.Shifts = response.data;
-        //             this.failureMessage2 = '';
-        //         })
-        //         .catch(e => {
-        //             if (e.response.status == 404) {//Employee with EmployeeID not found
-        //                 this.failureMessage2 = "No employee with ID " + employeeID;
-        //             }
-        //             else {
-        //                 this.failureMessage2 = "Invalid employee ID"
-        //             }
-        //         });
-        // },
-        // filterShiftsByDate: function (date) {
-        //     this.failureMessage3 = '';
-        //     if (date == "") return;
-        //     AXIOS.get("/shift/date/" + date)
-        //         .then(response => {
-        //             this.Shifts = response.data;
-        //             this.failureMessage3 = '';
-        //         })
-        //         .catch(e => {
-        //             if (e.response.status == 404) {
-        //                 this.failureMessage3 = "No shift on this date";//no shift on this date
-        //             }
-        //         });
-        // },
         getAllShifts: function () {
-            // this.shiftID = "",
+            this.shiftID = "",
             this.employeeID = "",
-                this.date = "",
-                this.failureMessage2 = "";
+            this.date = "",
+            this.failureMessage2 = "";
             this.failureMessage3 = "";
 
             AXIOS.get("/shifts")
