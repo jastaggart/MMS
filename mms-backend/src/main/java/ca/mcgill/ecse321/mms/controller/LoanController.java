@@ -110,6 +110,11 @@ public class LoanController {
 		return new ResponseEntity<LoanResponseDto>(loan, HttpStatus.OK);
 	}
 
+	/**
+	 * Closes a Loan by its loanID after HTTP request and puts into the HTTP response
+	 * @param loanID - id of the Loan to close
+	 * @return - the closed Loan
+	 */
      @PutMapping("/loans/close/{loanID}")
 	public ResponseEntity<LoanResponseDto> closeLoan(@PathVariable int loanID)  {
 		LoanResponseDto loan = new LoanResponseDto(loanService.closeLoan(loanID));

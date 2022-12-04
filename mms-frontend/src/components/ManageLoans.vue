@@ -79,15 +79,6 @@
                     <th>End Date</th>
                     <th>Status</th>
                 </tr>
-                <!-- <tr v-for="pastLoan in LoanHistory">
-                    <td>{{ pastLoan.loanID }}</td>
-                    <td>{{ pastLoan.loanRequestor.visitorId }}</td>
-                    <td>{{ pastLoan.artwork.name }}</td>
-                    <td>{{ pastLoan.loanFee }}</td>
-                    <td>{{ pastLoan.startDate.substring(0, 10) }}</td>
-                    <td>{{ pastLoan.endDate.substring(0, 10) }}</td>
-                    <td>{{ getStatus(pastLoan) }}</td>
-                </tr> -->
                 <tr v-for="loan in Loans">
                     <td>{{ loan.loanID }}</td>
                     <td>{{ loan.loanRequestor.visitorId }}</td>
@@ -155,17 +146,10 @@ export default {
                     if (loan.isApproved && loanStartDate <= currentDate && currentDate <= loanEndDate) {
                         this.ActiveLoans.push(loan);
                     }
-                    // else if (currentDate > loanEndDate) {
-                    //     this.LoanHistory.push(loan);
-                    // }
                 }
                 if (this.ActiveLoans.length == 0) {
                     this.noActivesMessage = "There are currently no active loans."
                 }
-
-                // if (this.LoanHistory.length == 0) {
-                //     this.noHistoryMessage = "There are currently no past loans."
-                // }
 
             })
             .catch(e => {

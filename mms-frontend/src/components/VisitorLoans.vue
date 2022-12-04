@@ -21,10 +21,6 @@
                     <option value="Completed">Completed</option>
                 </select>
 
-                <!-- <p v-if="this.failureMessage1" style="color: red">
-                    {{ this.failiureMessage1 }}
-                </p> -->
-
                 <table id="myLoans">
                     <tr>
                         <th>Artwork</th>
@@ -149,7 +145,6 @@ a {
 
 p {
     text-align: center;
-    /* padding-top: 40px; */
     font-size: 1.2rem;
 }
 

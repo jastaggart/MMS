@@ -10,14 +10,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import ca.mcgill.ecse321.mms.dto.ShiftRequestDto;
 import ca.mcgill.ecse321.mms.dto.ShiftResponseDto;
-import ca.mcgill.ecse321.mms.dto.StaffMemberResponseDto;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 import ca.mcgill.ecse321.mms.model.Employee;
 import ca.mcgill.ecse321.mms.model.Owner;
 import ca.mcgill.ecse321.mms.model.Shift;
-import ca.mcgill.ecse321.mms.model.StaffMember;
 import ca.mcgill.ecse321.mms.repository.ShiftRepository;
 import ca.mcgill.ecse321.mms.repository.StaffMemberRepository;
 

@@ -3,7 +3,6 @@ package ca.mcgill.ecse321.mms.repository;
 import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.mms.model.Artwork;
-import ca.mcgill.ecse321.mms.model.Room;
 
 import java.util.List;
 

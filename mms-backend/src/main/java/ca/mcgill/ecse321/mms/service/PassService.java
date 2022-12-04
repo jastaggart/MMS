@@ -3,7 +3,6 @@ package ca.mcgill.ecse321.mms.service;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -13,11 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import ca.mcgill.ecse321.mms.dto.PassRequestDto;
-import ca.mcgill.ecse321.mms.dto.PassResponseDto;
 import ca.mcgill.ecse321.mms.exception.MMSException;
 import ca.mcgill.ecse321.mms.model.Pass;
-import ca.mcgill.ecse321.mms.model.Visitor;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
 import ca.mcgill.ecse321.mms.repository.PassRepository;
 import ca.mcgill.ecse321.mms.repository.VisitorRepository;

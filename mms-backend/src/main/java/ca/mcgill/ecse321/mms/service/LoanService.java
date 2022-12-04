@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.mms.service;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.transaction.Transactional;
 
@@ -10,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 
 import ca.mcgill.ecse321.mms.model.Loan;
-import ca.mcgill.ecse321.mms.model.Visitor;
 import ca.mcgill.ecse321.mms.model.StaffMember;
-import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.model.DisplayStatus;
 import ca.mcgill.ecse321.mms.repository.LoanRepository;
 import ca.mcgill.ecse321.mms.repository.VisitorRepository;
@@ -22,7 +19,6 @@ import ca.mcgill.ecse321.mms.exception.MMSException;
 
 import java.util.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Service
 public class LoanService {
@@ -180,6 +176,12 @@ public class LoanService {
         return loan;
     }
 
+    /**
+     * Closes an active loan by updating the artwork's loan availability to 'True', 
+     * its status to 'InStorage', and the loan's end date to the current date
+     * @param loanID - id of the Loan to close
+     * @return - the closed loan
+     */
     @Transactional
     public Loan closeLoan(int loanID) {
         Loan loan = loanRepository.findLoanByLoanID(loanID);

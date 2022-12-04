@@ -12,7 +12,6 @@ import ca.mcgill.ecse321.mms.model.Artwork;
 import ca.mcgill.ecse321.mms.model.DisplayStatus;
 import ca.mcgill.ecse321.mms.model.Room;
 import ca.mcgill.ecse321.mms.model.DisplayRoom;
-import ca.mcgill.ecse321.mms.model.Loan;
 import ca.mcgill.ecse321.mms.repository.ArtworkRepository;
 import ca.mcgill.ecse321.mms.repository.RoomRepository;
 import ca.mcgill.ecse321.mms.repository.MMSRepository;
