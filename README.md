@@ -21,7 +21,7 @@ The goal of this project is to design an application for the museum of a small t
 # Hours Spent
 |    Name               | Deliverable 1   | Deliverable 2   | Deliverable 3   
 | -------------         | :------------------------:| :-------------------: | :--------------------: | 
-| Chrisovalantis Vatos  | 12                   |    35                  |                      |                      
+| Chrisovalantis Vatos  | 12                   |    35                  |                30      |                      
 | Sadek Mahmood         |    10                  |     38                 |                      |                      
 | Jasmine Taggart       |     10                 |     40                 |                      |                      
 | Sarah Zhang           | 11                   |      33              |                      |                      
